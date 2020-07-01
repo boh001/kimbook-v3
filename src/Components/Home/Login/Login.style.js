@@ -3,10 +3,7 @@ import { flexCenter } from "utils/constants/css";
 import colors from "utils/constants/colors";
 import { Link } from "react-router-dom";
 export const LoginFrame = styled.div`
-  position: absolute;
-  margin-top: 240px;
-  top: 0;
-  left: 0;
+  margin-top: 120px;
   width: 100%;
   height: 100%;
   ${flexCenter}
@@ -52,7 +49,7 @@ export const FindPassword = styled(Link)`
   color: ${colors.mainGreen};
   margin: 40px 0px 40px 0px;
 `;
-export const SignUp = styled.button`
+export const SignBtn = styled.button`
   width: 170px;
   height: 80px;
   font-size: inherit;
