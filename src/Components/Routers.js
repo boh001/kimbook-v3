@@ -5,7 +5,7 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import routes from "utils/contants/routes";
+import routes from "utils/constants/routes";
 
 export default () => (
   <Router>
