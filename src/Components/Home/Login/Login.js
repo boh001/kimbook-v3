@@ -16,8 +16,8 @@ import SignUp from "../SignUp/SignUp";
 export default () => {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = useCallback(() => {
-    setIsOpen(true);
-  }, []);
+    setIsOpen(!isOpen);
+  }, [isOpen]);
   return (
     <>
       <LoginFrame>
@@ -46,7 +46,7 @@ export default () => {
       {isOpen ? (
         <>
           <ModalPortal>
-            <SignUp />
+            <SignUp onClose={openModal} />
           </ModalPortal>
         </>
       ) : null}
