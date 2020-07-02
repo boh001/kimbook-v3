@@ -9,11 +9,15 @@ export const GlobalStyles = createGlobalStyle`
         -webkit-box-sizing: border-box; /* Safari */
         box-sizing: border-box; /* CSS3 Standard */
     }
+    body{
+        font-family: 'Nanum Pen Script', cursive;
+    }
     a{
         text-decoration:none;
         color:inherit;
     }
     input{
+        font-family: inherit;
         border-radius:10px;
         border: 1px solid ${colors.mainGrey};
         padding:0px 30px;
@@ -26,6 +30,7 @@ export const GlobalStyles = createGlobalStyle`
         
     }
     button{
+        font-family: inherit;
         border-radius:10px;
         border:none;
         cursor:pointer;

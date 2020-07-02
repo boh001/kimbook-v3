@@ -11,26 +11,78 @@ export const SignUpbg = styled.div`
   width: 100%;
   ${flexCenter}
 `;
-export const SignUpFrame = styled.div`
+export const SignUpForm = styled.form`
   position: relative;
-  height: 1200px;
-  width: 1000px;
+  height: 900px;
+  width: 800px;
   ${flexCenter};
+  flex-direction: column;
   border-radius: 10px;
   border: 1px solid ${colors.mainGrey};
   background-color: white;
+  padding: 20px 50px;
+  font-size: 30px;
 `;
 export const CloseBtn = styled.button`
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   color: ${colors.mainGrey};
   border: 1px solid ${colors.mainGrey};
   ${flexCenter};
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 20px;
   border-radius: 10px;
   background-color: transparent;
+`;
+
+export const SignUpInput = styled.input.attrs((props) => {
+  return {
+    type: props.type,
+    placeholder: props.placeholder,
+    value: props.value,
+  };
+})`
+  width: 85%;
+  height: 80px;
+  font-size: 30px;
+  margin-left: 20px;
+`;
+export const SignUpLabel = styled.label`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 40px;
+  font-size: inherit;
+  position: relative;
+`;
+export const LabelText = styled.span`
+  display: inline-block;
+  line-height: 30px;
+  width: 15%;
+`;
+export const SignUpSubmit = styled.input`
+  position: absolute;
+  bottom: 30px;
+  right: 50px;
+  width: 160px;
+  height: 70px;
+  border-radius: 10px;
+  border: none;
+  background-color: ${colors.mainGreen};
+  color: white;
+  font-size: inherit;
+  cursor: pointer;
+`;
+export const CodeBtn = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 80px;
+  height: 60px;
+  background-color: ${colors.mainGreen};
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
 `;

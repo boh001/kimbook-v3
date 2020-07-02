@@ -43,6 +43,7 @@ export const LoginSubmit = styled.input.attrs((props) => {
 `;
 export const LoginLabel = styled.label`
   display: inline-block;
+  width: 100%;
   margin-bottom: 40px;
 `;
 export const FindPassword = styled(Link)`

@@ -8,6 +8,7 @@ export const HeaderFrame = styled.div`
   background-color: ${colors.mainBlack};
   ${flexCenter};
   color: ${colors.mainGreen};
-  font-size: 45px;
+  font-size: 60px;
+  letter-spacing: 30px;
   font-weight: bold;
 `;

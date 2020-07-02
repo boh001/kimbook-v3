@@ -1,3 +1,3 @@
 import React from "react";
 import { HeaderFrame } from "./Header.style";
-export default () => <HeaderFrame>KimBook</HeaderFrame>;
+export default () => <HeaderFrame>KIMBOOK</HeaderFrame>;
