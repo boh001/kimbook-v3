@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import {
   SignUpForm,
   SignUpbg,
@@ -11,19 +11,37 @@ import {
 } from "./SignUp.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { apiEmail } from "utils/api";
 export default ({ onClose }) => {
   const bgRef = useRef();
+  const emailRef = useRef();
+  const nameRef = useRef();
+
   window.onclick = function (e) {
     if (e.target === bgRef.current) {
       onClose();
     }
   };
+
+  const sendEmail = useCallback(async (e) => {
+    e.preventDefault();
+    const {
+      current: { value: email },
+    } = emailRef;
+    const {
+      current: { value: name },
+    } = nameRef;
+    const {
+      data: { result, code },
+    } = await apiEmail(email, name);
+    console.log(result, code);
+  });
   return (
     <SignUpbg ref={bgRef}>
       <SignUpForm>
         <SignUpLabel>
           <LabelText>이름</LabelText>
-          <SignUpInput type={"text"} placeholder={"Full Name"} />
+          <SignUpInput ref={nameRef} type={"text"} placeholder={"Full Name"} />
         </SignUpLabel>
         <SignUpLabel>
           <LabelText>아이디</LabelText>
@@ -43,8 +61,8 @@ export default ({ onClose }) => {
         </SignUpLabel>
         <SignUpLabel>
           <LabelText>이메일</LabelText>
-          <SignUpInput type={"email"} placeholder={"Email"} />
-          <CodeBtn>전송</CodeBtn>
+          <SignUpInput ref={emailRef} type={"email"} placeholder={"Email"} />
+          <CodeBtn onClick={(e) => sendEmail(e)}>전송</CodeBtn>
         </SignUpLabel>
         <SignUpLabel>
           <LabelText>인증번호</LabelText>

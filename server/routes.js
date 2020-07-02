@@ -1,5 +1,14 @@
-const API = "/api";
+const HOME = "/";
+
+const USER = "/user";
+const SENDEMAIL = "/sendEmail";
+
+const ME = "/me";
 
 const routes = {
-  API,
+  HOME,
+  USER,
+  SENDEMAIL,
+  ME,
 };
+export default routes;
