@@ -12,13 +12,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { apiEmail, apiIdCheck } from "utils/api";
-import Loading from "Components/Loading/Loading";
 import { useSelector, useDispatch } from "react-redux";
 import {
   idCheckAction,
   emailCheckAction,
   codeCheckAction,
-} from "modules/reducers/SignUp";
+} from "modules/reducers/SignUp/SignUpCheck";
 export default ({ onClose }) => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading);
@@ -39,10 +38,10 @@ export default ({ onClose }) => {
     const {
       target: { value: id },
     } = e;
-    const {
-      data: { result },
-    } = await apiIdCheck(id);
-    dispatch(idCheckAction(result));
+    // const {
+    //   data: { result },
+    // } = await apiIdCheck(id);
+    dispatch(idCheckAction.request(id));
   }); // 아이디 중복 확인
 
   const sendEmail = useCallback(async (e) => {
