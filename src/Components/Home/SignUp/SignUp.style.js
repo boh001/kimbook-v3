@@ -42,6 +42,8 @@ export const SignUpInput = styled.input.attrs((props) => {
     type: props.type,
     placeholder: props.placeholder,
     value: props.value,
+    pattern: props.pattern,
+    required: true,
   };
 })`
   width: 85%;
@@ -86,3 +88,4 @@ export const CodeBtn = styled.button`
   font-size: 30px;
   cursor: pointer;
 `;
+export const CheckText = styled.div``;

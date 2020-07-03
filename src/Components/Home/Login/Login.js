@@ -13,9 +13,7 @@ import {
 } from "./Login.style";
 import ModalPortal from "Components/ModalPortal";
 import SignUp from "Components/Home/SignUp/SignUp";
-import Loading from "Components/Loading/Loading";
 export default () => {
-  const isloading = true;
   const [isOpen, setIsOpen] = useState(false);
   const openModal = useCallback(() => {
     setIsOpen(!isOpen);

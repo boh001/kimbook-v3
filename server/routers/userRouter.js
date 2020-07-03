@@ -1,6 +1,6 @@
 import express from "express";
 import routes from "../routes";
-import { login, sendEmail } from "../controllers/userController";
+import { login, sendEmail, idCheck } from "../controllers/userController";
 
 const userRouter = express.Router();
 
@@ -12,5 +12,6 @@ userRouter.post(
   },
   login
 );
+userRouter.post(routes.IDCHECK, idCheck);
 userRouter.post(routes.SENDEMAIL, sendEmail);
 export default userRouter;
