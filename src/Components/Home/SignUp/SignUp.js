@@ -17,11 +17,15 @@ import {
   idCheckAction,
   emailCheckAction,
   codeCheckAction,
+  pwdCheckAction,
 } from "modules/reducers/SignUp/SignUpCheck";
 export default ({ onClose }) => {
-  const { idCheckState, emailCheckState, codeCheckState } = useSelector(
-    (state) => state.SignUpCheck
-  );
+  const {
+    idCheckState,
+    emailCheckState,
+    codeCheckState,
+    pwdCheckState,
+  } = useSelector((state) => state.SignUpCheck);
   const dispatch = useDispatch();
   const bgRef = useRef();
   const idRef = useRef();
@@ -41,7 +45,7 @@ export default ({ onClose }) => {
       current: { value: id },
     } = idRef;
     dispatch(idCheckAction.request({ id }));
-  }); // 아이디 중복 확인
+  }, []); // 아이디 중복 확인
 
   const sendEmail = useCallback(async (e) => {
     e.preventDefault();
@@ -52,18 +56,18 @@ export default ({ onClose }) => {
       current: { value: name },
     } = nameRef;
     dispatch(emailCheckAction.request({ email, name }));
-  }); // 이메일로 인증코드 전송
+  }, []); // 이메일로 인증코드 전송
 
   const verifyPwd = useCallback((e) => {
     const {
-      current: { value },
+      target: { value: pwd },
+    } = e;
+    const {
+      current: { value: verifyPwd },
     } = pwdRef;
-    if (value === e.target.value) {
-      console.log("비밀번호가 일치합니다");
-    } else {
-      console.log("비밀번호가 일치하지 않습니다");
-    }
-  });
+    dispatch(pwdCheckAction.request({ pwd, verifyPwd }));
+  }, []); // 비밀번호 재확인
+
   return (
     <SignUpbg ref={bgRef}>
       <SignUpForm>
@@ -74,11 +78,11 @@ export default ({ onClose }) => {
         <SignUpLabel>
           <LabelText>아이디</LabelText>
           <SignUpInput ref={idRef} type={"text"} placeholder={"ID"} />
-          {idCheck.show ? (
-            <CheckText>
-              {idCheck.result
-                ? "중복된 아이디입니다."
-                : "사용하실 수 있는 아이디 입니다."}
+          {idCheckState.show ? (
+            <CheckText check={idCheckState.result}>
+              {idCheckState.result
+                ? "사용가능한 아이디 입니다."
+                : "중복된 아이디입니다."}
             </CheckText>
           ) : null}
 
@@ -91,7 +95,6 @@ export default ({ onClose }) => {
             type={"password"}
             placeholder={"Password"}
           />
-          <CheckText></CheckText>
         </SignUpLabel>
         <SignUpLabel>
           <LabelText>
@@ -104,6 +107,11 @@ export default ({ onClose }) => {
             type={"password"}
             placeholder={"Verify Password"}
           />
+          {pwdCheckState.show ? (
+            <CheckText check={pwdCheckState.result}>
+              {pwdCheckState.result ? "일치합니다." : "일치하지않습니다"}
+            </CheckText>
+          ) : null}
         </SignUpLabel>
         <SignUpLabel>
           <LabelText>이메일</LabelText>

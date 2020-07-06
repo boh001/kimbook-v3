@@ -6,8 +6,6 @@ export default (actions, api) =>
       const {
         data: { result },
       } = yield call(api, payload);
-      console.log(result);
-
       yield put(actions.success({ result }));
     } catch (e) {
       yield put(actions.failure({ error: `${e.name}: ${e.message}` }));

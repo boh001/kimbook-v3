@@ -49,6 +49,7 @@ export const SignUpInput = styled.input.attrs((props) => {
   height: 80px;
   font-size: 30px;
   margin-left: 20px;
+  padding-right: 350px;
 `;
 export const SignUpLabel = styled.label`
   display: flex;
@@ -90,9 +91,9 @@ export const CodeBtn = styled.button`
 export const CheckText = styled.div`
   position: absolute;
   top: 10px;
-  right: 100px;
-  width: 260px;
+  right: 90px;
+  width: 240px;
   height: 60px;
   ${flexCenter}
-  color: ${(props) => (props.result ? `${colors.mainGreen}` : "red")};
+  color: ${(props) => (props.check ? `${colors.mainGreen}` : "red")};
 `;
