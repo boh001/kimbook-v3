@@ -87,4 +87,12 @@ export const CodeBtn = styled.button`
   font-size: 30px;
   cursor: pointer;
 `;
-export const CheckText = styled.div``;
+export const CheckText = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 100px;
+  width: 260px;
+  height: 60px;
+  ${flexCenter}
+  color: ${(props) => (props.result ? `${colors.mainGreen}` : "red")};
+`;

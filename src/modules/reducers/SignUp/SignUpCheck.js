@@ -9,20 +9,19 @@ const CODECHECKACTION = "CODECHECK";
 export const idCheckAction = createRequestAction(IDCHECKACTION);
 export const emailCheckAction = createRequestAction(EMAILCHECKACTION);
 export const codeCheckAction = createRequestAction(CODECHECKACTION);
-console.log(idCheckAction);
 
 const initialState = {
-  idCheck: {
+  idCheckState: {
     show: false,
     result: false,
     error: "",
   },
-  emailCheck: {
+  emailCheckState: {
     show: false,
     result: false,
     error: "",
   },
-  codeCheck: {
+  codeCheckState: {
     show: false,
     result: false,
     error: "",
@@ -37,16 +36,17 @@ export default handleActions(
   },
   {
     [idCheckAction.SUCCESS]: (state, { payload }) => {
+      console.log(payload);
       return produce(state, (draft) => {
-        draft.emailCheck.show = true;
-        draft.idCheck.result = payload.result;
+        draft.idCheckState.show = true;
+        draft.idCheckState.result = payload.result;
       });
     },
   },
   {
     [idCheckAction.FAILURE]: (state, { payload }) => {
       return produce(state, (draft) => {
-        draft.idCheck.error = payload.error;
+        draft.idCheckState.error = payload.error;
       });
     },
   },
@@ -56,15 +56,15 @@ export default handleActions(
   {
     [emailCheckAction.SUCCESS]: (state, { payload }) => {
       return produce(state, (draft) => {
-        draft.emailCheck.show = true;
-        draft.emailCheck.result = payload.result;
+        draft.emailCheckState.show = true;
+        draft.emailCheckState.result = payload.result;
       });
     },
   },
   {
     [emailCheckAction.FAILURE]: (state, { payload }) => {
       return produce(state, (draft) => {
-        draft.emailCheck.error = payload.error;
+        draft.emailCheckState.error = payload.error;
       });
     },
   },
@@ -74,15 +74,15 @@ export default handleActions(
   {
     [codeCheckAction.SUCCESS]: (state, { payload }) => {
       return produce(state, (draft) => {
-        draft.emailCheck.show = true;
-        draft.codeCheck.result = payload.result;
+        draft.codeCheckState.show = true;
+        draft.codeCheckState.result = payload.result;
       });
     },
   },
   {
     [codeCheckAction.FAILURE]: (state, { payload }) => {
       return produce(state, (draft) => {
-        draft.codeCheck.error = payload.error;
+        draft.codeCheckState.error = payload.error;
       });
     },
   },

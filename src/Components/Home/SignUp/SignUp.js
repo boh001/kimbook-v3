@@ -8,6 +8,7 @@ import {
   LabelText,
   SignUpSubmit,
   CodeBtn,
+  CheckText,
 } from "./SignUp.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -18,6 +19,9 @@ import {
   codeCheckAction,
 } from "modules/reducers/SignUp/SignUpCheck";
 export default ({ onClose }) => {
+  const { idCheckState, emailCheckState, codeCheckState } = useSelector(
+    (state) => state.SignUpCheck
+  );
   const dispatch = useDispatch();
   const bgRef = useRef();
   const idRef = useRef();
@@ -70,6 +74,14 @@ export default ({ onClose }) => {
         <SignUpLabel>
           <LabelText>아이디</LabelText>
           <SignUpInput ref={idRef} type={"text"} placeholder={"ID"} />
+          {idCheck.show ? (
+            <CheckText>
+              {idCheck.result
+                ? "중복된 아이디입니다."
+                : "사용하실 수 있는 아이디 입니다."}
+            </CheckText>
+          ) : null}
+
           <CodeBtn onClick={(e) => idCheck(e)}>중복</CodeBtn>
         </SignUpLabel>
         <SignUpLabel>
@@ -79,6 +91,7 @@ export default ({ onClose }) => {
             type={"password"}
             placeholder={"Password"}
           />
+          <CheckText></CheckText>
         </SignUpLabel>
         <SignUpLabel>
           <LabelText>
@@ -88,7 +101,7 @@ export default ({ onClose }) => {
           </LabelText>
           <SignUpInput
             onChange={(e) => verifyPwd(e)}
-            type={"text"}
+            type={"password"}
             placeholder={"Verify Password"}
           />
         </SignUpLabel>
@@ -100,6 +113,7 @@ export default ({ onClose }) => {
         <SignUpLabel>
           <LabelText>인증번호</LabelText>
           <SignUpInput type={"number"} placeholder={"Verification Code"} />
+          <CheckText></CheckText>
           <CodeBtn>인증</CodeBtn>
         </SignUpLabel>
         <SignUpSubmit type={"submit"} value={"확인"} />

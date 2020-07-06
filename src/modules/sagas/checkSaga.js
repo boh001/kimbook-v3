@@ -3,7 +3,9 @@ import { put, call } from "redux-saga/effects";
 export default (actions, api) =>
   function* ({ payload }) {
     try {
-      const result = yield call(api, payload);
+      const {
+        data: { result },
+      } = yield call(api, payload);
       console.log(result);
 
       yield put(actions.success({ result }));
