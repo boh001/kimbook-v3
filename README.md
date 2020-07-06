@@ -14,6 +14,6 @@ Front-End | Back-End | DataBase
 
 
 
-Proto-type | Test | Cloud-Service
+Prototype | Test | Cloud-Service
 ----| ----| ----|
 ![image](https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpllvO9KSl49BWp4N-DBeZ--eIqUd01Oqg8g&usqp=CAU) | | ![image](https://user-images.githubusercontent.com/54930248/86572669-33a6b700-bfae-11ea-8090-238e7be8f0be.png) |
