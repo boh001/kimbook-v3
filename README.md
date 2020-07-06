@@ -10,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## 기술 스택
 Front-End | Back-End | DataBase
 ----| ----| ----|
-![](https://www.figma.com/file/L6uoNS7LIGsZYjgemv53nh/kimbook?node-id=20%3A75)
+![](./images/front-end.png)
 
 Proto-type | Test | Cloud-Service
 ----| ----| ----|
