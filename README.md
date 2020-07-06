@@ -10,6 +10,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## 기술 스택
 Front-End | Back-End | DataBase
 ----| ----| ----|
-
+(https://raw.githubusercontent.com/baeharam/Movie/b597cc714ee336b39bc591b2df433b99f1c1464f/images/react.svg)
 Proto-type | Test | Cloud-Service
 ----| ----| ----|
