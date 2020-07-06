@@ -11,7 +11,6 @@ import {
 } from "./SignUp.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { apiEmail, apiIdCheck } from "utils/api";
 import { useSelector, useDispatch } from "react-redux";
 import {
   idCheckAction,
@@ -20,9 +19,8 @@ import {
 } from "modules/reducers/SignUp/SignUpCheck";
 export default ({ onClose }) => {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.loading);
-  const isLoading = loading;
   const bgRef = useRef();
+  const idRef = useRef();
   const emailRef = useRef();
   const nameRef = useRef();
   const pwdRef = useRef();
@@ -36,12 +34,9 @@ export default ({ onClose }) => {
   const idCheck = useCallback(async (e) => {
     e.preventDefault();
     const {
-      target: { value: id },
-    } = e;
-    // const {
-    //   data: { result },
-    // } = await apiIdCheck(id);
-    dispatch(idCheckAction.request(id));
+      current: { value: id },
+    } = idRef;
+    dispatch(idCheckAction.request({ id }));
   }); // 아이디 중복 확인
 
   const sendEmail = useCallback(async (e) => {
@@ -52,11 +47,9 @@ export default ({ onClose }) => {
     const {
       current: { value: name },
     } = nameRef;
-    const {
-      data: { result, code },
-    } = await apiEmail(email, name);
-    console.log(result, code);
-  });
+    dispatch(emailCheckAction.request({ email, name }));
+  }); // 이메일로 인증코드 전송
+
   const verifyPwd = useCallback((e) => {
     const {
       current: { value },
@@ -76,7 +69,7 @@ export default ({ onClose }) => {
         </SignUpLabel>
         <SignUpLabel>
           <LabelText>아이디</LabelText>
-          <SignUpInput type={"text"} placeholder={"ID"} />
+          <SignUpInput ref={idRef} type={"text"} placeholder={"ID"} />
           <CodeBtn onClick={(e) => idCheck(e)}>중복</CodeBtn>
         </SignUpLabel>
         <SignUpLabel>
@@ -101,14 +94,7 @@ export default ({ onClose }) => {
         </SignUpLabel>
         <SignUpLabel>
           <LabelText>이메일</LabelText>
-          <SignUpInput
-            ref={emailRef}
-            type={"email"}
-            placeholder={"Email"}
-            pattern={
-              "[a-zA-Z0-9!#$%&amp;'*+/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*"
-            }
-          />
+          <SignUpInput ref={emailRef} type={"email"} placeholder={"Email"} />
           <CodeBtn onClick={(e) => sendEmail(e)}>전송</CodeBtn>
         </SignUpLabel>
         <SignUpLabel>

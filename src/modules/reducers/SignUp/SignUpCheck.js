@@ -9,6 +9,7 @@ const CODECHECKACTION = "CODECHECK";
 export const idCheckAction = createRequestAction(IDCHECKACTION);
 export const emailCheckAction = createRequestAction(EMAILCHECKACTION);
 export const codeCheckAction = createRequestAction(CODECHECKACTION);
+console.log(idCheckAction);
 
 const initialState = {
   idCheck: {
@@ -31,8 +32,6 @@ const initialState = {
 export default handleActions(
   {
     [idCheckAction.REQUEST]: (state, { payload }) => {
-      console.log(payload);
-
       return state;
     },
   },

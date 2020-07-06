@@ -1,6 +1,6 @@
-import { takeLatest, all, take } from "redux-saga/effects";
+import { takeLatest, all } from "redux-saga/effects";
 import checkSaga from "../checkSaga";
-import { apiIdCheck, apiEmail } from "utils/api";
+import { apiIdCheck, apiSendEmail } from "utils/api/createPostData";
 import {
   idCheckAction,
   emailCheckAction,
@@ -8,7 +8,7 @@ import {
 } from "modules/reducers/SignUp/SignUpCheck";
 
 const idCheckSaga = checkSaga(idCheckAction, apiIdCheck);
-const emailCheckSaga = checkSaga(emailCheckAction, apiEmail);
+const emailCheckSaga = checkSaga(emailCheckAction, apiSendEmail);
 const codeCheckSaga = checkSaga(codeCheckAction);
 
 function* watchIdCheck() {

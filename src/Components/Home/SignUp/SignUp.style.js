@@ -42,7 +42,6 @@ export const SignUpInput = styled.input.attrs((props) => {
     type: props.type,
     placeholder: props.placeholder,
     value: props.value,
-    pattern: props.pattern,
     required: true,
   };
 })`
