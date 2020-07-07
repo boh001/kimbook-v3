@@ -2,9 +2,10 @@ import mongoose from "mongoose";
 import passportLocalMongoose from "passport-local-mongoose";
 
 const UserSchema = new mongoose.Schema({
-  name: String,
+  nickname: String,
   ID: String,
   email: String,
+  avatarURL: String,
   friends: [
     {
       type: mongoose.Schema.Types.ObjectId,

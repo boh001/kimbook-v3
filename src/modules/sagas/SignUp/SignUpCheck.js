@@ -10,22 +10,30 @@ import {
 
 const idCheckSaga = checkSaga(idCheckAction, apiIdCheck);
 const emailCheckSaga = checkSaga(emailCheckAction, apiSendEmail);
-const codeCheckSaga = checkSaga(codeCheckAction);
+const codeCheckSaga = function* ({ payload }) {
+  try {
+    const { origin, verify } = payload;
+    let result = false;
+    if (origin === verify) {
+      result = true;
+    }
+    yield put(codeCheckAction.success({ result }));
+  } catch (e) {
+    yield put(codeCheckAction.failure({ error: `${e.name}: ${e.message}` }));
+  }
+};
 const pwdCheckSaga = function* ({ payload }) {
   try {
-    const { pwd, verifyPwd } = payload;
+    const { origin, verify } = payload;
     let result = false;
-    if (pwd === verifyPwd) {
+    if (origin === verify) {
       result = true;
     }
     yield put(pwdCheckAction.success({ result }));
   } catch (e) {
-    console.log(e);
-
     yield put(pwdCheckAction.failure({ error: `${e.name}: ${e.message}` }));
   }
 };
-
 function* watchIdCheck() {
   yield takeLatest(idCheckAction.REQUEST, idCheckSaga);
 }

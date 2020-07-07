@@ -6,6 +6,7 @@ import cookiePaser from "cookie-parser";
 import MongoStore from "connect-mongo";
 import mongoose from "mongoose";
 import passport from "passport";
+import "./passport";
 import dotenv from "dotenv";
 import cors from "cors";
 import userRouter from "./routers/userRouter";

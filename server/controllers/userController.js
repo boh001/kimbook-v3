@@ -8,6 +8,24 @@ export const login = passport.authenticate("local", {
   failureRedirect: routes.HOME,
   successRedirect: routes.ME,
 });
+export const signUp = async (req, res, next) => {
+  const {
+    body: { nickname, email, ID, password },
+  } = req;
+  console.log(nickname, email, ID, password);
+
+  try {
+    const newUser = await User({
+      nickname,
+      email,
+      ID,
+    });
+    await User.register(newUser, password);
+    next();
+  } catch (e) {
+    console.log(e);
+  }
+};
 export const idCheck = async (req, res) => {
   const {
     body: { id },
@@ -24,21 +42,12 @@ export const sendEmail = (req, res) => {
     body: { name, email },
   } = req;
   const code = cryptoRandomString({ length: 10, type: "base64" });
-  try {
-    transporter.sendMail(mailOptions(name, email, code));
-    console.log("Email sending");
-    res.status(200).send({ result: true, code });
-  } catch (e) {
-    res.status(400).send({ result: false });
-  }
-  // const code = cryptoRandomString({ length: 10, type: "base64" });
-  // transporter.sendMail(mailOptions(name, email, code), (error, info) => {
-  //   if (error) {
-  //     console.log(error);
-  //     res.status(404).send({ result: false });
-  //   } else {
-  //     console.log("Email sending");
-  //     res.status(200).send({ result: true, code });
-  //   }
-  // });
+  transporter.sendMail(mailOptions(name, email, code), (error, info) => {
+    if (error) {
+      res.send({ result: false });
+      res.status(400);
+    } else {
+      res.status(200).send({ result: true, code });
+    }
+  });
 };

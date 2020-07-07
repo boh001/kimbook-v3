@@ -2,16 +2,10 @@ import styled from "styled-components";
 import { flexCenter } from "utils/constants/css";
 import colors from "utils/constants/colors";
 
-export const SignUpbg = styled.div`
-  background: rgba(0, 0, 0, 0.25);
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  ${flexCenter}
-`;
-export const SignUpForm = styled.form`
+export const SignUpForm = styled.form.attrs({
+  action: "/user/signUp",
+  method: "post",
+})`
   position: relative;
   height: 900px;
   width: 800px;
@@ -37,33 +31,6 @@ export const CloseBtn = styled.button`
   background-color: transparent;
 `;
 
-export const SignUpInput = styled.input.attrs((props) => {
-  return {
-    type: props.type,
-    placeholder: props.placeholder,
-    value: props.value,
-    required: true,
-  };
-})`
-  width: 85%;
-  height: 80px;
-  font-size: 30px;
-  margin-left: 20px;
-  padding-right: 350px;
-`;
-export const SignUpLabel = styled.label`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 40px;
-  font-size: inherit;
-  position: relative;
-`;
-export const LabelText = styled.span`
-  display: inline-block;
-  line-height: 30px;
-  width: 15%;
-`;
 export const SignUpSubmit = styled.input`
   position: absolute;
   bottom: 30px;
@@ -77,23 +44,12 @@ export const SignUpSubmit = styled.input`
   font-size: inherit;
   cursor: pointer;
 `;
-export const CodeBtn = styled.button`
+export const SignUpError = styled.span`
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 80px;
-  height: 60px;
-  background-color: ${colors.mainGreen};
-  color: white;
-  font-size: 30px;
-  cursor: pointer;
-`;
-export const CheckText = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 90px;
-  width: 240px;
-  height: 60px;
-  ${flexCenter}
-  color: ${(props) => (props.check ? `${colors.mainGreen}` : "red")};
+  ${flexCenter};
+  bottom: 30px;
+  right: 300px;
+  font-size: inherit;
+  height: 70px;
+  color: red;
 `;

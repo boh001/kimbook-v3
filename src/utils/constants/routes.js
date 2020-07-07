@@ -1,21 +1,22 @@
 import Home from "Routes/Home";
+import Me from "Routes/Me";
 
 const HOME = {
   path: "/",
   exact: true,
   component: Home,
 };
-const MAIN = {
-  path: "/main",
+const ME = {
+  path: "/me",
   exact: true,
-  component: "",
+  component: Me,
 };
 const PROFILE = {
-  path: "/main/detail/:id",
+  path: "/me/profile/:id",
   exact: true,
   component: "",
 };
 
-const routes = [HOME, MAIN, PROFILE];
+const routes = [HOME, ME, PROFILE];
 
 export default routes;

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import {
   LoginFrame,
   LoginForm,
@@ -12,12 +12,19 @@ import {
   LineText,
 } from "./Login.style";
 import ModalPortal from "Components/ModalPortal";
+import Modal from "Components/Modal/Modal";
 import SignUp from "Components/Home/SignUp/SignUp";
+import { useSelector, useDispatch } from "react-redux";
+import { modalOpenAction } from "modules/reducers/modal";
 export default () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const modal = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
+  const isOpenModal = modal["LOGIN"];
+
   const openModal = useCallback(() => {
-    setIsOpen(!isOpen);
-  }, [isOpen]);
+    dispatch(modalOpenAction({ type: "LOGIN" }));
+  }, [dispatch]);
+
   return (
     <>
       <LoginFrame>
@@ -43,12 +50,12 @@ export default () => {
         </LineFrame>
         <SignBtn onClick={openModal}>회원가입</SignBtn>
       </LoginFrame>
-      {isOpen ? (
-        <>
-          <ModalPortal>
-            <SignUp onClose={openModal} />
-          </ModalPortal>
-        </>
+      {isOpenModal ? (
+        <ModalPortal>
+          <Modal type="LOGIN">
+            <SignUp />
+          </Modal>
+        </ModalPortal>
       ) : null}
     </>
   );

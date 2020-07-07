@@ -1,15 +1,12 @@
 import React, { useRef, useCallback } from "react";
 import {
   SignUpForm,
-  SignUpbg,
   CloseBtn,
-  SignUpInput,
-  SignUpLabel,
-  LabelText,
   SignUpSubmit,
-  CodeBtn,
-  CheckText,
+  SignUpError,
 } from "./SignUp.style";
+import SignUpInfo from "./SignUpInfo/SignUpInfo";
+import { modalCloseAction } from "modules/reducers/modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,117 +15,158 @@ import {
   emailCheckAction,
   codeCheckAction,
   pwdCheckAction,
+  totalCheckAction,
 } from "modules/reducers/SignUp/SignUpCheck";
-export default ({ onClose }) => {
+
+export default () => {
   const {
     idCheckState,
     emailCheckState,
     codeCheckState,
     pwdCheckState,
+    totalCheckState,
   } = useSelector((state) => state.SignUpCheck);
   const dispatch = useDispatch();
-  const bgRef = useRef();
   const idRef = useRef();
   const emailRef = useRef();
   const nameRef = useRef();
   const pwdRef = useRef();
+  const codeRef = useRef();
 
-  window.onclick = function (e) {
-    if (e.target === bgRef.current) {
-      onClose();
+  const closeModal = useCallback(
+    () => dispatch(modalCloseAction({ type: "LOGIN" })),
+    [dispatch]
+  );
+  const idCheck = useCallback(
+    (e) => {
+      e.preventDefault();
+      const {
+        current: { value: id },
+      } = idRef;
+      dispatch(idCheckAction.request({ id }));
+    },
+    [dispatch]
+  ); // 아이디 중복 확인
+
+  const sendEmail = useCallback(
+    (e) => {
+      e.preventDefault();
+      const {
+        current: { value: email },
+      } = emailRef;
+      const {
+        current: { value: name },
+      } = nameRef;
+      dispatch(emailCheckAction.request({ email, name }));
+    },
+    [dispatch]
+  ); // 이메일로 인증코드 전송
+
+  const verifyPwd = useCallback(
+    (e) => {
+      e.preventDefault();
+      const {
+        target: { value: origin },
+      } = e;
+      const {
+        current: { value: verify },
+      } = pwdRef;
+      dispatch(pwdCheckAction.request({ origin, verify }));
+    },
+    [dispatch]
+  ); // 비밀번호 재확인
+
+  const verifyCode = useCallback(
+    (e) => {
+      e.preventDefault();
+      const { code: origin } = codeCheckState;
+      const {
+        current: { value: verify },
+      } = codeRef;
+      dispatch(codeCheckAction.request({ origin, verify }));
+    },
+    [dispatch, codeCheckState]
+  ); // 인증코드 확인
+  const verifyTotal = useCallback((e) => {
+    if (
+      !(
+        idCheckState.result &&
+        emailCheckState.result &&
+        codeCheckState.result &&
+        pwdCheckState.result
+      )
+    ) {
+      e.preventDefault();
+      dispatch(totalCheckAction());
     }
-  }; // bg 클릭시 모달 닫힘
-
-  const idCheck = useCallback(async (e) => {
-    e.preventDefault();
-    const {
-      current: { value: id },
-    } = idRef;
-    dispatch(idCheckAction.request({ id }));
-  }, []); // 아이디 중복 확인
-
-  const sendEmail = useCallback(async (e) => {
-    e.preventDefault();
-    const {
-      current: { value: email },
-    } = emailRef;
-    const {
-      current: { value: name },
-    } = nameRef;
-    dispatch(emailCheckAction.request({ email, name }));
-  }, []); // 이메일로 인증코드 전송
-
-  const verifyPwd = useCallback((e) => {
-    const {
-      target: { value: pwd },
-    } = e;
-    const {
-      current: { value: verifyPwd },
-    } = pwdRef;
-    dispatch(pwdCheckAction.request({ pwd, verifyPwd }));
-  }, []); // 비밀번호 재확인
-
+  });
   return (
-    <SignUpbg ref={bgRef}>
-      <SignUpForm>
-        <SignUpLabel>
-          <LabelText>이름</LabelText>
-          <SignUpInput ref={nameRef} type={"text"} placeholder={"Full Name"} />
-        </SignUpLabel>
-        <SignUpLabel>
-          <LabelText>아이디</LabelText>
-          <SignUpInput ref={idRef} type={"text"} placeholder={"ID"} />
-          {idCheckState.show ? (
-            <CheckText check={idCheckState.result}>
-              {idCheckState.result
-                ? "사용가능한 아이디 입니다."
-                : "중복된 아이디입니다."}
-            </CheckText>
-          ) : null}
-
-          <CodeBtn onClick={(e) => idCheck(e)}>중복</CodeBtn>
-        </SignUpLabel>
-        <SignUpLabel>
-          <LabelText>비밀번호</LabelText>
-          <SignUpInput
-            ref={pwdRef}
-            type={"password"}
-            placeholder={"Password"}
-          />
-        </SignUpLabel>
-        <SignUpLabel>
-          <LabelText>
-            비밀번호
-            <br />
-            재확인
-          </LabelText>
-          <SignUpInput
-            onChange={(e) => verifyPwd(e)}
-            type={"password"}
-            placeholder={"Verify Password"}
-          />
-          {pwdCheckState.show ? (
-            <CheckText check={pwdCheckState.result}>
-              {pwdCheckState.result ? "일치합니다." : "일치하지않습니다"}
-            </CheckText>
-          ) : null}
-        </SignUpLabel>
-        <SignUpLabel>
-          <LabelText>이메일</LabelText>
-          <SignUpInput ref={emailRef} type={"email"} placeholder={"Email"} />
-          <CodeBtn onClick={(e) => sendEmail(e)}>전송</CodeBtn>
-        </SignUpLabel>
-        <SignUpLabel>
-          <LabelText>인증번호</LabelText>
-          <SignUpInput type={"number"} placeholder={"Verification Code"} />
-          <CheckText></CheckText>
-          <CodeBtn>인증</CodeBtn>
-        </SignUpLabel>
-        <SignUpSubmit type={"submit"} value={"확인"} />
-        <CloseBtn onClick={onClose}>
-          <FontAwesomeIcon icon={faTimes} />
-        </CloseBtn>
-      </SignUpForm>
-    </SignUpbg>
+    <SignUpForm onSubmit={(e) => verifyTotal(e)}>
+      <SignUpInfo
+        ref={nameRef}
+        label={"닉네임"}
+        type={"text"}
+        placeholder={"Nickname"}
+        name={"nickname"}
+      />
+      <SignUpInfo
+        ref={idRef}
+        label={"아이디"}
+        type={"text"}
+        placeholder={"ID"}
+        name={"ID"}
+        show={idCheckState.show}
+        result={idCheckState.result}
+        btn={"중복"}
+        btnEvent={idCheck}
+        check={["사용가능한 아이디 입니다", "중복된 아이디입니다"]}
+      />
+      <SignUpInfo
+        ref={pwdRef}
+        label={"비밀번호"}
+        type={"password"}
+        name={"password"}
+        placeholder={"Password"}
+      />
+      <SignUpInfo
+        label={`비밀번호 /n 재확인`}
+        type={"password"}
+        placeholder={"Verify Password"}
+        show={pwdCheckState.show}
+        result={pwdCheckState.result}
+        check={["일치합니다", "일치하지않습니다"]}
+        inputEvent={verifyPwd}
+      />
+      <SignUpInfo
+        ref={emailRef}
+        label={`이메일`}
+        type={"email"}
+        placeholder={"Email"}
+        name={"email"}
+        show={emailCheckState.show}
+        result={emailCheckState.result}
+        btn={"전송"}
+        btnEvent={sendEmail}
+        check={["전송완료", "전송실패"]}
+      />
+      <SignUpInfo
+        ref={codeRef}
+        label={`인증코드`}
+        type={"text"}
+        placeholder={"Verification Code"}
+        show={codeCheckState.show}
+        result={codeCheckState.result}
+        btn={"인증"}
+        btnEvent={verifyCode}
+        check={["인증성공", "인증실패"]}
+      />
+      {totalCheckState.show && (
+        <SignUpError>올바르지않은 양식입니다</SignUpError>
+      )}
+      <SignUpSubmit type={"submit"} value={"확인"} />
+      <CloseBtn onClick={closeModal}>
+        <FontAwesomeIcon icon={faTimes} />
+      </CloseBtn>
+    </SignUpForm>
   );
 };

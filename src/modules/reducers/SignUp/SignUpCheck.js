@@ -6,11 +6,13 @@ const IDCHECKACTION = "IDCHECK";
 const EMAILCHECKACTION = "EMAILCHECK";
 const CODECHECKACTION = "CODECHECK";
 const PWDCHECKACTION = "PWDCHECKACTION";
+const TOTALCHECKACTION = "TOTALCHECKACTION";
 
 export const idCheckAction = createRequestAction(IDCHECKACTION);
 export const emailCheckAction = createRequestAction(EMAILCHECKACTION);
 export const codeCheckAction = createRequestAction(CODECHECKACTION);
 export const pwdCheckAction = createRequestAction(PWDCHECKACTION);
+export const totalCheckAction = createAction(TOTALCHECKACTION);
 
 const initialState = {
   idCheckState: {
@@ -26,12 +28,16 @@ const initialState = {
   codeCheckState: {
     show: false,
     result: false,
+    code: "fail",
     error: "",
   },
   pwdCheckState: {
     show: false,
     result: false,
     error: "",
+  },
+  totalCheckState: {
+    show: false,
   },
 };
 
@@ -54,6 +60,7 @@ export default handleActions(
     [emailCheckAction.SUCCESS]: (state, { payload }) => {
       return produce(state, (draft) => {
         draft.emailCheckState.show = true;
+        draft.codeCheckState.code = payload.code;
         draft.emailCheckState.result = payload.result;
       });
     },
@@ -86,6 +93,11 @@ export default handleActions(
     [pwdCheckAction.FAILURE]: (state, { payload }) => {
       return produce(state, (draft) => {
         draft.pwdCheckState.error = payload.error;
+      });
+    },
+    [TOTALCHECKACTION]: (state, { payload }) => {
+      return produce(state, (draft) => {
+        draft.totalCheckState.show = true;
       });
     },
   },
