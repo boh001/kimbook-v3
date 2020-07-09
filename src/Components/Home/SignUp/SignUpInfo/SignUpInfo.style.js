@@ -10,7 +10,7 @@ export const SignUpInput = styled.input.attrs((props) => {
     required: true,
   };
 })`
-  width: 85%;
+  width: 88%;
   height: 80px;
   font-size: 30px;
   margin-left: 20px;
@@ -27,7 +27,7 @@ export const SignUpInputLabel = styled.label`
 export const LabelText = styled.span`
   display: inline-block;
   line-height: 30px;
-  width: 15%;
+  width: 12%;
 `;
 export const CodeBtn = styled.button`
   position: absolute;
@@ -39,7 +39,11 @@ export const CodeBtn = styled.button`
   color: white;
   font-size: 30px;
   cursor: pointer;
+  &:hover {
+    background-color: ${colors.hoverGreen};
+  }
 `;
+
 export const CheckText = styled.div`
   position: absolute;
   top: 10px;

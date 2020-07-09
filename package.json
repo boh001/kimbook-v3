@@ -55,7 +55,9 @@
     "start:dev-server": "nodemon --exec babel-node ./server/init.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -72,5 +74,14 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3002/"
+  "proxy": "http://localhost:3002/",
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/design-system": "^5.1.1",
+    "@storybook/preset-create-react-app": "^3.1.3",
+    "@storybook/react": "^5.3.19",
+    "addon-redux": "^1.1.0"
+  }
 }

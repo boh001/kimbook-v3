@@ -1,12 +1,14 @@
 import { takeLatest, all, takeEvery, put } from "redux-saga/effects";
-import checkSaga from "../checkSaga";
+import checkSaga from "./checkSaga";
 import { apiIdCheck, apiSendEmail } from "utils/api/createPostData";
 import {
   idCheckAction,
   emailCheckAction,
   codeCheckAction,
   pwdCheckAction,
-} from "modules/reducers/SignUp/SignUpCheck";
+  resetAction,
+} from "modules/reducers/SignUp";
+import { MODALCLOSEACTION } from "modules/reducers/modal";
 
 const idCheckSaga = checkSaga(idCheckAction, apiIdCheck);
 const emailCheckSaga = checkSaga(emailCheckAction, apiSendEmail);
@@ -46,11 +48,19 @@ function* watchCodeCheck() {
 function* watchPwdCheck() {
   yield takeEvery(pwdCheckAction.REQUEST, pwdCheckSaga);
 }
-export default function* watchSignUpCheck() {
+function* watchModalClose() {
+  yield takeEvery(MODALCLOSEACTION, function* ({ payload }) {
+    if (payload.type === "LOGIN") {
+      yield put(resetAction());
+    }
+  });
+}
+export default function* watchSignUp() {
   yield all([
     watchIdCheck(),
     watchEmailCheck(),
     watchCodeCheck(),
     watchPwdCheck(),
+    watchModalClose(),
   ]);
 }

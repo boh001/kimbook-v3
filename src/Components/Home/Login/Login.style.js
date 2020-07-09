@@ -11,7 +11,10 @@ export const LoginFrame = styled.div`
   padding: 40px 0px;
   flex-direction: column;
 `;
-export const LoginForm = styled.form`
+export const LoginForm = styled.form.attrs({
+  action: "/user/login",
+  method: "post",
+})`
   width: 500px;
 `;
 export const LoginInput = styled.input.attrs((props) => {
@@ -19,6 +22,7 @@ export const LoginInput = styled.input.attrs((props) => {
     type: props.type,
     placeholder: props.placeholder,
     value: props.value,
+    name: props.name,
   };
 })`
   width: 100%;
@@ -32,7 +36,7 @@ export const LoginSubmit = styled.input.attrs((props) => {
     value: props.value,
   };
 })`
-  width: 100%;
+  width: 500px;
   height: 80px;
   font-size: inherit;
   margin-top: 20px;
@@ -40,6 +44,9 @@ export const LoginSubmit = styled.input.attrs((props) => {
   background-color: ${colors.mainGreen};
   color: white;
   cursor: pointer;
+  &:hover {
+    background-color: ${colors.hoverGreen};
+  }
 `;
 export const LoginLabel = styled.label`
   display: inline-block;
@@ -56,6 +63,9 @@ export const SignBtn = styled.button`
   font-size: inherit;
   color: white;
   background-color: ${colors.mainGreen};
+  &:hover {
+    background-color: ${colors.hoverGreen};
+  }
 `;
 export const LineFrame = styled.div`
   margin-bottom: 40px;

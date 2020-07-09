@@ -30,11 +30,17 @@ export const idCheck = async (req, res) => {
   const {
     body: { id },
   } = req;
-  const users = await User.find({ ID: id });
-  if (users.length === 0) {
-    res.status(200).send({ result: true });
+  if (id.length === 0) {
+    res.send({ result: false });
+    res.status(400);
   } else {
-    res.stats(400).send({ result: false });
+    const users = await User.find({ ID: id });
+    if (users.length === 0) {
+      res.status(200).send({ result: true });
+    } else {
+      res.send({ result: false });
+      res.status(400);
+    }
   }
 };
 export const sendEmail = (req, res) => {

@@ -16,7 +16,7 @@ import {
   codeCheckAction,
   pwdCheckAction,
   totalCheckAction,
-} from "modules/reducers/SignUp/SignUpCheck";
+} from "modules/reducers/SignUp";
 
 export default () => {
   const {
@@ -25,7 +25,7 @@ export default () => {
     codeCheckState,
     pwdCheckState,
     totalCheckState,
-  } = useSelector((state) => state.SignUpCheck);
+  } = useSelector((state) => state.SignUp);
   const dispatch = useDispatch();
   const idRef = useRef();
   const emailRef = useRef();
@@ -87,19 +87,28 @@ export default () => {
     },
     [dispatch, codeCheckState]
   ); // 인증코드 확인
-  const verifyTotal = useCallback((e) => {
-    if (
-      !(
-        idCheckState.result &&
-        emailCheckState.result &&
-        codeCheckState.result &&
-        pwdCheckState.result
-      )
-    ) {
-      e.preventDefault();
-      dispatch(totalCheckAction());
-    }
-  });
+  const verifyTotal = useCallback(
+    (e) => {
+      if (
+        !(
+          idCheckState.result &&
+          emailCheckState.result &&
+          codeCheckState.result &&
+          pwdCheckState.result
+        )
+      ) {
+        e.preventDefault();
+        dispatch(totalCheckAction());
+      }
+    },
+    [
+      idCheckState.result,
+      emailCheckState.result,
+      codeCheckState.result,
+      pwdCheckState.result,
+      dispatch,
+    ]
+  );
   return (
     <SignUpForm onSubmit={(e) => verifyTotal(e)}>
       <SignUpInfo
@@ -129,7 +138,7 @@ export default () => {
         placeholder={"Password"}
       />
       <SignUpInfo
-        label={`비밀번호 /n 재확인`}
+        label={`비밀번호 재확인`}
         type={"password"}
         placeholder={"Verify Password"}
         show={pwdCheckState.show}

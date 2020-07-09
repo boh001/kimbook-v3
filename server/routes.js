@@ -8,6 +8,7 @@ const IDCHECK = "/idCheck";
 
 const ME = "/me";
 
+const ERROR = "/error";
 const routes = {
   HOME,
   USER,
@@ -16,5 +17,6 @@ const routes = {
   IDCHECK,
   SENDEMAIL,
   ME,
+  ERROR,
 };
 export default routes;

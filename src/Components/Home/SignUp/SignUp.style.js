@@ -43,6 +43,9 @@ export const SignUpSubmit = styled.input`
   color: white;
   font-size: inherit;
   cursor: pointer;
+  &:hover {
+    background-color: ${colors.hoverGreen};
+  }
 `;
 export const SignUpError = styled.span`
   position: absolute;
