@@ -6,8 +6,9 @@ import {
   CheckText,
   CodeBtn,
 } from "./SignUpInfo.style";
+import PropTypes from "prop-types";
 
-export default forwardRef(
+const SignUpInfo = forwardRef(
   (
     {
       label,
@@ -41,3 +42,16 @@ export default forwardRef(
     );
   }
 );
+SignUpInfo.propTypes = {
+  label: PropTypes.string,
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+  name: PropTypes.string,
+  show: PropTypes.boolean,
+  result: PropTypes.boolean,
+  btn: PropTypes.string,
+  btnEvent: PropTypes.fnc,
+  check: PropTypes.array,
+  inputEvent: PropTypes.fnc,
+};
+export default SignUpInfo;

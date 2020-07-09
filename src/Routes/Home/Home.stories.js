@@ -3,6 +3,8 @@ import Home from "Routes/Home";
 import withReduxDecorator from "modules/story/withReduxDecorator";
 import { modalOpenAction, modalCloseAction } from "modules/reducers/modal";
 import Layout from "modules/story/Layout";
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+
 import {
   idCheckAction,
   emailCheckAction,
@@ -13,7 +15,7 @@ import {
 } from "modules/reducers/SignUp";
 
 export default {
-  title: "Pages/Home",
+  title: "Pages|Home",
   decorators: [
     (storyFn) => <Layout>{storyFn()}</Layout>,
     (storyFn) => withReduxDecorator({}, cannedActions)(storyFn),
@@ -45,6 +47,11 @@ const cannedActions = [
 export const home = () => <Home />;
 home.story = {
   name: "홈 - Redux",
+  parameters: {
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+    },
+  },
   decorators: [
     (storyFn) => {
       var newNode = document.createElement("div");
