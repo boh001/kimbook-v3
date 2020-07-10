@@ -10,12 +10,22 @@ export const LoginFrame = styled.div`
   font-size: 30px;
   padding: 40px 0px;
   flex-direction: column;
+  @media screen and (max-width: 600px) {
+    font-size: 20px;
+    margin-top: 20px;
+  }
 `;
 export const LoginForm = styled.form.attrs({
   action: "/user/login",
   method: "post",
 })`
   width: 500px;
+  @media screen and (max-width: 600px) {
+    width: 300px;
+  }
+  @media screen and (max-width: 400px) {
+    width: 90%;
+  }
 `;
 export const LoginInput = styled.input.attrs((props) => {
   return {
@@ -29,14 +39,18 @@ export const LoginInput = styled.input.attrs((props) => {
   height: 80px;
   font-size: inherit;
   margin: 20px 0px;
+  @media screen and (max-width: 600px) {
+    height: 50px;
+  }
 `;
+
 export const LoginSubmit = styled.input.attrs((props) => {
   return {
     type: props.type,
     value: props.value,
   };
 })`
-  width: 500px;
+  width: 100%;
   height: 80px;
   font-size: inherit;
   margin-top: 20px;
@@ -46,6 +60,9 @@ export const LoginSubmit = styled.input.attrs((props) => {
   cursor: pointer;
   &:hover {
     background-color: ${colors.hoverGreen};
+  }
+  @media screen and (max-width: 600px) {
+    height: 50px;
   }
 `;
 export const LoginLabel = styled.label`
@@ -66,16 +83,20 @@ export const SignBtn = styled.button`
   &:hover {
     background-color: ${colors.hoverGreen};
   }
+  @media screen and (max-width: 600px) {
+    width: 100px;
+    height: 50px;
+  }
 `;
 export const LineFrame = styled.div`
   margin-bottom: 40px;
   color: ${colors.mainGrey};
-  display: flex;
-  align-items: center;
+  ${flexCenter}
+  width: 100%;
 `;
 export const Line = styled.div`
   border: 1px solid;
-  width: 208px;
+  width: 1%;
   height: 1px;
   background-color: ${colors.mainGrey};
   margin: 0px 10px 0px 15px;

@@ -1,8 +1,8 @@
 import React from "react";
 import Home from "Routes/Home";
-import withReduxDecorator from "modules/story/withReduxDecorator";
+import withReduxDecorator from "utils/story/withReduxDecorator";
 import { modalOpenAction, modalCloseAction } from "modules/reducers/modal";
-import Layout from "modules/story/Layout";
+import Layout from "utils/story/Layout";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 
 import {

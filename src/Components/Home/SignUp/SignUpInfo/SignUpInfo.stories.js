@@ -1,7 +1,7 @@
 import React from "react";
 import SignUpInfo from "./SignUpInfo";
 import { withKnobs, text, boolean, array } from "@storybook/addon-knobs";
-import Layout from "modules/story/Layout";
+import Layout from "utils/story/Layout";
 import { action } from "@storybook/addon-actions";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 

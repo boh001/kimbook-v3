@@ -6,6 +6,7 @@ import {
   CheckText,
   CodeBtn,
 } from "./SignUpInfo.style";
+import MiniLoading from "Components/MiniLoading/MiniLoading";
 import PropTypes from "prop-types";
 
 const SignUpInfo = forwardRef(
@@ -21,6 +22,7 @@ const SignUpInfo = forwardRef(
       btnEvent,
       check,
       inputEvent,
+      isLoading,
     },
     ref
   ) => {
@@ -37,7 +39,11 @@ const SignUpInfo = forwardRef(
         {show ? (
           <CheckText check={result}>{result ? check[0] : check[1]}</CheckText>
         ) : null}
-        {btn && <CodeBtn onClick={(e) => btnEvent(e)}>{btn}</CodeBtn>}
+        {btn && (
+          <CodeBtn onClick={(e) => btnEvent(e)}>
+            {isLoading ? <MiniLoading /> : btn}
+          </CodeBtn>
+        )}
       </SignUpInputLabel>
     );
   }
@@ -50,8 +56,18 @@ SignUpInfo.propTypes = {
   show: PropTypes.boolean,
   result: PropTypes.boolean,
   btn: PropTypes.string,
-  btnEvent: PropTypes.fnc,
+  btnEvent: PropTypes.func,
   check: PropTypes.array,
-  inputEvent: PropTypes.fnc,
+  isLoading: PropTypes.boolean,
+  inputEvent: PropTypes.func,
+};
+SignUpInfo.defaultProps = {
+  show: false,
+  result: false,
+  btn: "",
+  btnEvent: () => {},
+  isLoading: false,
+  check: [],
+  inputEvent: () => {},
 };
 export default SignUpInfo;

@@ -17,6 +17,7 @@ import {
   pwdCheckAction,
   totalCheckAction,
 } from "modules/reducers/SignUp";
+import { LOGIN } from "modules/reducers/Login";
 
 export default () => {
   const {
@@ -26,6 +27,10 @@ export default () => {
     pwdCheckState,
     totalCheckState,
   } = useSelector((state) => state.SignUp);
+  const loading = useSelector((state) => state.loading);
+  const idLoading = loading[idCheckAction.TYPE];
+  const emailLoading = loading[emailCheckAction.TYPE];
+  const codeLoading = loading[codeCheckAction.TYPE];
   const dispatch = useDispatch();
   const idRef = useRef();
   const emailRef = useRef();
@@ -34,7 +39,7 @@ export default () => {
   const codeRef = useRef();
 
   const closeModal = useCallback(
-    () => dispatch(modalCloseAction({ type: "LOGIN" })),
+    () => dispatch(modalCloseAction({ type: LOGIN })),
     [dispatch]
   );
   const idCheck = useCallback(
@@ -128,7 +133,8 @@ export default () => {
         result={idCheckState.result}
         btn={"중복"}
         btnEvent={idCheck}
-        check={["사용가능한 아이디 입니다", "중복된 아이디입니다"]}
+        isLoading={idLoading}
+        check={["사용가능합니다", "중복된 아이디입니다"]}
       />
       <SignUpInfo
         ref={pwdRef}
@@ -156,17 +162,19 @@ export default () => {
         result={emailCheckState.result}
         btn={"전송"}
         btnEvent={sendEmail}
+        isLoading={emailLoading}
         check={["전송완료", "전송실패"]}
       />
       <SignUpInfo
         ref={codeRef}
         label={`인증코드`}
         type={"text"}
-        placeholder={"Verification Code"}
+        placeholder={"Verifiy Code"}
         show={codeCheckState.show}
         result={codeCheckState.result}
         btn={"인증"}
         btnEvent={verifyCode}
+        isLoading={codeLoading}
         check={["인증성공", "인증실패"]}
       />
       {totalCheckState.show && (

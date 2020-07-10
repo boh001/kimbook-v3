@@ -14,6 +14,11 @@ export const HeaderFrame = styled.div`
   position: relative;
   overflow: hidden;
   z-index: 1;
+  @media screen and (max-width: 600px) {
+    font-size: 30px;
+    letter-spacing: 10px;
+    height: 120px;
+  }
 `;
 export const BubbleFrame = styled.ul`
   position: absolute;
@@ -44,13 +49,17 @@ export const Bubble = styled.li`
   }
 
   &:nth-child(2) {
-    left: 20%;
+    left: 24%;
 
     width: 80px;
     height: 80px;
 
     animation-delay: 2s;
     animation-duration: 17s;
+    @media screen and (max-width: 600px) {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   &:nth-child(3) {
@@ -64,6 +73,10 @@ export const Bubble = styled.li`
     height: 20px;
 
     animation-duration: 22s;
+    @media screen and (max-width: 600px) {
+      width: 10px;
+      height: 10px;
+    }
   }
 
   &:nth-child(5) {
@@ -76,6 +89,10 @@ export const Bubble = styled.li`
     height: 60px;
 
     animation-delay: 3s;
+    @media screen and (max-width: 600px) {
+      width: 30px;
+      height: 30px;
+    }
   }
 
   &:nth-child(7) {
@@ -84,6 +101,10 @@ export const Bubble = styled.li`
     height: 80px;
 
     animation-delay: 7s;
+    @media screen and (max-width: 600px) {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   &:nth-child(8) {
@@ -93,6 +114,10 @@ export const Bubble = styled.li`
 
     animation-delay: 15s;
     animation-duration: 40s;
+    @media screen and (max-width: 600px) {
+      width: 10px;
+      height: 10px;
+    }
   }
 
   &:nth-child(9) {
@@ -110,5 +135,9 @@ export const Bubble = styled.li`
     height: 70px;
 
     animation-delay: 11s;
+    @media screen and (max-width: 600px) {
+      width: 30px;
+      height: 30px;
+    }
   }
 `;

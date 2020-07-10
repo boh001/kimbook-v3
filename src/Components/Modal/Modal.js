@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
+import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { modalCloseAction } from "modules/reducers/modal";
 import { ModalFrame } from "./Modal.style";
-export default ({ children, type }) => {
+const Modal = ({ children, type }) => {
   const frameRef = useRef();
   const dispatch = useDispatch();
-  window.onclick = function (e) {
+  window.onclick = function(e) {
     if (e.target === frameRef.current) {
       dispatch(modalCloseAction({ type }));
     }
@@ -13,3 +14,8 @@ export default ({ children, type }) => {
 
   return <ModalFrame ref={frameRef}>{children}</ModalFrame>;
 };
+Modal.propTypes = {
+  children: PropTypes.element.isRequired,
+  type: PropTypes.string.isRequired,
+};
+export default Modal;
