@@ -19,13 +19,13 @@ const loadingA = keyframes`
 `;
 const loadingB = keyframes`
 0 {
-   height: 4px;
+   height: 5px;
  }
  50% {
-   height: 24px;
+   height: 20px;
  }
  100% {
-   height: 4px;
+   height: 5px;
  }
 `;
 export const MiniLoading = styled.div`
