@@ -14,5 +14,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 | Prototype                                                                                                       | Testing | Cloud-Service                                                                                                  |
 | --------------------------------------------------------------------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------- |
-| ![image](https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpllvO9KSl49BWp4N-DBeZ--eIqUd01Oqg8g&usqp=CAU) |  ![image](https://user-images.githubusercontent.com/54930248/87116477-e0d04680-c2b0-11ea-9a89-c7d7028d2874.png)
-       | ![image](https://user-images.githubusercontent.com/54930248/86573281-21794880-bfaf-11ea-91f8-6657b2877dc7.png) |
+| ![image](https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpllvO9KSl49BWp4N-DBeZ--eIqUd01Oqg8g&usqp=CAU) |  ![image](https://user-images.githubusercontent.com/54930248/87116477-e0d04680-c2b0-11ea-9a89-c7d7028d2874.png) | ![image](https://user-images.githubusercontent.com/54930248/86573281-21794880-bfaf-11ea-91f8-6657b2877dc7.png) |
