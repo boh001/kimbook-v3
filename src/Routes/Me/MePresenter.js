@@ -1,7 +1,13 @@
 import React from "react";
+import Header from "Components/Header/Header";
+import Content from "Components/Content/Content";
+import MainFrame from "Components/MainFrame/MainFrame";
 
 export default () => (
   <>
-    <div>memememe</div>
+    <Header />
+    <MainFrame>
+      <Content />
+    </MainFrame>
   </>
 );

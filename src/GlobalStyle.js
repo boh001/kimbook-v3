@@ -37,5 +37,8 @@ export const GlobalStyles = createGlobalStyle`
         &:focus{
             outline:none;
         }
+        &:active {
+            transform:scale(0.95)
+        }
     }
 `;

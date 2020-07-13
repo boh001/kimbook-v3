@@ -61,6 +61,9 @@ export const LoginSubmit = styled.input.attrs((props) => {
   &:hover {
     background-color: ${colors.hoverGreen};
   }
+  &:active {
+    transform: scale(0.95);
+  }
   @media screen and (max-width: 600px) {
     height: 50px;
   }
