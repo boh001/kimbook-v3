@@ -4,6 +4,8 @@ import { withKnobs, text, boolean, array } from "@storybook/addon-knobs";
 import Layout from "utils/story/Layout";
 import { action } from "@storybook/addon-actions";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+import { SignUpForm } from "../SignUp.style";
+import { ModalFrame } from "Components/Modal/Modal.style";
 
 export default {
   title: "Components|Home/SignUp/SignUpInfo",
@@ -11,19 +13,9 @@ export default {
     withKnobs,
     (storyFn) => (
       <Layout>
-        <div
-          style={{
-            width: "100%",
-            height: "400px",
-            padding: "30px",
-            fontSize: "30px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {storyFn()}
-        </div>
+        <ModalFrame>
+          <SignUpForm>{storyFn()}</SignUpForm>
+        </ModalFrame>
       </Layout>
     ),
   ],

@@ -14,6 +14,7 @@ const Layout = ({ children }) => (
     <body>
       <MemoryRouter>
         <GlobalStyles />
+
         {children}
       </MemoryRouter>
     </body>

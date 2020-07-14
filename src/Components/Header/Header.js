@@ -20,6 +20,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { showSearchAction } from "modules/reducers/Header";
+import UserInfo from "Components/UserInfo/UserInfo";
 
 const Header = ({}) => {
   const dispatch = useDispatch();
@@ -31,10 +32,7 @@ const Header = ({}) => {
     <HeaderFrame>
       <HeaderSection>
         <HeaderFlag>KIMBOOK</HeaderFlag>
-        <HeaderUser>
-          <UserAvatar />
-          <UserName>name</UserName>
-        </HeaderUser>
+        <UserInfo />
       </HeaderSection>
       <HeaderSection>
         <HeaderIcon to="#">

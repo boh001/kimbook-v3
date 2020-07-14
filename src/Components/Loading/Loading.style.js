@@ -11,7 +11,7 @@ export const Loading = styled.div`
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  border: 0.6rem solid ${colors.mainBlack};
+  border: 0.5rem solid ${colors.mainBlack};
 
   border-top-color: ${colors.mainGreen};
   animation: spin 1s infinite linear;
@@ -22,5 +22,9 @@ export const Loading = styled.div`
     100% {
       transform: rotate(360deg);
     }
+  }
+  @media screen and (max-width: 700px) {
+    width: 40px;
+    height: 40px;
   }
 `;

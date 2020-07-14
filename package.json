@@ -28,6 +28,7 @@
     "helmet": "^3.23.3",
     "http-proxy-middleware": "^1.0.4",
     "immer": "^7.0.5",
+    "moment": "^2.27.0",
     "mongo": "^0.1.0",
     "mongoose": "^5.9.21",
     "morgan": "^1.10.0",
@@ -75,7 +76,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3002/",
+  "proxy": "http://localhost:3003/",
   "devDependencies": {
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-docs": "^5.3.19",
