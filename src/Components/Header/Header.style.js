@@ -34,35 +34,6 @@ export const HeaderFlag = styled.span`
     display: none;
   }
 `;
-export const HeaderUser = styled.div`
-  display: flex;
-  align-items: center;
-  padding-left: 1.5rem;
-  @media screen and (max-width: 700px) {
-    padding-left: 0;
-  }
-`;
-export const UserAvatar = styled.img.attrs((props) => ({
-  src: "../images/testing",
-}))`
-  width: 55px;
-  height: 55px;
-  object-fit: cover;
-  background-color: red;
-  border-radius: 50%;
-  @media screen and (max-width: 1024px) {
-    width: 50px;
-    height: 50px;
-  }
-  @media screen and (max-width: 700px) {
-    width: 40px;
-    height: 40px;
-  }
-`;
-export const UserName = styled.span`
-  color: white;
-  padding-left: 1rem;
-`;
 export const HeaderIcon = styled(Link)`
   padding: 0px 1rem;
   display: flex;

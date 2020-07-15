@@ -1,5 +1,5 @@
 import { createAction } from "redux-actions";
 
-export const LOGIN = "LOGIN";
+const LOGIN = "LOGIN";
 
-export const loginAction = createAction(LOGIN);
+export const loginAction = { TYPE: LOGIN };

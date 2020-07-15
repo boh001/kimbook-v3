@@ -19,6 +19,20 @@ export const GlobalStyles = createGlobalStyle`
     input{
         font-family: inherit;
         border-radius:10px;
+        font-size:inherit;
+        border: 1px solid ${colors.mainGrey};
+        padding:0px 30px;
+        &:focus{
+            outline:none;
+        }
+        &::placeholder{
+            color:${colors.mainGrey}
+        }
+        
+    }
+    textArea{
+        font-family: inherit;
+        font-size:inherit;
         border: 1px solid ${colors.mainGrey};
         padding:0px 30px;
         &:focus{

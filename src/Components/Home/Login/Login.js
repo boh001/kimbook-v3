@@ -17,7 +17,7 @@ import Loading from "Components/Loading/Loading";
 import SignUp from "Components/Home/SignUp/SignUp";
 import { useSelector, useDispatch } from "react-redux";
 import { modalOpenAction } from "modules/reducers/modal";
-import { LOGIN } from "modules/reducers/Login";
+import { loginAction } from "modules/reducers/Login";
 import { startLoading, finishLoading } from "modules/reducers/loading";
 import useComponentWillMount from "hooks/useComponentWillMount";
 import useComponentDidMount from "hooks/useComponentDidMount";
@@ -26,14 +26,18 @@ export default () => {
   const modal = useSelector((state) => state.modal);
   const loading = useSelector((state) => state.loading);
 
-  const isLoading = loading[LOGIN];
-  const isOpenModal = modal[LOGIN];
+  const isLoading = loading[loginAction.TYPE];
+  const isOpenModal = modal[loginAction.TYPE];
 
   const openModal = useCallback(() => {
-    dispatch(modalOpenAction({ type: LOGIN }));
+    dispatch(modalOpenAction({ type: loginAction.TYPE }));
   }, [dispatch]);
-  useComponentWillMount(() => dispatch(startLoading({ type: LOGIN })));
-  useComponentDidMount(() => dispatch(finishLoading({ type: LOGIN })));
+  useComponentWillMount(() =>
+    dispatch(startLoading({ type: loginAction.TYPE }))
+  );
+  useComponentDidMount(() =>
+    dispatch(finishLoading({ type: loginAction.TYPE }))
+  );
   return (
     <>
       {isLoading ? (
@@ -70,7 +74,7 @@ export default () => {
       )}
       {isOpenModal ? (
         <ModalPortal>
-          <Modal type={LOGIN}>
+          <Modal type={loginAction.TYPE}>
             <SignUp />
           </Modal>
         </ModalPortal>
