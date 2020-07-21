@@ -1,5 +1,5 @@
 import React from "react";
-import Me from "Routes/Me";
+import Me from "Routes/Me/Me";
 import withReduxDecorator from "utils/story/withReduxDecorator";
 import { showSearchAction } from "modules/reducers/Header";
 import Layout from "utils/story/Layout";

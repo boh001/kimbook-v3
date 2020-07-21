@@ -17,7 +17,7 @@ import {
   pwdCheckAction,
   totalCheckAction,
 } from "modules/reducers/SignUp";
-import { LOGIN } from "modules/reducers/Login";
+import { loginAction } from "modules/reducers/Login";
 
 export default () => {
   const {
@@ -39,7 +39,7 @@ export default () => {
   const codeRef = useRef();
 
   const closeModal = useCallback(
-    () => dispatch(modalCloseAction({ type: LOGIN })),
+    () => dispatch(modalCloseAction({ type: loginAction.TYPE })),
     [dispatch]
   );
   const idCheck = useCallback(

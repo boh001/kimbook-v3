@@ -1,5 +1,5 @@
 import React from "react";
-import Home from "Routes/Home";
+import Home from "./Home";
 import withReduxDecorator from "utils/story/withReduxDecorator";
 import { modalOpenAction, modalCloseAction } from "modules/reducers/modal";
 import Layout from "utils/story/Layout";

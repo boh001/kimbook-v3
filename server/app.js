@@ -10,7 +10,7 @@ import "./passport";
 import dotenv from "dotenv";
 import cors from "cors";
 import userRouter from "./routers/userRouter";
-import homeRouter from "./routers/homeRouter";
+import contentRouter from "./routers/contentRouter";
 import routes from "./routes";
 dotenv.config();
 
@@ -34,7 +34,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(routes.HOME, homeRouter);
+app.use(routes.CONTENT, contentRouter);
 app.use(routes.USER, userRouter);
 
 export default app;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { flexCenter } from "utils/constants/css";
 import colors from "utils/constants/colors";
 import { Link } from "react-router-dom";
+import { USERLOGIN } from "utils/api/path";
 export const LoginFrame = styled.div`
   margin-top: 120px;
   width: 100%;
@@ -16,7 +17,7 @@ export const LoginFrame = styled.div`
   }
 `;
 export const LoginForm = styled.form.attrs({
-  action: "/user/login",
+  action: USERLOGIN,
   method: "post",
 })`
   width: 500px;
@@ -33,6 +34,7 @@ export const LoginInput = styled.input.attrs((props) => {
     placeholder: props.placeholder,
     value: props.value,
     name: props.name,
+    required: true,
   };
 })`
   width: 100%;

@@ -5,6 +5,7 @@ import {
   sendEmail,
   idCheck,
   signUp,
+  upInfo,
 } from "../controllers/userController";
 
 const userRouter = express.Router();
@@ -13,4 +14,5 @@ userRouter.post(routes.SIGNUP, signUp, login);
 userRouter.post(routes.IDCHECK, idCheck);
 userRouter.post(routes.SENDEMAIL, sendEmail);
 userRouter.post(routes.LOGIN, login);
+userRouter.post(routes.INFO, upInfo);
 export default userRouter;

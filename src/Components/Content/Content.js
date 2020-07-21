@@ -26,16 +26,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faHeart, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { faHeart, faBookmark } from "@fortawesome/free-regular-svg-icons";
 
-const Content = ({ avatarUrl, name, content, nLike, writeDate }) => {
-  const { src, text } = content;
-  const relativeTime = moment(writeDate).fromNow();
+const Content = ({ avatarUrl, nickname, content, like, createAt }) => {
+  const { files, text } = content;
+  const relativeTime = moment(createAt).fromNow();
   return (
     <ContentFrame>
       <ContentInfo>
-        <UserInfo src={avatarUrl} name={name} size={"medium"} color={"black"} />
+        <UserInfo
+          src={avatarUrl}
+          name={nickname}
+          size={"medium"}
+          color={"black"}
+        />
         <InfoDate>{relativeTime}</InfoDate>
       </ContentInfo>
-      <ContentImg src={src} />
+      {files.map((file, key) => {
+        const { fileUrl, contentType } = file;
+        return <ContentImg key={key} src={fileUrl} />;
+      })}
+
       <ContentSub>
         <SubOptions>
           <OptionLike>
@@ -47,9 +56,9 @@ const Content = ({ avatarUrl, name, content, nLike, writeDate }) => {
           </OptionStore>
         </SubOptions>
         <SubText>
-          <TextLike>좋아요 {nLike}개</TextLike>
+          <TextLike>좋아요 {like}개</TextLike>
           <TextInfo>
-            <InfoUser>{name}</InfoUser>
+            <InfoUser>{nickname}</InfoUser>
             <InfoValue>{text}</InfoValue>
           </TextInfo>
         </SubText>
@@ -63,21 +72,21 @@ const Content = ({ avatarUrl, name, content, nLike, writeDate }) => {
 };
 Content.propTypes = {
   avatarUrl: PropTypes.string,
-  name: PropTypes.string,
+  nickname: PropTypes.string,
   content: PropTypes.object,
-  nLike: PropTypes.number,
-  writeDate: PropTypes.instanceOf(Date),
+  like: PropTypes.number,
+  createAt: PropTypes.instanceOf(Date),
 };
 Content.defaultProps = {
   avatarUrl:
     "https://images.unsplash.com/photo-1594599304267-88bdc2233be9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-  name: "Sara",
+  nickname: "Sara",
   content: {
     src:
       "https://images.unsplash.com/photo-1594599304267-88bdc2233be9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
     text: "High enough to be out of reach of any unwanted paw action...",
   },
-  nLike: 3312,
-  writeDate: new Date(),
+  like: 3312,
+  createAt: new Date(),
 };
 export default Content;

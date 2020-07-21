@@ -1,4 +1,5 @@
 import User from "../models/User";
+import Content from "../models/Content";
 import passport from "passport";
 import routes from "../routes";
 import { mailOptions, transporter } from "../nodemailer";
@@ -56,4 +57,24 @@ export const sendEmail = (req, res) => {
       res.status(200).send({ result: true, code });
     }
   });
+};
+export const upInfo = async (req, res) => {
+  const {
+    user: { _id },
+  } = req;
+  try {
+    const loginUser = await User.findOne({ _id });
+    const { nickname, avatarUrl } = loginUser;
+    const contents = await Content.find({}).populate([
+      {
+        path: "authorId",
+        model: "User",
+      },
+    ]);
+    console.log(contents);
+    res.status(200).send({ user: { nickname, avatarUrl }, contents });
+  } catch (error) {
+    res.send({ error });
+    res.status(400);
+  }
 };

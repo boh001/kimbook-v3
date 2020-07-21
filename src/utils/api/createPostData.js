@@ -1,10 +1,18 @@
 import axios from "axios";
-import { baseURL, idCheckURL, sendEmailURL } from "./path";
+import {
+  BASEURL,
+  USERIDCHECK,
+  USERSENDEMAIL,
+  USERSEARCH,
+  USERINFO,
+} from "./path";
 
 const api = axios.create({
-  baseURL: baseURL,
+  baseURL: BASEURL,
 });
 const apiPostData = (path) => (data) => api.post(path, data);
 
-export const apiIdCheck = apiPostData(idCheckURL);
-export const apiSendEmail = apiPostData(sendEmailURL);
+export const apiIdCheck = apiPostData(USERIDCHECK);
+export const apiSendEmail = apiPostData(USERSENDEMAIL);
+export const apiUserInfo = apiPostData(USERINFO);
+export const apiSearch = apiPostData(USERSEARCH);

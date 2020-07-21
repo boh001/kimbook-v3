@@ -19,16 +19,19 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { modalOpenAction } from "modules/reducers/modal";
-import { showSearchAction, headerAction } from "modules/reducers/Header";
+import { showSearchAction } from "modules/reducers/Header";
+import { writeAction } from "modules/reducers/Write";
 import UserInfo from "Components/UserInfo/UserInfo";
-import Write from "./Write/Write";
-const Header = ({}) => {
+import Write from "Components/Write/Write";
+const Header = ({ src, name }) => {
   const dispatch = useDispatch();
-  const { show } = useSelector((state) => state.Header);
+  const {
+    search: { show },
+  } = useSelector((state) => state.Header);
   const modal = useSelector((state) => state.modal);
-  const isOpenModal = modal[headerAction.TYPE];
+  const isOpenModal = modal[writeAction.TYPE];
   const openModal = useCallback(() => {
-    dispatch(modalOpenAction({ type: headerAction.TYPE }));
+    dispatch(modalOpenAction({ type: writeAction.TYPE }));
   }, [dispatch]);
   const showSearch = useCallback(() => dispatch(showSearchAction()), [
     dispatch,
@@ -38,7 +41,7 @@ const Header = ({}) => {
       <HeaderFrame>
         <HeaderSection>
           <HeaderFlag>KIMBOOK</HeaderFlag>
-          <UserInfo />
+          <UserInfo src={src} name={name} color={"white"} size={"medium"} />
         </HeaderSection>
         <HeaderSection>
           <HeaderIcon to="#">
@@ -60,7 +63,7 @@ const Header = ({}) => {
       </HeaderFrame>
       {isOpenModal ? (
         <ModalPortal>
-          <Modal type={headerAction.TYPE}>
+          <Modal type={writeAction.TYPE}>
             <Write />
           </Modal>
         </ModalPortal>

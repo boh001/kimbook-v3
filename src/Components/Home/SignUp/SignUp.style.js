@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { flexCenter } from "utils/constants/css";
 import colors from "utils/constants/colors";
+import { USERSIGNUP } from "utils/api/path";
 
 export const SignUpForm = styled.form.attrs({
-  action: "/user/signUp",
+  action: USERSIGNUP,
   method: "post",
 })`
   position: relative;

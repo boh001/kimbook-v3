@@ -31,23 +31,25 @@ export const content = () => {
     "src",
     "https://images.unsplash.com/photo-1594599304267-88bdc2233be9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
   );
-  const name = text("name", "Sara");
+  const nickname = text("nickname", "Sara");
   const size = text("size", "medium");
-  const content = object("content", {
-    src:
-      "https://images.unsplash.com/photo-1594599304267-88bdc2233be9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-    text: "High enough to be out of reach of any unwanted paw action...",
-  });
+  const content = object("content", [
+    {
+      files:
+        "https://images.unsplash.com/photo-1594599304267-88bdc2233be9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      text: "High enough to be out of reach of any unwanted paw action...",
+    },
+  ]);
   const nLike = number("nLike", 3312);
-  const writeDate = date("date", new Date());
+  const createAt = date("date", new Date());
   return (
     <Content
       avatarUrl={avatarUrl}
-      name={name}
+      nickname={nickname}
       size={size}
       content={content}
       nLike={nLike}
-      date={writeDate}
+      createAt={createAt}
     />
   );
 };

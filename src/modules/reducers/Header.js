@@ -5,15 +5,19 @@ const SHOWSEARCHACTION = "SHOWSEARCHACTION";
 const HEADER = "HEADER";
 
 export const showSearchAction = createAction(SHOWSEARCHACTION);
+
 export const headerAction = { TYPE: HEADER };
+
 const initialState = {
-  show: false,
+  search: {
+    show: false,
+  },
 };
 export default handleActions(
   {
-    [SHOWSEARCHACTION]: (state, action) =>
+    [SHOWSEARCHACTION]: (state, { payload }) =>
       produce(state, (draft) => {
-        draft.show = !draft.show;
+        draft.search.show = !draft.search.show;
       }),
   },
   initialState

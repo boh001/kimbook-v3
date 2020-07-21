@@ -1,5 +1,5 @@
-import Home from "Routes/Home";
-import Me from "Routes/Me";
+import Home from "Routes/Home/Home";
+import Me from "Routes/Me/Me";
 
 const HOME = {
   path: "/",

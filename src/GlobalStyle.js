@@ -55,4 +55,5 @@ export const GlobalStyles = createGlobalStyle`
             transform:scale(0.95)
         }
     }
+  
 `;
