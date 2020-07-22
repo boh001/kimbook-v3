@@ -6,6 +6,7 @@ export const Frame = styled.div`
   height: 100%;
   padding: 2rem 1rem;
   ${flexCenter};
+  flex-direction: column;
   @media screen and (max-width: 1024px) {
     padding: 2rem 0;
   }

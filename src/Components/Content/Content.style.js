@@ -7,6 +7,7 @@ export const ContentFrame = styled.div`
   border: 1px solid ${colors.mainGrey};
   font-size: 30px;
   border-radius: 10px;
+  margin-bottom: 30px;
   @media screen and (max-width: 1024px) {
     width: 100%;
     border-radius: 0px;
@@ -116,19 +117,51 @@ export const ContentForm = styled.form.attrs({})`
   align-items: center;
   justify-content: space-between;
 `;
-export const ContentInput = styled.input.attrs({
+export const ContentInput = styled.textarea.attrs({
   type: "text",
   placeholder: "댓글 달기...",
 })`
   width: 100%;
-  height: 100%;
+  height: 70px;
   border: none;
   display: flex;
   font-size: inherit;
   align-items: center;
   padding: 1rem 0px;
+  resize: none;
+
   @media screen and (max-width: 700px) {
-    padding: 0.5rem 0px;
+    padding: 0.8rem 0px;
+    height: 50px;
+    &::-moz-placeholder {
+      /* Mozilla Firefox 19+ */
+      line-height: 25px;
+    }
+    &::-webkit-input-placeholder {
+      /* Webkit */
+      line-height: 25px;
+    }
+    &:-ms-input-placeholder {
+      /* IE */
+      line-height: 25px;
+    }
+    &:hover {
+      opacity: 1;
+    }
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 7px;
+      background-color: ${colors.mainGrey};
+    }
+    &::-webkit-scrollbar-button {
+      width: 0;
+      height: 0;
+    }
   }
 `;
 export const ContentSubmit = styled.input.attrs({

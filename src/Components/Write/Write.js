@@ -18,17 +18,15 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload, faTh, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { showUploadAction } from "modules/reducers/Write";
+import { showUploadAction, showSlideAction } from "modules/reducers/Write";
 export default () => {
   const dispatch = useDispatch();
-  const [slide, setSlide] = useState(false);
-  const { uploads } = useSelector((state) => state.Write);
+  const { slide, uploads } = useSelector((state) => state.Write);
   const readUpload = (inputFile) => {
     const reader = new FileReader();
     return new Promise((resolve, reject) => {
       reader.onload = (e) => {
         const { result } = e.target;
-        console.log(e.target.result);
         resolve(result);
       };
       reader.readAsDataURL(inputFile);
@@ -49,10 +47,10 @@ export default () => {
     dispatch(showUploadAction({ uploads }));
   });
   const showSlide = useCallback(() => {
-    setSlide(true);
+    dispatch(showSlideAction({ slide: true }));
   });
   const hiddenSlide = useCallback(() => {
-    setSlide(false);
+    dispatch(showSlideAction({ slide: false }));
   });
   return (
     <>

@@ -127,13 +127,14 @@ export const WriteBack = styled.div`
 export const WriteUploads = styled.div`
   display: grid;
   width: 100%;
-  height: 600px;
-  background-color: red;
+  min-height: 500px;
+  grid-template-columns: repeat(3, 100%);
+  grid-auto-rows: 1fr;
 `;
 export const UploadImg = styled.img.attrs((props) => ({
   src: props.src,
 }))`
-  height: 300px;
+  height: 100px;
 `;
 export const UploadVideo = styled.video.attrs((props) => ({
   src: props.src,
