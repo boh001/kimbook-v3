@@ -1,9 +1,23 @@
 import React from "react";
-import Header from "Components/Home/Header/Header";
-import Login from "Components/Home/Login/Login";
+import Login from "Components/Login/Login";
+import { HeaderFrame, BubbleFrame, Bubble } from "./Home.style";
 export default () => (
   <>
-    <Header />
+    <HeaderFrame>
+      KIMBOOK
+      <BubbleFrame>
+        <Bubble />
+        <Bubble />
+        <Bubble />
+        <Bubble />
+        <Bubble />
+        <Bubble />
+        <Bubble />
+        <Bubble />
+        <Bubble />
+        <Bubble />
+      </BubbleFrame>
+    </HeaderFrame>
     <Login />
   </>
 );

@@ -23,6 +23,8 @@ import { showSearchAction } from "modules/reducers/Header";
 import { writeAction } from "modules/reducers/Write";
 import UserInfo from "Components/UserInfo/UserInfo";
 import Write from "Components/Write/Write";
+import PropTypes from "prop-types";
+
 const Header = ({ src, name }) => {
   const dispatch = useDispatch();
   const {
@@ -71,5 +73,13 @@ const Header = ({ src, name }) => {
     </>
   );
 };
-
+Header.propTypes = {
+  src: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+};
+Header.defaultProps = {
+  src:
+    "https://images.unsplash.com/photo-1594599304267-88bdc2233be9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+  name: "Sara",
+};
 export default Header;

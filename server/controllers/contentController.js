@@ -25,3 +25,31 @@ export const uploadContent = async (req, res) => {
     console.log(error);
   }
 };
+export const upLike = async (req, res) => {
+  const {
+    body: { contentId },
+  } = req;
+  const {
+    user: { _id },
+  } = req;
+  console.log(contentId);
+  try {
+    const content = await Content.findOne({ _id: contentId });
+    const likeUsers = content.likeUsers;
+    if (likeUsers.includes(_id)) {
+      await content.updateOne({
+        $inc: { like: -1 },
+        $pull: { likeUsers: _id },
+      });
+      res.status(200).send({ result: true });
+    } else {
+      await content.updateOne({
+        $inc: { like: 1 },
+        $push: { likeUsers: _id },
+      });
+      res.status(200).send({ result: false });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};

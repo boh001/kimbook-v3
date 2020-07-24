@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import colors from "utils/constants/colors";
 import { flexCenter } from "utils/constants/css";
+import { COMMENTUPLOAD } from "utils/api/path";
 
 export const ContentFrame = styled.div`
   width: 760px;
@@ -81,12 +82,14 @@ export const SubOptions = styled.div`
 `;
 export const OptionLike = styled.span`
   ${flexCenter};
+  cursor: pointer;
 `;
 export const OptionSlideBtns = styled.div`
   ${flexCenter};
 `;
 export const OptionStore = styled.span`
   ${flexCenter};
+  cursor: pointer;
 `;
 export const SubText = styled.div``;
 export const TextLike = styled.span`
@@ -98,15 +101,21 @@ export const TextLike = styled.span`
 `;
 export const TextInfo = styled.div`
   display: flex;
+  position: relative;
 `;
 export const InfoUser = styled.span`
   color: ${colors.mainGreen};
+  position: absolute;
+  top: 0;
+  left: 0;
   margin-right: 1rem;
   @media screen and (max-width: 700px) {
     margin-right: 0.5rem;
   }
 `;
-export const InfoValue = styled.p``;
+export const InfoValue = styled.p`
+  text-indent: ${(props) => `${props.ident * 0.7}em`};
+`;
 export const ContentForm = styled.form.attrs({})`
   width: 100%;
   height: 10%;
@@ -120,6 +129,7 @@ export const ContentForm = styled.form.attrs({})`
 export const ContentInput = styled.textarea.attrs({
   type: "text",
   placeholder: "댓글 달기...",
+  name: "text",
 })`
   width: 100%;
   height: 70px;
@@ -127,41 +137,25 @@ export const ContentInput = styled.textarea.attrs({
   display: flex;
   font-size: inherit;
   align-items: center;
-  padding: 1rem 0px;
+  padding: 1rem 1rem 1rem 0;
   resize: none;
-
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    background-color: ${colors.mainGrey};
+  }
+  &::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+  }
   @media screen and (max-width: 700px) {
     padding: 0.8rem 0px;
     height: 50px;
-    &::-moz-placeholder {
-      /* Mozilla Firefox 19+ */
-      line-height: 25px;
-    }
-    &::-webkit-input-placeholder {
-      /* Webkit */
-      line-height: 25px;
-    }
-    &:-ms-input-placeholder {
-      /* IE */
-      line-height: 25px;
-    }
-    &:hover {
-      opacity: 1;
-    }
-    &::-webkit-scrollbar {
-      width: 7px;
-    }
-    &::-webkit-scrollbar-track {
-      background-color: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-      border-radius: 7px;
-      background-color: ${colors.mainGrey};
-    }
-    &::-webkit-scrollbar-button {
-      width: 0;
-      height: 0;
-    }
   }
 `;
 export const ContentSubmit = styled.input.attrs({
@@ -179,3 +173,6 @@ export const ContentSubmit = styled.input.attrs({
     opacity: 1;
   }
 `;
+export const SubComment = styled.div``;
+export const commentUser = styled.span``;
+export const CommentText = styled.p``;

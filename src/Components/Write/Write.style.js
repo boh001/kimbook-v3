@@ -41,7 +41,6 @@ export const WriteForm = styled.form.attrs({
 export const WriteText = styled.textarea.attrs({
   name: "writeText",
   placeholder: "글 쓰기...",
-  required: true,
 })`
   width: 100%;
   min-height: 200px;
@@ -72,6 +71,7 @@ export const WriteFile = styled.input.attrs({
   type: "file",
   multiple: "multiple",
   name: "uploadFiles[]",
+  required: true,
 })`
   position: absolute;
   width: 1px;

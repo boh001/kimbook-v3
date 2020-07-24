@@ -5,6 +5,7 @@ import SignUp from "./SignUp";
 import Header from "./Header";
 import Write from "./Write";
 import Me from "./Me";
+import Content from "./Content";
 const rootReducer = combineReducers({
   loading,
   SignUp,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   Header,
   Me,
   Write,
+  Content,
 });
 
 export default rootReducer;

@@ -11,6 +11,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import userRouter from "./routers/userRouter";
 import contentRouter from "./routers/contentRouter";
+import commentRouter from "./routers/commentRouter";
 import routes from "./routes";
 dotenv.config();
 
@@ -36,5 +37,6 @@ app.use(passport.session());
 
 app.use(routes.CONTENT, contentRouter);
 app.use(routes.USER, userRouter);
+app.use(routes.COMMENT, commentRouter);
 
 export default app;

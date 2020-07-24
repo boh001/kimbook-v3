@@ -67,6 +67,16 @@ export const upInfo = async (req, res) => {
     const { nickname, avatarUrl } = loginUser;
     const contents = await Content.find({}).populate([
       {
+        path: "comments",
+        model: "Comment",
+        populate: [
+          {
+            path: "authorId",
+            model: "User",
+          },
+        ],
+      },
+      {
         path: "authorId",
         model: "User",
       },

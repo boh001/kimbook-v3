@@ -14,7 +14,7 @@ export const UserInfoAvatar = styled.img.attrs((props) => ({
       case "medium":
         return "55px";
       case "small":
-        return "30px";
+        return "40px";
     }
   }};
   height: ${(props) => {
@@ -24,7 +24,7 @@ export const UserInfoAvatar = styled.img.attrs((props) => ({
       case "medium":
         return "55px";
       case "small":
-        return "30px";
+        return "40px";
     }
   }};
   object-fit: cover;
@@ -76,7 +76,7 @@ export const UserInfoAvatar = styled.img.attrs((props) => ({
 `;
 export const UserInfoName = styled.span`
   color: ${(props) => props.color};
-  padding-left: 1rem;
+  padding-left: 1em;
   font-size: ${(props) => {
     switch (props.size) {
       case "large":

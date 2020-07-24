@@ -14,7 +14,7 @@ import {
 import ModalPortal from "Components/ModalPortal";
 import Modal from "Components/Modal/Modal";
 import Loading from "Components/Loading/Loading";
-import SignUp from "Components/Home/SignUp/SignUp";
+import SignUp from "Components/SignUp/SignUp";
 import { useSelector, useDispatch } from "react-redux";
 import { modalOpenAction } from "modules/reducers/modal";
 import { loginAction } from "modules/reducers/Login";

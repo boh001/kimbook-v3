@@ -3,6 +3,7 @@ import Content from "./Content";
 import { withKnobs, text, date, object, number } from "@storybook/addon-knobs";
 import Layout from "utils/story/Layout";
 import { action } from "@storybook/addon-actions";
+import withReduxDecorator from "utils/story/withReduxDecorator";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 
 export default {
@@ -19,13 +20,15 @@ export default {
             justifyContent: "center",
           }}
         >
-          <Content>{storyFn()}</Content>
+          {storyFn()}
         </div>
       </Layout>
     ),
+    (storyFn) => withReduxDecorator({}, cannedActions)(storyFn),
   ],
   component: Content,
 };
+const cannedActions = [{}];
 export const content = () => {
   const avatarUrl = text(
     "src",
@@ -33,14 +36,17 @@ export const content = () => {
   );
   const nickname = text("nickname", "Sara");
   const size = text("size", "medium");
-  const content = object("content", [
-    {
-      files:
-        "https://images.unsplash.com/photo-1594599304267-88bdc2233be9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-      text: "High enough to be out of reach of any unwanted paw action...",
-    },
-  ]);
-  const nLike = number("nLike", 3312);
+  const content = object("content", {
+    files: [
+      {
+        fileUrl:
+          "https://images.unsplash.com/photo-1594599304267-88bdc2233be9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+        contentType: "image/jpeg",
+      },
+    ],
+    text: "High enough to be out of reach of any unwanted paw action...",
+  });
+  const like = number("like", 3312);
   const createAt = date("date", new Date());
   return (
     <Content
@@ -48,7 +54,7 @@ export const content = () => {
       nickname={nickname}
       size={size}
       content={content}
-      nLike={nLike}
+      like={like}
       createAt={createAt}
     />
   );

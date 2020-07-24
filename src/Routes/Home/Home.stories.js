@@ -4,7 +4,6 @@ import withReduxDecorator from "utils/story/withReduxDecorator";
 import { modalOpenAction, modalCloseAction } from "modules/reducers/modal";
 import Layout from "utils/story/Layout";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
-
 import {
   idCheckAction,
   emailCheckAction,
