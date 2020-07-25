@@ -22,5 +22,6 @@ module.exports = {
     quotes: [2, "double", { allowTemplateLiterals: true }],
     "react/jsx-filename-extension": [2, { extensions: [".js", ".jsx"] }],
     "no-unused-vars": [1, { vars: "all", args: "all" }],
+    "import/prefer-default-export": "off",
   },
 };

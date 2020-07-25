@@ -7,6 +7,7 @@ import {
   USERINFO,
   COMMENTUPLOAD,
   CONTENTLIKE,
+  CONTENTMARK,
 } from "./path";
 
 const api = axios.create({
@@ -20,3 +21,4 @@ export const apiUserInfo = apiPostData(USERINFO);
 export const apiSearch = apiPostData(USERSEARCH);
 export const apiComment = apiPostData(COMMENTUPLOAD);
 export const apiLike = apiPostData(CONTENTLIKE);
+export const apiMark = apiPostData(CONTENTMARK);

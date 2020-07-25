@@ -87,7 +87,7 @@ export const OptionLike = styled.span`
 export const OptionSlideBtns = styled.div`
   ${flexCenter};
 `;
-export const OptionStore = styled.span`
+export const OptionMark = styled.span`
   ${flexCenter};
   cursor: pointer;
 `;

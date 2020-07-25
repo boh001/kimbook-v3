@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useComponentDidMount from "hooks/useComponentDidMount";
 import { meRequestAction } from "modules/reducers/Me";
 import { Frame } from "./Me.style";
+
 export default () => {
   const dispatch = useDispatch();
   const {
@@ -26,11 +27,12 @@ export default () => {
             const {
               authorId: { nickname, avatarUrl },
               files,
-              like,
               likeUsers,
               text,
               createAt,
               comments,
+              myContents,
+              markContents,
               _id: contentId,
             } = content;
             return (
@@ -40,10 +42,13 @@ export default () => {
                 contentId={contentId}
                 avatarUrl={avatarUrl}
                 nickname={nickname}
-                content={{ files: files, text: text }}
-                like={like}
+                content={{ files, text }}
+                like={likeUsers.length}
+                likeUsers={likeUsers}
                 createAt={createAt}
                 comments={comments}
+                myContents={myContents}
+                markContents={markContents}
               />
             );
           })}

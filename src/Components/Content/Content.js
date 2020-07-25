@@ -1,4 +1,26 @@
 import React, { useCallback, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHeart as THeart,
+  faBookmark as TMark,
+  faEllipsisH,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart as FHeart,
+  faBookmark as FMark,
+} from "@fortawesome/free-regular-svg-icons";
+
+import { addCommentAction } from "modules/reducers/Me";
+import colors from "utils/constants/colors";
+import {
+  onLikeAction,
+  onMarkAction,
+  initialCheckAction,
+} from "modules/reducers/Content";
+import useComponentDidMount from "hooks/useComponentDidMount";
 import {
   ContentFrame,
   ContentInfo,
@@ -11,7 +33,7 @@ import {
   SubOptions,
   OptionLike,
   OptionSlideBtns,
-  OptionStore,
+  OptionMark,
   SubText,
   ContentSubmit,
   TextLike,
@@ -22,22 +44,8 @@ import {
   commentUser,
   CommentText,
 } from "./Content.style";
-import UserInfo from "../UserInfo/UserInfo";
-import moment from "moment";
-import PropTypes from "prop-types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeart as THeart,
-  faBookmark as TMark,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  faHeart as FHeart,
-  faBookmark as FMark,
-} from "@fortawesome/free-regular-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
-import { addCommentAction } from "modules/reducers/Me";
-import colors from "utils/constants/colors";
-import { onLikeAction } from "modules/reducers/Content";
+import UserInfo from "Components/UserInfo/UserInfo";
+
 const Content = ({
   idx,
   avatarUrl,
@@ -47,10 +55,16 @@ const Content = ({
   createAt,
   comments,
   contentId,
+  myContents,
+  likeUsers,
+  markContents,
 }) => {
   const { files, text } = content;
   const dispatch = useDispatch();
-  const { likeCheck } = useSelector((state) => state.Content);
+  const { likeCheck, markCheck } = useSelector((state) => state.Content);
+  const {
+    user: { userId },
+  } = useSelector((state) => state.Me);
   const commentRef = useRef();
   const relativeTime = moment(createAt).fromNow();
   const addComment = useCallback((e) => {
@@ -67,15 +81,22 @@ const Content = ({
     e.preventDefault();
     dispatch(onLikeAction.request({ contentId }));
   });
+  const onMark = useCallback((e) => {
+    e.preventDefault();
+    dispatch(onMarkAction.request({ contentId }));
+  });
+  useComponentDidMount(() =>
+    dispatch(
+      initialCheckAction({
+        likeCheck: likeUsers.includes(userId),
+        markCheck: markContents.includes(contentId),
+      })
+    )
+  );
   return (
     <ContentFrame>
       <ContentInfo>
-        <UserInfo
-          src={avatarUrl}
-          name={nickname}
-          size={"medium"}
-          color={"black"}
-        />
+        <UserInfo src={avatarUrl} name={nickname} size="medium" color="black" />
         <InfoDate>{relativeTime}</InfoDate>
       </ContentInfo>
       {files.map((file, key) => {
@@ -93,13 +114,19 @@ const Content = ({
             )}
           </OptionLike>
           <OptionSlideBtns></OptionSlideBtns>
-          <OptionStore>
-            {likeCheck ? (
-              <FontAwesomeIcon icon={TMark} />
-            ) : (
-              <FontAwesomeIcon icon={FMark} />
-            )}
-          </OptionStore>
+          {!myContents.includes(contentId) ? (
+            <OptionMark>
+              <FontAwesomeIcon icon={faEllipsisH} />
+            </OptionMark>
+          ) : (
+            <OptionMark onClick={(e) => onMark(e)}>
+              {markCheck ? (
+                <FontAwesomeIcon icon={TMark} />
+              ) : (
+                <FontAwesomeIcon icon={FMark} />
+              )}
+            </OptionMark>
+          )}
         </SubOptions>
         <SubText>
           <TextLike>좋아요 {like}개</TextLike>
@@ -121,7 +148,7 @@ const Content = ({
               <UserInfo
                 src={avatarUrl}
                 name={nickname}
-                size={"small"}
+                size="small"
                 color={colors.mainGreen}
               />
               <CommentText>{text}</CommentText>
@@ -137,28 +164,23 @@ const Content = ({
   );
 };
 Content.propTypes = {
+  idx: PropTypes.number.isRequired,
   avatarUrl: PropTypes.string.isRequired,
-  nickname: PropTypes.string.isRequired,
-  content: PropTypes.object.isRequired,
+  nickname: PropTypes.string,
+  content: PropTypes.objectOf(PropTypes.object).isRequired,
   like: PropTypes.number.isRequired,
+  likeUsers: PropTypes.arrayOf(PropTypes.string),
   createAt: PropTypes.instanceOf(Date).isRequired,
-  comments: PropTypes.array.isRequired,
+  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
   contentId: PropTypes.string.isRequired,
+  myContents: PropTypes.arrayOf(PropTypes.string),
+  markContents: PropTypes.arrayOf(PropTypes.string),
 };
 Content.defaultProps = {
-  avatarUrl:
-    "https://images.unsplash.com/photo-1594599304267-88bdc2233be9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-  nickname: "Sara",
-  content: [
-    {
-      files:
-        "https://images.unsplash.com/photo-1594599304267-88bdc2233be9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-      text: "High enough to be out of reach of any unwanted paw action...",
-    },
-  ],
-  like: 3312,
-  createAt: new Date(),
-  comments: [],
-  contentId: "",
+  nickname: "",
+  myContents: [],
+  markContents: [],
+  likeUsers: [],
 };
+
 export default Content;

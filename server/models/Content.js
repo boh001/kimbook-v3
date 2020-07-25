@@ -23,10 +23,6 @@ const ContentSchema = new mongoose.Schema({
       ref: "Comment",
     },
   ],
-  like: {
-    type: Number,
-    default: 0,
-  },
   likeUsers: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -10,6 +10,7 @@ const IDCHECK = "/idCheck";
 const INFO = "/info";
 const UPLOAD = "/upload";
 const LIKE = "/like";
+const MARK = "/mark";
 
 const ERROR = "/error";
 
@@ -18,6 +19,7 @@ const routes = {
   COMMENT,
   UPLOAD,
   LIKE,
+  MARK,
   USER,
   LOGIN,
   SIGNUP,

@@ -1,9 +1,9 @@
+import passport from "passport";
+import cryptoRandomString from "crypto-random-string";
 import User from "../models/User";
 import Content from "../models/Content";
-import passport from "passport";
 import routes from "../routes";
 import { mailOptions, transporter } from "../nodemailer";
-import cryptoRandomString from "crypto-random-string";
 
 export const login = passport.authenticate("local", {
   failureRedirect: routes.HOME,
@@ -82,7 +82,9 @@ export const upInfo = async (req, res) => {
       },
     ]);
     console.log(contents);
-    res.status(200).send({ user: { nickname, avatarUrl }, contents });
+    res
+      .status(200)
+      .send({ user: { userId: _id, nickname, avatarUrl }, contents });
   } catch (error) {
     res.send({ error });
     res.status(400);

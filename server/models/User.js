@@ -12,6 +12,18 @@ const UserSchema = new mongoose.Schema({
       ref: "User",
     },
   ],
+  myContents: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Content",
+    },
+  ],
+  markContents: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Content",
+    },
+  ],
 });
 UserSchema.plugin(passportLocalMongoose, { usernameField: "ID" });
 const model = mongoose.model("User", UserSchema);

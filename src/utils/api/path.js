@@ -10,5 +10,6 @@ export const USERINFO = "/user/info";
 
 export const CONTENTUPLOAD = "/content/upload";
 export const CONTENTLIKE = "/content/like";
+export const CONTENTMARK = "/content/mark";
 
 export const COMMENTUPLOAD = "/comment/upload";

@@ -1,6 +1,5 @@
 import Comment from "../models/Comment";
 import Content from "../models/Content";
-import routes from "../routes";
 
 export const uploadComment = async (req, res) => {
   const {

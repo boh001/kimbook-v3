@@ -1,4 +1,5 @@
 import Content from "../models/Content";
+import User from "../models/User";
 import routes from "../routes";
 
 export const uploadContent = async (req, res) => {
@@ -8,17 +9,19 @@ export const uploadContent = async (req, res) => {
   const {
     user: { _id },
   } = req;
-  let files = [];
+  const files = [];
   req.files.forEach((file) => {
-    console.log(file);
     const { originalname, location, mimetype } = file;
     files.push({ originalname, fileUrl: location, contentType: mimetype });
   });
   try {
-    await Content.create({
+    const newContent = await Content.create({
       authorId: _id,
       files,
       text: writeText,
+    });
+    await User.findByIdAndUpdate(_id, {
+      $push: { myContents: newContent._id },
     });
     res.redirect(routes.ME);
   } catch (error) {
@@ -32,22 +35,44 @@ export const upLike = async (req, res) => {
   const {
     user: { _id },
   } = req;
-  console.log(contentId);
   try {
     const content = await Content.findOne({ _id: contentId });
-    const likeUsers = content.likeUsers;
+    const { likeUsers } = content;
     if (likeUsers.includes(_id)) {
       await content.updateOne({
-        $inc: { like: -1 },
         $pull: { likeUsers: _id },
       });
-      res.status(200).send({ result: true });
+      res.status(200).send({ result: false });
     } else {
       await content.updateOne({
-        $inc: { like: 1 },
         $push: { likeUsers: _id },
       });
+      res.status(200).send({ result: true });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+export const upMark = async (req, res) => {
+  const {
+    body: { contentId },
+  } = req;
+  const {
+    user: { _id },
+  } = req;
+  try {
+    const user = await User.findOne({ _id });
+    const { markContents } = user;
+    if (markContents.includes(contentId)) {
+      await user.updateOne({
+        $pull: { markContents: contentId },
+      });
       res.status(200).send({ result: false });
+    } else {
+      await user.updateOne({
+        $push: { markContents: contentId },
+      });
+      res.status(200).send({ result: true });
     }
   } catch (e) {
     console.log(e);

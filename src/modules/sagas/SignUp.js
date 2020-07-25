@@ -12,7 +12,7 @@ import { MODALCLOSEACTION } from "modules/reducers/modal";
 
 const idCheckSaga = checkSaga(idCheckAction, apiIdCheck);
 const emailCheckSaga = checkSaga(emailCheckAction, apiSendEmail);
-const codeCheckSaga = function* ({ payload }) {
+function* codeCheckSaga({ payload }) {
   try {
     const { origin, verify } = payload;
     let result = false;
@@ -23,8 +23,8 @@ const codeCheckSaga = function* ({ payload }) {
   } catch (e) {
     yield put(codeCheckAction.failure({ error: `${e.name}: ${e.message}` }));
   }
-};
-const pwdCheckSaga = function* ({ payload }) {
+}
+function* pwdCheckSaga({ payload }) {
   try {
     const { origin, verify } = payload;
     let result = false;
@@ -35,7 +35,7 @@ const pwdCheckSaga = function* ({ payload }) {
   } catch (e) {
     yield put(pwdCheckAction.failure({ error: `${e.name}: ${e.message}` }));
   }
-};
+}
 function* watchIdCheck() {
   yield takeLatest(idCheckAction.REQUEST, idCheckSaga);
 }
@@ -49,7 +49,7 @@ function* watchPwdCheck() {
   yield takeEvery(pwdCheckAction.REQUEST, pwdCheckSaga);
 }
 function* watchModalClose() {
-  yield takeEvery(MODALCLOSEACTION, function* ({ payload }) {
+  yield takeEvery(MODALCLOSEACTION, function* resetSaga({ payload }) {
     if (payload.type === "LOGIN") {
       yield put(resetAction());
     }

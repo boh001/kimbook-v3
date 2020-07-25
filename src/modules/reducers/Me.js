@@ -10,6 +10,7 @@ export const addCommentAction = createRequestAction(ADDCOMMENT);
 
 const initialState = {
   user: {
+    userId: "",
     nickname: "",
     avatarUrl: "",
   },
