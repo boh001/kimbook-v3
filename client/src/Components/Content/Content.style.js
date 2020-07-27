@@ -1,7 +1,6 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import colors from "utils/constants/colors";
 import { flexCenter } from "utils/constants/css";
-import { COMMENTUPLOAD } from "utils/api/path";
 
 export const ContentFrame = styled.div`
   width: 760px;
@@ -80,9 +79,30 @@ export const SubOptions = styled.div`
     margin-bottom: 0.5rem;
   }
 `;
+const heartbeat = keyframes`
+  0% {
+    transform: scale(0.75);
+  }
+  20% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.75);
+  }
+  60% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(0.75);
+  }
+  100% {
+    transform: scale(0.75);
+  }
+`;
 export const OptionLike = styled.span`
   ${flexCenter};
   cursor: pointer;
+  animation: ${heartbeat} ${(props) => !props.likeCheck} 1s infinite;
 `;
 export const OptionSlideBtns = styled.div`
   ${flexCenter};

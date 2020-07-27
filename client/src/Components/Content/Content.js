@@ -106,7 +106,7 @@ const Content = ({
 
       <ContentSub>
         <SubOptions>
-          <OptionLike onClick={(e) => onLike(e)}>
+          <OptionLike onClick={(e) => onLike(e)} likeCheck={likeCheck}>
             {likeCheck ? (
               <FontAwesomeIcon icon={THeart} />
             ) : (
