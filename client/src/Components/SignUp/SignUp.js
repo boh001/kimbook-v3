@@ -37,7 +37,6 @@ export default () => {
   const nameRef = useRef();
   const pwdRef = useRef();
   const codeRef = useRef();
-  const hi = "hi";
   const closeModal = useCallback(
     () => dispatch(modalCloseAction({ type: loginAction.TYPE })),
     [dispatch]
