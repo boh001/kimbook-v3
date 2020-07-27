@@ -13,7 +13,6 @@ export const signUp = async (req, res, next) => {
   const {
     body: { nickname, email, ID, password },
   } = req;
-  console.log(nickname, email, ID, password);
 
   try {
     const newUser = await User({
@@ -81,7 +80,6 @@ export const upInfo = async (req, res) => {
         model: "User",
       },
     ]);
-    console.log(contents);
     res
       .status(200)
       .send({ user: { userId: _id, nickname, avatarUrl }, contents });

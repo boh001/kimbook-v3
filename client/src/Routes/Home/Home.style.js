@@ -29,7 +29,7 @@ export const BubbleFrame = styled.ul`
 `;
 const square = keyframes`
   0%   { transform: translateY(0); }
-  100% { transform: translateY(-700px) rotate(600deg); }
+  100% { transform: translateY(-700px) }
 `;
 
 export const Bubble = styled.li`

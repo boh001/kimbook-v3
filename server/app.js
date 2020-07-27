@@ -13,6 +13,7 @@ import userRouter from "./routers/userRouter";
 import contentRouter from "./routers/contentRouter";
 import commentRouter from "./routers/commentRouter";
 import routes from "./routes";
+
 dotenv.config();
 
 const app = express();
