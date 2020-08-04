@@ -10,7 +10,7 @@ import { Frame } from "./Me.style";
 export default () => {
   const dispatch = useDispatch();
   const {
-    user: { nickname, avatarUrl },
+    user: { _id, nickname, avatarUrl, myContents, markContents },
     contents,
   } = useSelector((state) => state.Me);
   const loading = useSelector((state) => state.loading);
@@ -18,27 +18,26 @@ export default () => {
   useComponentDidMount(() => dispatch(meRequestAction.request()));
   return (
     <>
-      <Header src={avatarUrl} name={nickname} />
+      <Header userId={_id} src={avatarUrl} name={nickname} />
       {isLoading ? (
         <Loading />
       ) : (
         <Frame>
           {contents.map((content, key) => {
             const {
-              authorId: { nickname, avatarUrl },
+              authorId: { _id, nickname, avatarUrl },
               files,
               likeUsers,
               text,
               createAt,
               comments,
-              myContents,
-              markContents,
               _id: contentId,
             } = content;
             return (
               <Content
                 key={key}
                 idx={key}
+                userId={_id}
                 contentId={contentId}
                 avatarUrl={avatarUrl}
                 nickname={nickname}

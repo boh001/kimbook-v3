@@ -71,6 +71,7 @@ export const WriteFile = styled.input.attrs({
   type: "file",
   multiple: "multiple",
   name: "uploadFiles[]",
+  accept: "image/*,video/*",
   required: true,
 })`
   position: absolute;

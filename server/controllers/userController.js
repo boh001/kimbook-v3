@@ -63,7 +63,6 @@ export const upInfo = async (req, res) => {
   } = req;
   try {
     const loginUser = await User.findOne({ _id });
-    const { nickname, avatarUrl } = loginUser;
     const contents = await Content.find({}).populate([
       {
         path: "comments",
@@ -80,11 +79,30 @@ export const upInfo = async (req, res) => {
         model: "User",
       },
     ]);
-    res
-      .status(200)
-      .send({ user: { userId: _id, nickname, avatarUrl }, contents });
+    res.status(200).send({ user: loginUser, contents });
   } catch (error) {
     res.send({ error });
     res.status(400);
+  }
+};
+export const searchUser = async (req, res) => {
+  const {
+    body: { result },
+  } = req;
+  try {
+    const users = await User.find({
+      $or: [
+        { email: { $regex: `${result}`, $options: "i" } },
+        { ID: { $regex: `${result}`, $options: "i" } },
+        { nickname: { $regex: `${result}`, $options: "i" } },
+      ],
+    });
+
+    console.log(users);
+    res.status(200).send({ users });
+  } catch (error) {
+    res.send({ error });
+    res.status(400);
+    console.log(error);
   }
 };

@@ -2,11 +2,11 @@ import React from "react";
 import { UserInfoFrame, UserInfoAvatar, UserInfoName } from "./UserInfo.style";
 import PropTypes from "prop-types";
 
-const UserInfo = ({ src, name, size, color }) => {
+const UserInfo = ({ userId, src, name, size, color }) => {
   return (
     <UserInfoFrame>
       <UserInfoAvatar src={src} size={size} />
-      <UserInfoName size={size} color={color}>
+      <UserInfoName to={`/me/profile/${userId}`} size={size} color={color}>
         {name}
       </UserInfoName>
     </UserInfoFrame>

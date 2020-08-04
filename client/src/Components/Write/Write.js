@@ -16,7 +16,12 @@ import {
   UploadVideo,
 } from "./Write.style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUpload, faTh, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUpload,
+  faTh,
+  faArrowLeft,
+  faUserTag,
+} from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { showUploadAction, showSlideAction } from "modules/reducers/Write";
 export default () => {
@@ -60,6 +65,9 @@ export default () => {
           <WriteForm>
             <WriteText />
             <WriteOptions>
+              <WriteOption>
+                <FontAwesomeIcon icon={faUserTag} />
+              </WriteOption>
               <WriteOption onClick={showSlide}>
                 <FontAwesomeIcon icon={faTh} />
               </WriteOption>

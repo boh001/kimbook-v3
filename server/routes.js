@@ -11,6 +11,7 @@ const INFO = "/info";
 const UPLOAD = "/upload";
 const LIKE = "/like";
 const MARK = "/mark";
+const SEARCH = "/search";
 
 const ERROR = "/error";
 
@@ -26,6 +27,7 @@ const routes = {
   IDCHECK,
   SENDEMAIL,
   INFO,
+  SEARCH,
   ME,
   ERROR,
 };

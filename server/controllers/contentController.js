@@ -14,11 +14,13 @@ export const uploadContent = async (req, res) => {
     const { originalname, location, mimetype } = file;
     files.push({ originalname, fileUrl: location, contentType: mimetype });
   });
+  const createAt = new Date();
   try {
     const newContent = await Content.create({
       authorId: _id,
       files,
       text: writeText,
+      createAt,
     });
     await User.findByIdAndUpdate(_id, {
       $push: { myContents: newContent._id },

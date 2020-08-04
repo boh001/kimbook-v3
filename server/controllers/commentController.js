@@ -8,10 +8,12 @@ export const uploadComment = async (req, res) => {
   const {
     user: { _id: authorId },
   } = req;
+  const createAt = new Date();
   try {
     const createComment = await Comment.create({
       authorId,
       text,
+      createAt,
     });
     await Content.findOneAndUpdate(
       { _id: contentId },
@@ -23,9 +25,9 @@ export const uploadComment = async (req, res) => {
         model: "User",
       },
     ]);
-    console.log(comment);
     res.status(200).send({ idx, comment });
   } catch (error) {
-    console.log(error);
+    res.status(400);
+    res.send({ error });
   }
 };

@@ -1,6 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import colors from "utils/constants/colors";
 import { flexCenter } from "utils/constants/css";
+import { Link } from "react-router-dom";
 
 export const ContentFrame = styled.div`
   width: 760px;
@@ -49,7 +50,11 @@ export const ContentImg = styled.img.attrs((props) => ({
     height: 400px;
   }
 `;
-export const ContentVideo = styled.video`
+export const ContentVideo = styled.video.attrs((props) => ({
+  src: props.src,
+  type: props.type,
+  controls: true,
+}))`
   width: 100%;
   height: 600px;
   border: none;
@@ -78,6 +83,14 @@ export const SubOptions = styled.div`
   @media screen and (max-width: 700px) {
     margin-bottom: 0.5rem;
   }
+`;
+export const LOptions = styled.div`
+  ${flexCenter}
+`;
+export const OptionComment = styled(Link)`
+  cursor: pointer;
+  margin-left: 0.3em;
+  ${flexCenter};
 `;
 const heartbeat = keyframes`
   0% {
@@ -114,28 +127,26 @@ export const OptionMark = styled.span`
 export const SubText = styled.div``;
 export const TextLike = styled.span`
   display: inline-block;
-  margin-bottom: 1rem;
-  @media screen and (max-width: 700px) {
-    margin-bottom: 0.5rem;
-  }
+  font-weight: bold;
 `;
 export const TextInfo = styled.div`
   display: flex;
   position: relative;
-`;
-export const InfoUser = styled.span`
-  color: ${colors.mainGreen};
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-right: 1rem;
+  margin-top: 1rem;
   @media screen and (max-width: 700px) {
-    margin-right: 0.5rem;
+    margin-top: 0.5rem;
   }
 `;
-export const InfoValue = styled.p`
-  text-indent: ${(props) => `${props.ident * 0.7}em`};
+export const TextMore = styled.div`
+  display: flex;
+  color: ${colors.mainGrey};
+  cursor: pointer;
+  margin-top: 1rem;
+  @media screen and (max-width: 700px) {
+    margin-top: 0.5rem;
+  }
 `;
+export const InfoValue = styled.p``;
 export const ContentForm = styled.form.attrs({})`
   width: 100%;
   height: 10%;
@@ -193,6 +204,20 @@ export const ContentSubmit = styled.input.attrs({
     opacity: 1;
   }
 `;
-export const SubComment = styled.div``;
-export const commentUser = styled.span``;
-export const CommentText = styled.p``;
+export const SubComment = styled.div`
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding-top: 0.5em;
+`;
+export const CommentUser = styled(Link)`
+  display: inline-block;
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  color: ${colors.mainGreen};
+`;
+export const CommentText = styled.p`
+  display: inline-block;
+  text-indent: ${(props) => `${props.ident * 1.3}px`};
+`;

@@ -3,41 +3,27 @@ import {
   HeaderFrame,
   HeaderSection,
   HeaderFlag,
-  HeaderSearch,
-  HeaderSearchIcon,
-  HeaderSearchBar,
   HeaderIcon,
 } from "./Header.style";
 import ModalPortal from "Components/ModalPortal";
 import Modal from "Components/Modal/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSearch,
-  faHome,
-  faBell,
-  faPenSquare,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHome, faBell, faPenSquare } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { modalOpenAction } from "modules/reducers/modal";
-import { showSearchAction } from "modules/reducers/Header";
 import { writeAction } from "modules/reducers/Write";
 import UserInfo from "Components/UserInfo/UserInfo";
 import Write from "Components/Write/Write";
+import SearchBar from "Components/SearchBar/SearchBar";
 import PropTypes from "prop-types";
 
 const Header = ({ src, name }) => {
   const dispatch = useDispatch();
-  const {
-    search: { show },
-  } = useSelector((state) => state.Header);
   const modal = useSelector((state) => state.modal);
   const isOpenModal = modal[writeAction.TYPE];
   const openModal = useCallback(() => {
     dispatch(modalOpenAction({ type: writeAction.TYPE }));
   }, [dispatch]);
-  const showSearch = useCallback(() => dispatch(showSearchAction()), [
-    dispatch,
-  ]);
   return (
     <>
       <HeaderFrame>
@@ -49,12 +35,7 @@ const Header = ({ src, name }) => {
           <HeaderIcon to="#">
             <FontAwesomeIcon icon={faHome} />
           </HeaderIcon>
-          <HeaderSearch>
-            <HeaderSearchBar show={show} />
-            <HeaderSearchIcon onClick={showSearch} show={show}>
-              <FontAwesomeIcon icon={faSearch} />
-            </HeaderSearchIcon>
-          </HeaderSearch>
+          <SearchBar />
           <HeaderIcon to="#">
             <FontAwesomeIcon icon={faBell} />
           </HeaderIcon>

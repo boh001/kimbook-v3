@@ -10,6 +10,7 @@ const ONMARKACTION = "ONMARKACTION";
 export const initialCheckAction = createAction(INITALCHECKACTION);
 export const onLikeAction = createRequestAction(ONLIKEACTION);
 export const onMarkAction = createRequestAction(ONMARKACTION);
+export const contentAction = { TYPE: CONTENT };
 
 const initialState = {
   likeCheck: false,

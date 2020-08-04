@@ -18,7 +18,7 @@ const apiPostData = (path) => (data) => api.post(path, data);
 export const apiIdCheck = apiPostData(USERIDCHECK);
 export const apiSendEmail = apiPostData(USERSENDEMAIL);
 export const apiUserInfo = apiPostData(USERINFO);
-export const apiSearch = apiPostData(USERSEARCH);
+export const apiUserSearch = apiPostData(USERSEARCH);
 export const apiComment = apiPostData(COMMENTUPLOAD);
 export const apiLike = apiPostData(CONTENTLIKE);
 export const apiMark = apiPostData(CONTENTMARK);
