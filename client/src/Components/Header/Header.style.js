@@ -13,6 +13,10 @@ export const HeaderFrame = styled.div`
   font-size: 45px;
   font-weight: bold;
   padding: 0px 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
   @media screen and (max-width: 1024px) {
     height: 70px;
     font-size: 30px;

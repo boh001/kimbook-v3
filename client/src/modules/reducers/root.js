@@ -5,7 +5,6 @@ import SignUp from "./SignUp";
 import Search from "./Search";
 import Write from "./Write";
 import Me from "./Me";
-import Content from "./Content";
 import Detail from "./Detail";
 const rootReducer = combineReducers({
   loading,
@@ -14,7 +13,6 @@ const rootReducer = combineReducers({
   Search,
   Me,
   Write,
-  Content,
   Detail,
 });
 

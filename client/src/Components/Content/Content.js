@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import PropTypes from "prop-types";
@@ -13,16 +13,13 @@ import {
   faBookmark as FMark,
   faComment,
 } from "@fortawesome/free-regular-svg-icons";
-
-import { addCommentAction } from "modules/reducers/Me";
 import {
   onLikeAction,
   onMarkAction,
-  initialCheckAction,
-  contentAction,
-} from "modules/reducers/Content";
+  meRequestAction,
+  addCommentAction,
+} from "modules/reducers/Me";
 import { modalOpenAction } from "modules/reducers/modal";
-import useComponentDidMount from "hooks/useComponentDidMount";
 import {
   ContentFrame,
   ContentInfo,
@@ -52,30 +49,28 @@ import ModalPortal from "Components/ModalPortal";
 import Modal from "Components/Modal/Modal";
 import UserInfo from "Components/UserInfo/UserInfo";
 
-const Content = ({
-  idx,
-  userId,
-  avatarUrl,
-  nickname,
-  content,
-  like,
-  createAt,
-  comments,
-  contentId,
-  myContents,
-  likeUsers,
-  markContents,
-}) => {
-  const { files, text } = content;
+const Content = React.memo(({ idx, content, loginUser }) => {
+  console.log(idx);
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
-  const isOpenModal = modal[contentAction.TYPE];
-  const { likeCheck, markCheck } = useSelector((state) => state.Content);
+  const isOpenModal = modal[meRequestAction.TYPE];
   const {
-    user: { _id: loginUserId },
-  } = useSelector((state) => state.Me);
+    userId,
+    avatarUrl,
+    nickname,
+    files,
+    text,
+    createAt,
+    comments,
+    _id: contentId,
+    myContents,
+    likeUsers,
+    markContents,
+  } = content;
   const commentRef = useRef();
   const identRef = useRef();
+  const likeCheck = likeUsers?.includes(loginUser._id);
+  const markCheck = markContents?.includes(contentId);
   const addComment = useCallback(
     (e) => {
       e.preventDefault();
@@ -93,26 +88,18 @@ const Content = ({
   const onLike = useCallback(
     (e) => {
       e.preventDefault();
-      dispatch(onLikeAction.request({ contentId }));
+      dispatch(onLikeAction.request({ idx, contentId }));
     },
-    [dispatch, contentId]
+    [dispatch, contentId, idx]
   );
   const onMark = useCallback(
     (e) => {
       e.preventDefault();
-      dispatch(onMarkAction.request({ contentId }));
+      dispatch(onMarkAction.request({ idx, contentId }));
     },
-    [dispatch, contentId]
+    [dispatch, contentId, idx]
   );
 
-  useComponentDidMount(() =>
-    dispatch(
-      initialCheckAction({
-        likeCheck: likeUsers.includes(loginUserId),
-        markCheck: markContents.includes(contentId),
-      })
-    )
-  );
   return (
     <>
       <ContentFrame>
@@ -150,7 +137,7 @@ const Content = ({
               </OptionComment>
             </LOptions>
             <OptionSlideBtns></OptionSlideBtns>
-            {myContents.includes(contentId) ? (
+            {myContents?.includes(contentId) ? (
               <OptionMark>
                 <FontAwesomeIcon icon={faEllipsisH} />
               </OptionMark>
@@ -165,7 +152,7 @@ const Content = ({
             )}
           </SubOptions>
           <SubText>
-            <TextLike>좋아요 {like}개</TextLike>
+            <TextLike>좋아요 {likeUsers.length}개</TextLike>
             <TextInfo>
               <InfoValue>{text}</InfoValue>
             </TextInfo>
@@ -176,12 +163,12 @@ const Content = ({
 
           {comments.slice(0, 2).map((comment, key) => {
             const {
-              authorId: { nickname },
+              authorId: { _id: userId, nickname },
               text,
             } = comment;
             return (
               <SubComment key={key}>
-                <CommentUser to={`/me/profile/${loginUserId}`} ref={identRef}>
+                <CommentUser to={`/me/profile/${userId}`} ref={identRef}>
                   {nickname}
                 </CommentUser>
                 <CommentText ident={identRef.current?.clientWidth}>
@@ -198,12 +185,12 @@ const Content = ({
       </ContentFrame>
       {isOpenModal ? (
         <ModalPortal>
-          <Modal type={contentAction.TYPE}></Modal>
+          <Modal type={meRequestAction.TYPE}></Modal>
         </ModalPortal>
       ) : null}
     </>
   );
-};
+});
 Content.propTypes = {
   idx: PropTypes.number.isRequired,
   avatarUrl: PropTypes.string.isRequired,

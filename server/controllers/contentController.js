@@ -32,7 +32,7 @@ export const uploadContent = async (req, res) => {
 };
 export const upLike = async (req, res) => {
   const {
-    body: { contentId },
+    body: { idx, contentId },
   } = req;
   const {
     user: { _id },
@@ -44,12 +44,12 @@ export const upLike = async (req, res) => {
       await content.updateOne({
         $pull: { likeUsers: _id },
       });
-      res.status(200).send({ result: false });
+      res.status(200).send({ likeCheck: false, idx });
     } else {
       await content.updateOne({
         $push: { likeUsers: _id },
       });
-      res.status(200).send({ result: true });
+      res.status(200).send({ likeCheck: true, idx });
     }
   } catch (e) {
     console.log(e);
@@ -57,7 +57,7 @@ export const upLike = async (req, res) => {
 };
 export const upMark = async (req, res) => {
   const {
-    body: { contentId },
+    body: { idx, contentId },
   } = req;
   const {
     user: { _id },

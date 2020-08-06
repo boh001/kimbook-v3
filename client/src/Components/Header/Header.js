@@ -32,7 +32,7 @@ const Header = ({ src, name }) => {
           <UserInfo src={src} name={name} color={"white"} size={"medium"} />
         </HeaderSection>
         <HeaderSection>
-          <HeaderIcon to="#">
+          <HeaderIcon to="/me">
             <FontAwesomeIcon icon={faHome} />
           </HeaderIcon>
           <SearchBar />

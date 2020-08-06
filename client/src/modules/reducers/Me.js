@@ -3,9 +3,13 @@ import createRequestAction from "./createRequestAction";
 import produce from "immer";
 
 const ME = "ME";
+const ONLIKEACTION = "ONLIKEACTION";
+const ONMARKACTION = "ONMARKACTION";
 const ADDCOMMENT = "ADDCOMMENT";
 
 export const meRequestAction = createRequestAction(ME);
+export const onLikeAction = createRequestAction(ONLIKEACTION);
+export const onMarkAction = createRequestAction(ONMARKACTION);
 export const addCommentAction = createRequestAction(ADDCOMMENT);
 
 const initialState = {
@@ -19,7 +23,6 @@ const initialState = {
   contents: [
     {
       comments: [],
-      like: 0,
       likeUsers: [],
       _id: "",
       authorId: {},
@@ -46,13 +49,41 @@ export default handleActions(
       produce(state, (draft) => {
         draft.error = payload.error;
       }),
+    [onLikeAction.REQUEST]: (state, { payload }) => state,
+    [onLikeAction.SUCCESS]: (state, { payload }) => {
+      return produce(state, (draft) => {
+        const {
+          data: { likeCheck, idx },
+        } = payload;
+        if (likeCheck) {
+          draft.contents[idx].likeUsers.push(draft.user._id);
+        } else {
+          draft.contents[idx].likeUsers.pop();
+        }
+      });
+    },
+    [onLikeAction.FAILURE]: (state, { payload }) => {
+      return produce(state, (draft) => {
+        draft.error = payload.error;
+      });
+    },
+    [onMarkAction.REQUEST]: (state, { payload }) => state,
+    [onMarkAction.SUCCESS]: (state, { payload }) => {
+      return produce(state, (draft) => {
+        draft.markCheck = payload.data.result;
+      });
+    },
+    [onMarkAction.FAILURE]: (state, { payload }) => {
+      return produce(state, (draft) => {
+        draft.error = payload.error;
+      });
+    },
     [addCommentAction.REQUEST]: (state, { payload }) => state,
     [addCommentAction.SUCCESS]: (state, { payload }) =>
       produce(state, (draft) => {
         const {
           data: { idx, comment },
         } = payload;
-        console.log(comment);
         draft.contents[idx].comments.push(comment);
       }),
     [addCommentAction.FAILURE]: (state, { payload }) =>
