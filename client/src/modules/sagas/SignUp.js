@@ -16,10 +16,16 @@ function* codeCheckSaga({ payload }) {
   try {
     const { origin, verify } = payload;
     let result = false;
+    let message = "인증 실패";
     if (origin === verify) {
       result = true;
+      message = "인증 성공";
     }
-    yield put(codeCheckAction.success({ result }));
+    const data = {
+      result,
+      message,
+    };
+    yield put(codeCheckAction.success({ data }));
   } catch (e) {
     yield put(codeCheckAction.failure({ error: `${e.name}: ${e.message}` }));
   }
@@ -28,10 +34,16 @@ function* pwdCheckSaga({ payload }) {
   try {
     const { origin, verify } = payload;
     let result = false;
+    let message = "일치하지 않습니다";
     if (origin === verify) {
       result = true;
+      message = "일치합니다";
     }
-    yield put(pwdCheckAction.success({ result }));
+    const data = {
+      result,
+      message,
+    };
+    yield put(pwdCheckAction.success({ data }));
   } catch (e) {
     yield put(pwdCheckAction.failure({ error: `${e.name}: ${e.message}` }));
   }

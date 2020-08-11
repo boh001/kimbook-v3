@@ -5,6 +5,7 @@ import {
   USERSENDEMAIL,
   USERSEARCH,
   USERINFO,
+  USERSIGNUP,
   USERPROFILE,
   COMMENTUPLOAD,
   CONTENTLIKE,
@@ -20,6 +21,7 @@ const apiPostData = (path) => (data) => api.post(path, data);
 
 export const apiIdCheck = apiPostData(USERIDCHECK);
 export const apiSendEmail = apiPostData(USERSENDEMAIL);
+export const apiSignUp = apiPostData(USERSIGNUP);
 export const apiUserInfo = apiPostData(USERINFO);
 export const apiUserProfile = apiPostData(USERPROFILE);
 export const apiUserSearch = apiPostData(USERSEARCH);

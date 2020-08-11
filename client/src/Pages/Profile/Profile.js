@@ -26,7 +26,14 @@ import { Link } from "react-router-dom";
 export default () => {
   const dispatch = useDispatch();
   const {
-    user: { nickname, avatarUrl, myContents, markContents, friends },
+    user: {
+      _id: loginuserId,
+      nickname,
+      avatarUrl,
+      myContents,
+      markContents,
+      friends,
+    },
   } = useSelector((state) => state.Profile);
   const albums = [].concat(myContents, markContents);
   const loading = useSelector((state) => state.loading);
@@ -37,7 +44,7 @@ export default () => {
   );
   return (
     <>
-      <Header src={avatarUrl} name={nickname} />
+      <Header userId={loginuserId} src={avatarUrl} name={nickname} />
       {isLoading ? (
         <Loading />
       ) : (

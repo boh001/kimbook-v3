@@ -26,7 +26,7 @@ export const SupportFrame = styled.div`
     width: 100%;
     border-left: none;
     border-right: none;
-    height: 80vw;
+    height: 85vw;
   }
 `;
 export const SupportCategory = styled.div`
@@ -49,11 +49,13 @@ export const SupportCustom = styled.div`
   }
 `;
 export const SupportProfile = styled.div`
-  ${flexCenter};
+  display: flex;
+  align-items: center;
   flex-direction: column;
   width: 70%;
   height: 100%;
   padding: 2em 4em;
+  position: relative;
 `;
 export const UserWrap = styled.div`
   padding-left: 1em;
@@ -70,7 +72,8 @@ export const UserImg = styled.img.attrs((props) => ({
   border-radius: 50%;
 `;
 export const InfoWrap = styled.div`
-  display: flex;
+  ${flexCenter};
+  padding-bottom: 3em;
 `;
 export const UserName = styled.span``;
 export const UploadImg = styled.span`
@@ -79,7 +82,7 @@ export const UploadImg = styled.span`
   cursor: pointer;
 `;
 export const SupportForm = styled.form.attrs((props) => ({}))`
-  display: flex;
+  ${flexCenter};
   width: 100%;
   justify-content: center;
   flex-direction: column;
@@ -94,7 +97,10 @@ export const NameLabel = styled.label`
 export const NameInput = styled.input.attrs((props) => ({
   value: props.pretext,
   type: "text",
-}))``;
+}))`
+  width: 100%;
+  padding: 0.2em 1em;
+`;
 export const EmailWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -103,16 +109,25 @@ export const EmailWrap = styled.div`
 `;
 export const EmailLabel = styled.label`
   width: 100%;
+  position: relative;
 `;
 export const EmailInput = styled.input.attrs((props) => ({
   value: props.pretext,
   type: "email",
-}))``;
+}))`
+  width: 100%;
+  padding: 0.2em 1em;
+`;
 export const EmailSend = styled.button`
   background-color: ${colors.mainGreen};
   color: white;
-  border: none;
-  border-radius: 10px;
+  border: 1px solid ${colors.mainGreen};
+  border-radius: 0px 10px 10px 0px;
+  font-size: inherit;
+  padding: 0.2em 1em;
+  position: absolute;
+  bottom: 0px;
+  right: 0;
 `;
 export const SupporSubmit = styled.input.attrs((props) => ({
   type: "submit",
@@ -120,4 +135,8 @@ export const SupporSubmit = styled.input.attrs((props) => ({
   border: none;
   background-color: ${colors.mainGreen};
   color: white;
+  position: absolute;
+  bottom: 2em;
+  right: 4em;
+  padding: 0.2em 1em;
 `;

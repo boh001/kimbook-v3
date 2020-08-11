@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Frame,
   SupportFrame,
@@ -27,6 +27,7 @@ import { useDispatch, useSelector } from "react-redux";
 import df from "images/default.jpeg";
 
 export default () => {
+  const [page, setPage] = useState(0);
   const dispatch = useDispatch();
   const {
     user: { _id: userId, avatarUrl, nickname, email },
@@ -51,15 +52,15 @@ export default () => {
             </InfoWrap>
             <SupportForm>
               <NameLabel>
-                <LabelText>이름</LabelText>
+                <LabelText>닉네임</LabelText>
                 <NameInput pretext={nickname} />
               </NameLabel>
               <EmailWrap>
                 <EmailLabel>
                   <LabelText>이메일</LabelText>
-                  <EmailInput pretext={email} />
+                  <EmailInput pretext={email}></EmailInput>
+                  <EmailSend>전송</EmailSend>
                 </EmailLabel>
-                <EmailSend>이메일 확인</EmailSend>
               </EmailWrap>
               <SupporSubmit />
             </SupportForm>

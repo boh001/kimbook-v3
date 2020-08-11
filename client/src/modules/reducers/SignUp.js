@@ -20,25 +20,30 @@ const initialState = {
   idCheckState: {
     show: false,
     result: false,
+    message: "",
     error: "",
   },
   emailCheckState: {
     show: false,
     result: false,
+    message: "",
     error: "",
   },
   codeCheckState: {
     show: false,
     result: false,
+    message: "",
     code: "fail",
     error: "",
   },
   pwdCheckState: {
     show: false,
     result: false,
+    message: "",
     error: "",
   },
   totalCheckState: {
+    init: true,
     show: false,
   },
 };
@@ -51,17 +56,20 @@ const resetState = {
   emailCheckState: {
     show: false,
     result: false,
+    message: "",
     error: "",
   },
   codeCheckState: {
     show: false,
     result: false,
+    message: "",
     code: "fail",
     error: "",
   },
   pwdCheckState: {
     show: false,
     result: false,
+    message: "",
     error: "",
   },
   totalCheckState: {
@@ -77,8 +85,12 @@ export default handleActions(
     },
     [idCheckAction.SUCCESS]: (state, { payload }) => {
       return produce(state, (draft) => {
+        const {
+          data: { result, message },
+        } = payload;
         draft.idCheckState.show = true;
-        draft.idCheckState.result = payload.result;
+        draft.idCheckState.result = result;
+        draft.idCheckState.message = message;
       });
     },
     [idCheckAction.FAILURE]: (state, { payload }) => {
@@ -94,9 +106,13 @@ export default handleActions(
     },
     [emailCheckAction.SUCCESS]: (state, { payload }) => {
       return produce(state, (draft) => {
+        const {
+          data: { result, message, code },
+        } = payload;
         draft.emailCheckState.show = true;
-        draft.codeCheckState.code = payload.code;
-        draft.emailCheckState.result = payload.result;
+        draft.codeCheckState.code = code;
+        draft.emailCheckState.result = result;
+        draft.emailCheckState.message = message;
       });
     },
     [emailCheckAction.FAILURE]: (state, { payload }) => {
@@ -112,8 +128,12 @@ export default handleActions(
     },
     [codeCheckAction.SUCCESS]: (state, { payload }) => {
       return produce(state, (draft) => {
+        const {
+          data: { result, message },
+        } = payload;
         draft.codeCheckState.show = true;
-        draft.codeCheckState.result = payload.result;
+        draft.codeCheckState.result = result;
+        draft.codeCheckState.message = message;
       });
     },
     [codeCheckAction.FAILURE]: (state, { payload }) => {
@@ -129,8 +149,12 @@ export default handleActions(
     },
     [pwdCheckAction.SUCCESS]: (state, { payload }) => {
       return produce(state, (draft) => {
+        const {
+          data: { result, message, code },
+        } = payload;
         draft.pwdCheckState.show = true;
-        draft.pwdCheckState.result = payload.result;
+        draft.pwdCheckState.result = result;
+        draft.pwdCheckState.message = message;
       });
     },
     [pwdCheckAction.FAILURE]: (state, { payload }) => {

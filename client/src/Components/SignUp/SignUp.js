@@ -93,20 +93,15 @@ export default () => {
   ); // 인증코드 확인
   const verifyTotal = useCallback(
     (e) => {
-      console.log(
-        idCheckState.result &&
-          emailCheckState.result &&
-          codeCheckState.result &&
-          pwdCheckState.result
-      );
       if (
         idCheckState.result &&
         emailCheckState.result &&
         codeCheckState.result &&
         pwdCheckState.result
       ) {
-        e.preventDefault();
+      } else {
         dispatch(totalCheckAction());
+        e.preventDefault();
       }
     },
     [
@@ -137,7 +132,7 @@ export default () => {
         btn={"중복"}
         btnEvent={idCheck}
         isLoading={idLoading}
-        check={["사용가능합니다", "중복된 아이디입니다"]}
+        check={idCheckState.message}
       />
       <SignUpInfo
         ref={pwdRef}
@@ -152,7 +147,7 @@ export default () => {
         placeholder={"Verify Password"}
         show={pwdCheckState.show}
         result={pwdCheckState.result}
-        check={["일치합니다", "일치하지않습니다"]}
+        check={pwdCheckState.message}
         inputEvent={verifyPwd}
       />
       <SignUpInfo
@@ -166,7 +161,7 @@ export default () => {
         btn={"전송"}
         btnEvent={sendEmail}
         isLoading={emailLoading}
-        check={["전송완료", "전송실패"]}
+        check={emailCheckState.message}
       />
       <SignUpInfo
         ref={codeRef}
@@ -178,12 +173,21 @@ export default () => {
         btn={"인증"}
         btnEvent={verifyCode}
         isLoading={codeLoading}
-        check={["인증성공", "인증실패"]}
+        check={codeCheckState.message}
       />
-      {!totalCheckState.show && (
-        <SignUpError>올바르지않은 양식입니다</SignUpError>
-      )}
-      <SignUpSubmit type={"submit"} value={"확인"} />
+      {totalCheckState.show &&
+        (!idCheckState.result ? (
+          <SignUpError>중복확인을 해주세요</SignUpError>
+        ) : !pwdCheckState.result ? (
+          <SignUpError>비밀번호를 확인하세요</SignUpError>
+        ) : !emailCheckState.result ? (
+          <SignUpError>이메일을 확인하세요</SignUpError>
+        ) : (
+          !codeCheckState.result && (
+            <SignUpError>인증코드를 확인하세요</SignUpError>
+          )
+        ))}
+      <SignUpSubmit>확인</SignUpSubmit>
       <CloseBtn onClick={closeModal}>
         <FontAwesomeIcon icon={faTimes} />
       </CloseBtn>

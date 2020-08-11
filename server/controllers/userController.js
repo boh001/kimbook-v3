@@ -26,7 +26,7 @@ export const login = (req, res, next) => {
       });
     } else {
       // 로그인 실패
-      res.send({ result: false });
+      res.redirect(routes.HOME);
     }
   })(req, res, next);
 };
@@ -34,7 +34,6 @@ export const signUp = async (req, res, next) => {
   const {
     body: { nickname, email, ID, password },
   } = req;
-  console.log(req.body);
   try {
     const newUser = await User({
       nickname,
@@ -43,8 +42,8 @@ export const signUp = async (req, res, next) => {
     });
     await User.register(newUser, password);
     next();
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    res.send({ error });
   }
 };
 export const idCheck = async (req, res) => {
@@ -52,15 +51,14 @@ export const idCheck = async (req, res) => {
     body: { id },
   } = req;
   if (id.length === 0) {
-    res.send({ result: false });
+    res.send({ result: false, message: "아이디를 입력해주세요" });
     res.status(400);
   } else {
     const users = await User.find({ ID: id });
     if (users.length === 0) {
-      res.status(200).send({ result: true });
+      res.status(200).send({ result: true, message: "사용가능합니다" });
     } else {
-      res.send({ result: false });
-      res.status(400);
+      res.send({ result: false, message: "중복된 아이디입니다" });
     }
   }
 };
@@ -71,10 +69,10 @@ export const sendEmail = (req, res) => {
   const code = cryptoRandomString({ length: 10, type: "base64" });
   transporter.sendMail(mailOptions(name, email, code), (error, info) => {
     if (error) {
-      res.send({ result: false });
+      res.send({ result: false, message: "전송 실패" });
       res.status(400);
     } else {
-      res.status(200).send({ result: true, code });
+      res.status(200).send({ result: true, code, message: "전송 성공" });
     }
   });
 };

@@ -36,9 +36,7 @@ const SignUpInfo = forwardRef(
           name={name}
           onChange={inputEvent && ((e) => inputEvent(e))}
         />
-        {show ? (
-          <CheckText check={result}>{result ? check[0] : check[1]}</CheckText>
-        ) : null}
+        {show ? <CheckText check={result}>{check}</CheckText> : null}
         {btn && (
           <CodeBtn onClick={(e) => btnEvent(e)}>
             {isLoading ? <MiniLoading /> : btn}

@@ -43,7 +43,9 @@ export const CloseBtn = styled.button`
   }
 `;
 
-export const SignUpSubmit = styled.input`
+export const SignUpSubmit = styled.button.attrs((props) => ({
+  type: "submit",
+}))`
   position: absolute;
   bottom: 20px;
   right: 50px;
