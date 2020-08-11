@@ -13,11 +13,11 @@ export const SignUpInput = styled.input.attrs((props) => {
   width: 75%;
   height: 100%;
   font-size: inherit;
+  padding-right: 250px;
   margin-left: 20px;
-  padding-right: 350px;
   @media screen and (max-width: 600px) {
     font-size: 15px;
-    padding-right: 120px;
+    padding-right: 35vw;
   }
 `;
 export const SignUpInputLabel = styled.label`

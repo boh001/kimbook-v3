@@ -12,7 +12,9 @@ const UPLOAD = "/upload";
 const LIKE = "/like";
 const MARK = "/mark";
 const SEARCH = "/search";
-
+const PROFILE = "/profile";
+const DETAIL = "/detail";
+const SUPPORT = "/support";
 const ERROR = "/error";
 
 const routes = {
@@ -28,6 +30,9 @@ const routes = {
   SENDEMAIL,
   INFO,
   SEARCH,
+  PROFILE,
+  DETAIL,
+  SUPPORT,
   ME,
   ERROR,
 };

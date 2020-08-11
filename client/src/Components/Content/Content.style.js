@@ -16,6 +16,9 @@ export const ContentFrame = styled.div`
   @media screen and (max-width: 700px) {
     font-size: 20px;
   }
+  @media screen and (max-width: 500px) {
+    font-size: 15px;
+  }
 `;
 
 export const ContentInfo = styled.div`
@@ -30,41 +33,19 @@ export const ContentInfo = styled.div`
     height: 50px;
   }
 `;
+export const ContentSlider = styled.div`
+  width: 760px;
+  height: 500px;
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    height: 70vw;
+  }
+`;
 export const InfoDate = styled.span`
   display: flex;
   align-items: center;
   color: ${colors.mainGrey};
   font-size: 20px;
-`;
-export const ContentImg = styled.img.attrs((props) => ({
-  src: props.src,
-}))`
-  width: 100%;
-  height: 600px;
-  border: none;
-  object-fit: cover;
-  @media screen and (max-width: 1024px) {
-    height: 500px;
-  }
-  @media screen and (max-width: 700px) {
-    height: 400px;
-  }
-`;
-export const ContentVideo = styled.video.attrs((props) => ({
-  src: props.src,
-  type: props.type,
-  controls: true,
-}))`
-  width: 100%;
-  height: 600px;
-  border: none;
-  object-fit: cover;
-  @media screen and (max-width: 1024px) {
-    height: 500px;
-  }
-  @media screen and (max-width: 700px) {
-    height: 400px;
-  }
 `;
 export const ContentSub = styled.div`
   width: 100%;
@@ -112,7 +93,10 @@ const heartbeat = keyframes`
     transform: scale(0.75);
   }
 `;
-export const OptionLike = styled.span`
+export const OptionLike = styled.button`
+  background-color: transparent;
+  color: inherit;
+  font-size: inherit;
   ${flexCenter};
   cursor: pointer;
   animation: ${heartbeat} ${(props) => !props.likeCheck} 1s infinite;
@@ -120,7 +104,10 @@ export const OptionLike = styled.span`
 export const OptionSlideBtns = styled.div`
   ${flexCenter};
 `;
-export const OptionMark = styled.span`
+export const OptionMark = styled.button`
+  background-color: transparent;
+  color: inherit;
+  font-size: inherit;
   ${flexCenter};
   cursor: pointer;
 `;

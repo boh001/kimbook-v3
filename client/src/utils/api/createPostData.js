@@ -5,9 +5,12 @@ import {
   USERSENDEMAIL,
   USERSEARCH,
   USERINFO,
+  USERPROFILE,
   COMMENTUPLOAD,
   CONTENTLIKE,
   CONTENTMARK,
+  CONTENTDETAIL,
+  USERSUPPORT,
 } from "./path";
 
 const api = axios.create({
@@ -18,7 +21,10 @@ const apiPostData = (path) => (data) => api.post(path, data);
 export const apiIdCheck = apiPostData(USERIDCHECK);
 export const apiSendEmail = apiPostData(USERSENDEMAIL);
 export const apiUserInfo = apiPostData(USERINFO);
+export const apiUserProfile = apiPostData(USERPROFILE);
 export const apiUserSearch = apiPostData(USERSEARCH);
+export const apiUserSupport = apiPostData(USERSUPPORT);
 export const apiComment = apiPostData(COMMENTUPLOAD);
 export const apiLike = apiPostData(CONTENTLIKE);
 export const apiMark = apiPostData(CONTENTMARK);
+export const apiDetail = apiPostData(CONTENTDETAIL);

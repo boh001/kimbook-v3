@@ -93,13 +93,17 @@ export default () => {
   ); // 인증코드 확인
   const verifyTotal = useCallback(
     (e) => {
-      if (
-        !(
-          idCheckState.result &&
+      console.log(
+        idCheckState.result &&
           emailCheckState.result &&
           codeCheckState.result &&
           pwdCheckState.result
-        )
+      );
+      if (
+        idCheckState.result &&
+        emailCheckState.result &&
+        codeCheckState.result &&
+        pwdCheckState.result
       ) {
         e.preventDefault();
         dispatch(totalCheckAction());
@@ -176,7 +180,7 @@ export default () => {
         isLoading={codeLoading}
         check={["인증성공", "인증실패"]}
       />
-      {totalCheckState.show && (
+      {!totalCheckState.show && (
         <SignUpError>올바르지않은 양식입니다</SignUpError>
       )}
       <SignUpSubmit type={"submit"} value={"확인"} />

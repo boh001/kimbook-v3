@@ -7,6 +7,8 @@ import {
   signUp,
   upInfo,
   searchUser,
+  profileUser,
+  supportInfoUser,
 } from "../controllers/userController";
 
 const userRouter = express.Router();
@@ -17,4 +19,6 @@ userRouter.post(routes.SENDEMAIL, sendEmail);
 userRouter.post(routes.LOGIN, login);
 userRouter.post(routes.INFO, upInfo);
 userRouter.post(routes.SEARCH, searchUser);
+userRouter.post(routes.PROFILE, profileUser);
+userRouter.post(routes.SUPPORT, supportInfoUser);
 export default userRouter;

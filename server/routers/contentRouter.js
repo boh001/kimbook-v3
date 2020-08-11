@@ -5,6 +5,7 @@ import {
   uploadContent,
   upLike,
   upMark,
+  loadDetail,
 } from "../controllers/contentController";
 
 const contentRouter = express.Router();
@@ -12,5 +13,7 @@ const contentRouter = express.Router();
 contentRouter.post(routes.UPLOAD, multerMiddleware, uploadContent);
 contentRouter.post(routes.LIKE, upLike);
 contentRouter.post(routes.MARK, upMark);
+contentRouter.post(routes.MARK, upMark);
+contentRouter.post(routes.DETAIL, loadDetail);
 
 export default contentRouter;

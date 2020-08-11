@@ -13,14 +13,13 @@ export const WriteFrame = styled.div`
   position: relative;
 `;
 export const WriteWrapper = styled.div`
-  width: 600px;
+  display: flex;
   transform: ${(props) => props.slide && "translateX(-600px)"};
   transition: 0.2s linear;
 `;
 export const WriteSlide = styled.div`
   width: 600px;
-  right: ${(props) => (props.slide ? "0" : "-600px")};
-  position: absolute;
+  position: relative;
   transition: 0.2s linear;
 `;
 export const WriteHeader = styled.div`
@@ -35,6 +34,7 @@ export const WriteForm = styled.form.attrs({
   encType: "multipart/form-data",
 })`
   display: flex;
+  width: 100%;
   flex-direction: column;
   position: relative;
 `;
@@ -44,7 +44,6 @@ export const WriteText = styled.textarea.attrs({
 })`
   width: 100%;
   min-height: 200px;
-  border-radius: none;
   border: none;
   padding-top: 5px;
   margin-bottom: 50px;
@@ -125,18 +124,28 @@ export const WriteBack = styled.div`
   left: 10px;
   cursor: pointer;
 `;
+export const WriteScroll = styled.div`
+  overflow: auto;
+  height: 300px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
 export const WriteUploads = styled.div`
   display: grid;
   width: 100%;
-  min-height: 500px;
-  grid-template-columns: repeat(3, 100%);
-  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 150px;
 `;
 export const UploadImg = styled.img.attrs((props) => ({
   src: props.src,
 }))`
-  height: 100px;
+  width: 100%;
+  height: 100%;
 `;
 export const UploadVideo = styled.video.attrs((props) => ({
   src: props.src,
-}))``;
+}))`
+  width: 100%;
+  height: 100%;
+`;

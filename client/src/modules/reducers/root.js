@@ -6,6 +6,9 @@ import Search from "./Search";
 import Write from "./Write";
 import Me from "./Me";
 import Detail from "./Detail";
+import Profile from "./Profile";
+import Support from "./Support";
+
 const rootReducer = combineReducers({
   loading,
   SignUp,
@@ -14,6 +17,8 @@ const rootReducer = combineReducers({
   Me,
   Write,
   Detail,
+  Profile,
+  Support,
 });
 
 export default rootReducer;

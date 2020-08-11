@@ -18,32 +18,15 @@ export const Frame = styled.div`
     font-size: 15px;
   }
 `;
-export const TopBg = styled.div`
-  ${flexCenter};
-  width: 1000px;
-  height: 300px;
-  background-color: red;
-  margin-bottom: 1em;
-  border-radius: 10px;
-  position: relative;
-  @media screen and (max-width: 1024px) {
-    width: 100%;
-    border-left: none;
-    border-right: none;
-    border-radius: 0px;
-    height: 250px;
-  }
-  @media screen and (max-width: 700px) {
-    height: 160px;
-  }
-`;
+
 export const ProfileMenu = styled.div`
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: space-between;
   width: 1000px;
   height: 150px;
-  background-color: blue;
+  border: 1px solid ${colors.mainGrey};
   border-radius: 10px;
   padding: 0px 1em 0px 300px;
   @media screen and (max-width: 1024px) {
@@ -52,14 +35,47 @@ export const ProfileMenu = styled.div`
     border-right: none;
     border-radius: 0px;
     height: 120px;
-    padding: 0px 1em 0px 250px;
+    padding: 0px 1em 0px 200px;
   }
   @media screen and (max-width: 700px) {
     height: 80px;
-    padding: 0px 1em 0px 180px;
+    padding: 0px 1em 0px 120px;
   }
 `;
-export const ProfileInfo = styled.div``;
+export const ProfileInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+export const InfoUser = styled.div`
+  display: flex;
+  align-items: center;
+  padding-bottom: 1em;
+`;
+export const InfoUserName = styled.span`
+  padding-right: 1em;
+`;
+export const InfoContent = styled.div`
+  display: flex;
+`;
+export const InfoContentsNum = styled.span`
+  &:nth-child(2) {
+    padding: 0em 1em;
+  }
+`;
+export const InfoCustomBtn = styled.button`
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 1px solid ${colors.mainGrey};
+  @media screen and (max-width: 1024px) {
+    font-size: 17px;
+  }
+  @media screen and (max-width: 700px) {
+    font-size: 15px;
+  }
+`;
+
 export const MenuOptions = styled.div`
   display: flex;
 `;
@@ -86,22 +102,22 @@ export const ProfileImg = styled.img.attrs((props) => ({
 }))`
   width: 175px;
   height: 175px;
-  background-color: yellow;
   border-radius: 50%;
   position: absolute;
   left: 50px;
   bottom: -100px;
+
   @media screen and (max-width: 1024px) {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     bottom: -80px;
     left: 35px;
   }
   @media screen and (max-width: 700px) {
-    width: 125px;
-    height: 125px;
-    bottom: -70px;
-    left: 25px;
+    width: 80px;
+    height: 80px;
+    bottom: -50px;
+    left: 15px;
   }
 `;
 export const ProfileLoc = styled.div`
@@ -122,22 +138,4 @@ export const ProfileLoc = styled.div`
   @media screen and (max-width: 700px) {
     height: 50px;
   }
-`;
-export const ProfileAlbum = styled.div`
-  width: 1000px;
-  min-height: 300px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 300px;
-  @media screen and (max-width: 1024px) {
-    width: 100%;
-    grid-auto-rows: 33vw;
-  }
-`;
-export const AlbumImg = styled.img.attrs((props) => ({
-  src: props.src,
-}))`
-  width: 100%;
-  height: 100%;
-  background-color: pink;
 `;

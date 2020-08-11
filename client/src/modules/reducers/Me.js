@@ -70,7 +70,14 @@ export default handleActions(
     [onMarkAction.REQUEST]: (state, { payload }) => state,
     [onMarkAction.SUCCESS]: (state, { payload }) => {
       return produce(state, (draft) => {
-        draft.markCheck = payload.data.result;
+        const {
+          data: { markCheck, contentId },
+        } = payload;
+        if (markCheck) {
+          draft.user.markContents.push(contentId);
+        } else {
+          draft.user.markContents.pop();
+        }
       });
     },
     [onMarkAction.FAILURE]: (state, { payload }) => {

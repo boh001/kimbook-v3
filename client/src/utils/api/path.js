@@ -7,9 +7,12 @@ export const USERLOGIN = "/user/login";
 export const USERSIGNUP = "/user/signUp";
 export const USERSEARCH = "/user/search";
 export const USERINFO = "/user/info";
+export const USERPROFILE = "/user/profile";
+export const USERSUPPORT = "/user/support";
 
 export const CONTENTUPLOAD = "/content/upload";
 export const CONTENTLIKE = "/content/like";
 export const CONTENTMARK = "/content/mark";
+export const CONTENTDETAIL = "/content/detail";
 
 export const COMMENTUPLOAD = "/comment/upload";

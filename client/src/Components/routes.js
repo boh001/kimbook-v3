@@ -3,6 +3,7 @@ import Me from "Pages/Me/Me";
 import Search from "Pages/Search/Search";
 import Detail from "Pages/Detail/Detail";
 import Profile from "Pages/Profile/Profile";
+import Support from "Pages/Support/Support";
 
 const HOME = {
   path: "/",
@@ -20,7 +21,7 @@ const DETAIL = {
   component: Detail,
 };
 const PROFILE = {
-  path: "/me/profile/:id",
+  path: "/profile/:id",
   exact: true,
   component: Profile,
 };
@@ -28,7 +29,11 @@ const SERACH = {
   path: "/search",
   component: Search,
 };
+const SUPPORT = {
+  path: "/me/support",
+  component: Support,
+};
 
-const routes = [HOME, ME, DETAIL, PROFILE, SERACH];
+const routes = [HOME, ME, DETAIL, PROFILE, SERACH, SUPPORT];
 
 export default routes;

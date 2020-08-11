@@ -1,25 +1,34 @@
 import { handleActions, createAction } from "redux-actions";
 import produce from "immer";
 
-const SHOWSLIDEACTION = "SHOWSLIDEACTION";
+const SHOWTHMBNAILACTION = "SHOWTHMBNAILACTION";
+const SHOWTAGACTION = "SHOWTAGACTION";
 const SHOWUPLOADACTION = "SHOWUPLOADACTION";
 const DELETEUPLOADACTION = "DELETEUPLOADACTION";
 const WRITE = "WRITE";
 
-export const showSlideAction = createAction(SHOWSLIDEACTION);
+export const showThumbnailAction = createAction(SHOWTHMBNAILACTION);
+export const showTagAction = createAction(SHOWTAGACTION);
 export const showUploadAction = createAction(SHOWUPLOADACTION);
 export const delteUploadAction = createAction(DELETEUPLOADACTION);
 export const writeAction = { TYPE: WRITE };
 
 const initialState = {
-  slide: false,
+  slide: {
+    tag: false,
+    thumbnail: false,
+  },
   uploads: [],
 };
 export default handleActions(
   {
-    [SHOWSLIDEACTION]: (state, { payload }) =>
+    [SHOWTHMBNAILACTION]: (state, { payload }) =>
       produce(state, (draft) => {
-        draft.slide = payload.slide;
+        draft.slide.thumbnail = payload.slide.thumbnail;
+      }),
+    [SHOWTAGACTION]: (state, { payload }) =>
+      produce(state, (draft) => {
+        draft.slide.tag = payload.slide.tag;
       }),
     [SHOWUPLOADACTION]: (state, { payload }) =>
       produce(state, (draft) => {

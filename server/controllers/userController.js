@@ -5,15 +5,36 @@ import Content from "../models/Content";
 import routes from "../routes";
 import { mailOptions, transporter } from "../nodemailer";
 
-export const login = passport.authenticate("local", {
-  failureRedirect: routes.HOME,
-  successRedirect: routes.ME,
-});
+// export const login = passport.authenticate("local", {
+//   failureRedirect: routes.HOME,
+//   successRedirect: routes.ME,
+// });
+export const login = (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+
+    if (user) {
+      // 로그인 성공
+      const json = JSON.parse(JSON.stringify(user));
+      req.logIn(user, (error) => {
+        if (error) {
+          return next(error);
+        }
+        return res.redirect(routes.ME);
+      });
+    } else {
+      // 로그인 실패
+      res.send({ result: false });
+    }
+  })(req, res, next);
+};
 export const signUp = async (req, res, next) => {
   const {
     body: { nickname, email, ID, password },
   } = req;
-
+  console.log(req.body);
   try {
     const newUser = await User({
       nickname,
@@ -98,11 +119,46 @@ export const searchUser = async (req, res) => {
       ],
     });
 
-    console.log(users);
     res.status(200).send({ users });
   } catch (error) {
     res.send({ error });
     res.status(400);
     console.log(error);
+  }
+};
+export const profileUser = async (req, res) => {
+  const {
+    body: { userId },
+  } = req;
+  try {
+    const user = await User.findOne({ _id: userId }).populate([
+      {
+        path: "myContents",
+        model: "Content",
+      },
+      {
+        path: "markContents",
+        model: "Content",
+      },
+      {
+        path: "friends",
+        model: "User",
+      },
+    ]);
+    res.status(200).send({ user });
+  } catch (error) {
+    res.status(400);
+    res.send({ error });
+  }
+};
+export const supportInfoUser = async (req, res) => {
+  const {
+    user: { _id },
+  } = req;
+  try {
+    const user = await User.findOne({ _id });
+    res.status(200).send({ user });
+  } catch (e) {
+    console.log(e);
   }
 };

@@ -2,9 +2,9 @@ import { handleActions } from "redux-actions";
 import createRequestAction from "./createRequestAction";
 import produce from "immer";
 
-const DETAIL = "DETAIL";
+const PROFILE = "PROFILE";
 
-export const detailRequestAction = createRequestAction(DETAIL);
+export const profileRequestAction = createRequestAction(PROFILE);
 
 const initialState = {
   user: {
@@ -13,31 +13,21 @@ const initialState = {
     avatarUrl: "",
     myContents: [],
     markContents: [],
-  },
-  content: {
-    comments: [],
-    likeUsers: [],
-    _id: "",
-    authorId: {},
-    files: [],
-    text: "",
-    createAt: new Date(),
-    __v: 0,
+    friends: [],
   },
 };
 
 export default handleActions(
   {
-    [detailRequestAction.REQUEST]: (state, { payload }) => state,
-    [detailRequestAction.SUCCESS]: (state, { payload }) =>
+    [profileRequestAction.REQUEST]: (state, { payload }) => state,
+    [profileRequestAction.SUCCESS]: (state, { payload }) =>
       produce(state, (draft) => {
         const {
-          data: { user, content },
+          data: { user },
         } = payload;
         draft.user = user;
-        draft.content = content;
       }),
-    [detailRequestAction.FAILURE]: (state, { payload }) =>
+    [profileRequestAction.FAILURE]: (state, { payload }) =>
       produce(state, (draft) => {
         draft.error = payload.error;
       }),

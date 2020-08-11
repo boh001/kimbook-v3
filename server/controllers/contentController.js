@@ -57,7 +57,7 @@ export const upLike = async (req, res) => {
 };
 export const upMark = async (req, res) => {
   const {
-    body: { idx, contentId },
+    body: { contentId },
   } = req;
   const {
     user: { _id },
@@ -69,14 +69,63 @@ export const upMark = async (req, res) => {
       await user.updateOne({
         $pull: { markContents: contentId },
       });
-      res.status(200).send({ result: false });
+      res.status(200).send({ markCheck: false, contentId });
     } else {
       await user.updateOne({
         $push: { markContents: contentId },
       });
-      res.status(200).send({ result: true });
+      res.status(200).send({ markCheck: true, contentId });
     }
   } catch (e) {
     console.log(e);
+  }
+};
+export const loadDetail = async (req, res) => {
+  const {
+    body: { contentId },
+  } = req;
+
+  try {
+    const content = await Content.findOne({ _id: contentId }).populate([
+      {
+        path: "comments",
+        model: "Comment",
+        populate: [
+          {
+            path: "authorId",
+            model: "User",
+          },
+        ],
+      },
+      {
+        path: "authorId",
+        model: "User",
+      },
+    ]);
+    const user = await User.findOne({ _id: content.authorId }).populate([
+      {
+        path: "myContents",
+        model: "Content",
+        populate: [
+          {
+            path: "comments",
+            model: "Comment",
+            populate: [
+              {
+                path: "authorId",
+                model: "User",
+              },
+            ],
+          },
+          {
+            path: "authorId",
+            model: "User",
+          },
+        ],
+      },
+    ]);
+    res.status(200).send({ user, content });
+  } catch (error) {
+    console.log(error);
   }
 };

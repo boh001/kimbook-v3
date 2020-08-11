@@ -24,8 +24,6 @@ import {
   ContentFrame,
   ContentInfo,
   InfoDate,
-  ContentImg,
-  ContentVideo,
   ContentSub,
   ContentForm,
   ContentInput,
@@ -44,33 +42,30 @@ import {
   TextInfo,
   SubComment,
   CommentText,
+  ContentSlider,
 } from "./Content.style";
 import ModalPortal from "Components/ModalPortal";
 import Modal from "Components/Modal/Modal";
 import UserInfo from "Components/UserInfo/UserInfo";
+import Slider from "Components/Slider/Slider";
 
 const Content = React.memo(({ idx, content, loginUser }) => {
-  console.log(idx);
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
   const isOpenModal = modal[meRequestAction.TYPE];
   const {
-    userId,
-    avatarUrl,
-    nickname,
+    authorId: { _id: userId, avatarUrl, nickname },
     files,
     text,
     createAt,
     comments,
     _id: contentId,
-    myContents,
     likeUsers,
-    markContents,
   } = content;
   const commentRef = useRef();
-  const identRef = useRef();
+  const identRef = useRef(null);
   const likeCheck = likeUsers?.includes(loginUser._id);
-  const markCheck = markContents?.includes(contentId);
+  const markCheck = loginUser.markContents?.includes(contentId);
   const addComment = useCallback(
     (e) => {
       e.preventDefault();
@@ -95,11 +90,10 @@ const Content = React.memo(({ idx, content, loginUser }) => {
   const onMark = useCallback(
     (e) => {
       e.preventDefault();
-      dispatch(onMarkAction.request({ idx, contentId }));
+      dispatch(onMarkAction.request({ contentId }));
     },
-    [dispatch, contentId, idx]
+    [dispatch, contentId]
   );
-
   return (
     <>
       <ContentFrame>
@@ -113,14 +107,9 @@ const Content = React.memo(({ idx, content, loginUser }) => {
           />
           <InfoDate>{moment(createAt).fromNow()}</InfoDate>
         </ContentInfo>
-        {files.map((file, key) => {
-          const { fileUrl, contentType } = file;
-          if (contentType.split("/")[0] === "image") {
-            return <ContentImg key={key} src={fileUrl} />;
-          } else {
-            return <ContentVideo key={key} src={fileUrl} />;
-          }
-        })}
+        <ContentSlider>
+          <Slider files={files} />
+        </ContentSlider>
 
         <ContentSub>
           <SubOptions>
@@ -137,7 +126,7 @@ const Content = React.memo(({ idx, content, loginUser }) => {
               </OptionComment>
             </LOptions>
             <OptionSlideBtns></OptionSlideBtns>
-            {myContents?.includes(contentId) ? (
+            {loginUser.myContents?.includes(contentId) ? (
               <OptionMark>
                 <FontAwesomeIcon icon={faEllipsisH} />
               </OptionMark>
@@ -168,7 +157,7 @@ const Content = React.memo(({ idx, content, loginUser }) => {
             } = comment;
             return (
               <SubComment key={key}>
-                <CommentUser to={`/me/profile/${userId}`} ref={identRef}>
+                <CommentUser to={`/profile/${userId}`} ref={identRef}>
                   {nickname}
                 </CommentUser>
                 <CommentText ident={identRef.current?.clientWidth}>

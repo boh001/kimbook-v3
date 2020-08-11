@@ -63,7 +63,7 @@ export default () => {
             </LoginLabel>
             <LoginSubmit type={"submit"} value={"로그인"} />
           </LoginForm>
-          <FindPassword to="#">계정을 잊으셨나요?</FindPassword>
+          <FindPassword to="/support">계정을 잊으셨나요?</FindPassword>
           <LineFrame>
             <Line />
             <LineText>또는</LineText>

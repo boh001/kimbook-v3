@@ -17,7 +17,7 @@ import Write from "Components/Write/Write";
 import SearchBar from "Components/SearchBar/SearchBar";
 import PropTypes from "prop-types";
 
-const Header = ({ src, name }) => {
+const Header = ({ userId, src, name }) => {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
   const isOpenModal = modal[writeAction.TYPE];
@@ -29,7 +29,13 @@ const Header = ({ src, name }) => {
       <HeaderFrame>
         <HeaderSection>
           <HeaderFlag>KIMBOOK</HeaderFlag>
-          <UserInfo src={src} name={name} color={"white"} size={"medium"} />
+          <UserInfo
+            userId={userId}
+            src={src}
+            name={name}
+            color={"white"}
+            size={"medium"}
+          />
         </HeaderSection>
         <HeaderSection>
           <HeaderIcon to="/me">
