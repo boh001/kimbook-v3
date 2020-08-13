@@ -12,6 +12,7 @@ import {
   CONTENTMARK,
   CONTENTDETAIL,
   USERSUPPORT,
+  CONTENTDELETE,
 } from "./path";
 
 const api = axios.create({
@@ -30,3 +31,4 @@ export const apiComment = apiPostData(COMMENTUPLOAD);
 export const apiLike = apiPostData(CONTENTLIKE);
 export const apiMark = apiPostData(CONTENTMARK);
 export const apiDetail = apiPostData(CONTENTDETAIL);
+export const apiContentDelete = apiPostData(CONTENTDELETE);

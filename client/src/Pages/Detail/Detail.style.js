@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import colors from "utils/constants/colors";
 import { flexCenter } from "utils/constants/css";
 
@@ -17,16 +17,16 @@ export const Frame = styled.div`
     margin-top: 70px;
     font-size: 20px;
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 764px) {
     margin-top: 50px;
     font-size: 15px;
   }
 `;
 export const DetailFrame = styled.div`
   width: 1000px;
-  height: 500px;
-  background-color: red;
+  height: 700px;
   ${flexCenter};
+  border: 1px solid ${colors.mainGrey};
   @media screen and (max-width: 1024px) {
     width: 100%;
   }
@@ -36,10 +36,12 @@ export const DetailFrame = styled.div`
   }
 `;
 
-export const DetailSub = styled.div`
+export const DetailSide = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 50%;
   height: 100%;
-  background-color: green;
+  border-left: 1px solid ${colors.mainGrey};
   @media screen and (max-width: 764px) {
     width: 100%;
     height: 30%;
@@ -54,6 +56,28 @@ export const DetailName = styled.span`
     padding-left: 0.5em;
   }
 `;
+export const DetailSub = styled.div`
+  width: 100%;
+  flex: 1;
+  overflow: auto;
+  padding: 0.5em;
+  border-bottom: 1px solid ${colors.mainGrey};
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @media screen and (max-width: 764px) {
+    display: none;
+  }
+`;
+export const DetailOptions = styled.div`
+  width: 100%;
+  padding: 0.5rem 1rem 1rem 1rem;
+`;
+export const DetailInput = styled.div`
+  @media screen and (max-width: 764px) {
+    display: none;
+  }
+`;
 export const DetailLine = styled.div`
   margin: 0.5em 0;
   width: 1000px;
@@ -62,3 +86,12 @@ export const DetailLine = styled.div`
     width: 100%;
   }
 `;
+export const OptionsText = styled.div`
+  display: flex;
+  position: relative;
+  margin-top: 1rem;
+  @media screen and (max-width: 700px) {
+    margin-top: 0.5rem;
+  }
+`;
+export const TextValue = styled.p``;

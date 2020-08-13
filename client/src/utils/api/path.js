@@ -14,5 +14,6 @@ export const CONTENTUPLOAD = "/content/upload";
 export const CONTENTLIKE = "/content/like";
 export const CONTENTMARK = "/content/mark";
 export const CONTENTDETAIL = "/content/detail";
+export const CONTENTDELETE = "/content/delete";
 
 export const COMMENTUPLOAD = "/comment/upload";

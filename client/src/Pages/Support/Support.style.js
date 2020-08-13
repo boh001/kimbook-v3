@@ -10,7 +10,7 @@ export const Frame = styled.div`
   @media screen and (max-width: 1024px) {
     padding: 140px 0;
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 764px) {
     font-size: 20px;
   }
   @media screen and (max-width: 500px) {
@@ -95,7 +95,7 @@ export const NameLabel = styled.label`
   width: 100%;
 `;
 export const NameInput = styled.input.attrs((props) => ({
-  value: props.pretext,
+  defaultValue: props.pretext,
   type: "text",
 }))`
   width: 100%;

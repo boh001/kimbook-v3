@@ -21,7 +21,7 @@ export const HeaderFrame = styled.div`
     height: 70px;
     font-size: 30px;
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 764px) {
     height: 50px;
     font-size: 20px;
     padding: 0px 0.3rem;
@@ -34,7 +34,7 @@ export const HeaderFlag = styled.span`
   display: flex;
   align-items: center;
   padding-right: 1.5rem;
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 764px) {
     display: none;
   }
 `;
@@ -45,7 +45,7 @@ export const HeaderIcon = styled(Link)`
   @media screen and (max-width: 1024px) {
     padding: 0px 0.8rem;
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 764px) {
     padding: 0px 0.5rem;
   }
 `;

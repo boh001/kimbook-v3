@@ -15,6 +15,7 @@ const initialState = {
     markContents: [],
     friends: [],
   },
+  me: false,
 };
 
 export default handleActions(
@@ -23,9 +24,10 @@ export default handleActions(
     [profileRequestAction.SUCCESS]: (state, { payload }) =>
       produce(state, (draft) => {
         const {
-          data: { user },
+          data: { user, me },
         } = payload;
         draft.user = user;
+        draft.me = me;
       }),
     [profileRequestAction.FAILURE]: (state, { payload }) =>
       produce(state, (draft) => {

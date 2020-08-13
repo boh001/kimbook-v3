@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colors from "utils/constants/colors";
 
 export const Frame = styled.div`
   width: 100%;
@@ -14,6 +15,7 @@ export const Prev = styled.button`
   background-color: transparent;
   color: white;
   font-size: inherit;
+  filter: drop-shadow(0 0 0.1rem ${colors.mainGrey});
 `;
 export const Next = styled.button`
   position: absolute;
@@ -23,13 +25,15 @@ export const Next = styled.button`
   background-color: transparent;
   color: white;
   font-size: inherit;
+  filter: drop-shadow(0 0 0.2rem ${colors.mainGrey});
 `;
 export const SliderImg = styled.img.attrs((props) => ({
   src: props.src,
 }))`
   width: 100%;
+  padding-right: 1px;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 `;
 export const SliderVideo = styled.video.attrs((props) => ({
   src: props.src,
@@ -38,5 +42,6 @@ export const SliderVideo = styled.video.attrs((props) => ({
 }))`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  padding-right: 1px;
+  object-fit: contain;
 `;

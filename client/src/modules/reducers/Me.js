@@ -1,4 +1,4 @@
-import { handleActions } from "redux-actions";
+import { createAction, handleActions } from "redux-actions";
 import createRequestAction from "./createRequestAction";
 import produce from "immer";
 
@@ -6,11 +6,14 @@ const ME = "ME";
 const ONLIKEACTION = "ONLIKEACTION";
 const ONMARKACTION = "ONMARKACTION";
 const ADDCOMMENT = "ADDCOMMENT";
-
+const SHOWDETAILMODAL = "SHOWDETAILMODAL";
+const SHOWDELETEMODAL = "SHOWDELETEMODAL";
 export const meRequestAction = createRequestAction(ME);
 export const onLikeAction = createRequestAction(ONLIKEACTION);
 export const onMarkAction = createRequestAction(ONMARKACTION);
 export const addCommentAction = createRequestAction(ADDCOMMENT);
+export const showDetailModalAction = { TYPE: SHOWDETAILMODAL };
+export const showDeleteModalAction = createRequestAction(SHOWDELETEMODAL);
 
 const initialState = {
   user: {
@@ -94,6 +97,11 @@ export default handleActions(
         draft.contents[idx].comments.push(comment);
       }),
     [addCommentAction.FAILURE]: (state, { payload }) =>
+      produce(state, (draft) => {
+        draft.error = payload.error;
+      }),
+    [showDeleteModalAction.REQUEST]: (state, { payload }) => state,
+    [showDeleteModalAction.FAILURE]: (state, { payload }) =>
       produce(state, (draft) => {
         draft.error = payload.error;
       }),

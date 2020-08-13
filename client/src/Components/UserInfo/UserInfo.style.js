@@ -60,7 +60,7 @@ export const UserInfoAvatar = styled.img.attrs((props) => ({
       }
     }};
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 764px) {
     width: ${(props) => {
       switch (props.size) {
         case "large":
@@ -115,7 +115,7 @@ export const UserInfoName = styled(Link)`
       }
     }};
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 764px) {
     font-size: ${(props) => {
       switch (props.size) {
         case "large":

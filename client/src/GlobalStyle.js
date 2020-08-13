@@ -39,7 +39,8 @@ export const GlobalStyles = createGlobalStyle`
             outline:none;
         }
         &::placeholder{
-            color:${colors.mainGrey}
+            color:${colors.mainGrey};
+            vertical-align: middle;
         }
         
     }

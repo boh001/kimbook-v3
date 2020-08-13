@@ -34,6 +34,7 @@ export const upLike = async (req, res) => {
   const {
     body: { idx, contentId },
   } = req;
+  console.log(req.body);
   const {
     user: { _id },
   } = req;
@@ -127,5 +128,15 @@ export const loadDetail = async (req, res) => {
     res.status(200).send({ user, content });
   } catch (error) {
     console.log(error);
+  }
+};
+export const deleteContent = async (req, res) => {
+  const {
+    body: { contentId },
+  } = req;
+  try {
+    await Content.deleteOne({ _id: contentId });
+  } catch (e) {
+    console.log(e);
   }
 };

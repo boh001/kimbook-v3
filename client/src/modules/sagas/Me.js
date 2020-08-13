@@ -5,18 +5,21 @@ import {
   apiLike,
   apiMark,
   apiComment,
+  apiContentDelete,
 } from "utils/api/createPostData";
 import {
   meRequestAction,
   onLikeAction,
   onMarkAction,
   addCommentAction,
+  showDeleteModalAction,
 } from "modules/reducers/Me";
 
 const loginUserSaga = requestSaga(meRequestAction, apiUserInfo);
 function* likeSaga({ payload }) {
   try {
     const { data } = yield call(apiLike, payload);
+    console.log(data);
     yield put(onLikeAction.success({ data }));
   } catch (e) {
     yield put(onLikeAction.failure({ error: `${e.name}: ${e.message}` }));
@@ -30,9 +33,16 @@ function* markSaga({ payload }) {
     yield put(onMarkAction.failure({ error: `${e.name}: ${e.message}` }));
   }
 }
-
 const addCommentSaga = requestSaga(addCommentAction, apiComment);
-
+function* deleteSaga({ payload }) {
+  try {
+    yield call(apiContentDelete, payload);
+  } catch (e) {
+    yield put(
+      showDeleteModalAction.failure({ error: `${e.name}: ${e.message}` })
+    );
+  }
+}
 function* watchLoginUser() {
   yield takeEvery(meRequestAction.REQUEST, loginUserSaga);
 }
@@ -45,6 +55,15 @@ function* watchMark() {
 function* watchAddComment() {
   yield takeEvery(addCommentAction.REQUEST, addCommentSaga);
 }
+function* watchDelete() {
+  yield takeEvery(showDeleteModalAction.REQUEST, deleteSaga);
+}
 export default function* watchMe() {
-  yield all([watchLoginUser(), watchLike(), watchMark(), watchAddComment()]);
+  yield all([
+    watchLoginUser(),
+    watchLike(),
+    watchMark(),
+    watchAddComment(),
+    watchDelete(),
+  ]);
 }

@@ -1,19 +1,17 @@
 import styled from "styled-components";
+import colors from "utils/constants/colors";
 
-export const SearchFrame = styled.form.attrs({
-  action: "/search",
-  method: "get",
-})`
+export const SearchFrame = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  padding-right: 1rem;
+  margin-right: 1rem;
   cursor: pointer;
   @media screen and (max-width: 1024px) {
-    padding-right: 0.6rem;
+    margin-right: 0.6rem;
   }
   @media screen and (max-width: 700px) {
-    padding-right: 0.3rem;
+    margin-right: 0.3rem;
   }
 `;
 export const SearchIcon = styled.span`
@@ -37,6 +35,7 @@ export const SearchBar = styled.input.attrs({
   type: "text",
   placeholder: "검색",
   name: "result",
+  autoComplete: "off",
 })`
   position: relative;
   width: ${(props) => (props.show ? "400px" : "0")};
@@ -54,6 +53,25 @@ export const SearchBar = styled.input.attrs({
   @media screen and (max-width: 700px) {
     width: ${(props) => (props.show ? "140px" : "0")};
     padding-left: ${(props) => (props.show ? "3rem" : "0")};
+    height: 30px;
+  }
+`;
+export const SearchReults = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: -500px;
+  width: 100%;
+  background-color: white;
+  border: 1px solid ${colors.mainGrey};
+  border-radius: 10px;
+`;
+export const SearchResult = styled.div`
+  width: 100%;
+  height: 60px;
+  @media screen and (max-width: 1024px) {
+    height: 45px;
+  }
+  @media screen and (max-width: 700px) {
     height: 30px;
   }
 `;

@@ -81,10 +81,17 @@ export const MenuOptions = styled.div`
 `;
 export const Option = styled.div`
   ${flexCenter};
-  width: 100px;
-  height: 70px;
+  width: 55px;
+  height: 55px;
   border-radius: 10px;
+  color: ${colors.mainGreen};
   border: 1px solid ${colors.mainGrey};
+  cursor: pointer;
+  &:hover {
+    color: white;
+    background-color: ${colors.mainGreen};
+    border: none;
+  }
   &:nth-child(2) {
     margin: 0px 20px;
   }

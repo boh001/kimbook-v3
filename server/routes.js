@@ -15,6 +15,7 @@ const SEARCH = "/search";
 const PROFILE = "/profile";
 const DETAIL = "/detail";
 const SUPPORT = "/support";
+const DELETE = "/delete";
 const ERROR = "/error";
 
 const routes = {
@@ -34,6 +35,7 @@ const routes = {
   DETAIL,
   SUPPORT,
   ME,
+  DELETE,
   ERROR,
 };
 export default routes;

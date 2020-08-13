@@ -11,6 +11,7 @@ export const showSearchAction = createAction(SHOWSEARCHACTION);
 const initialState = {
   search: {
     show: false,
+    resultShow: false,
   },
   results: [],
   error: "",
@@ -28,6 +29,11 @@ export default handleActions(
           data: { users },
         } = payload;
         draft.results = users;
+        if (users.length > 0) {
+          draft.search.resultShow = true;
+        } else {
+          draft.search.resultShow = false;
+        }
       }),
     [searchRequestAction.FAILURE]: (state, { payload }) =>
       produce(state, (draft) => {

@@ -108,20 +108,24 @@ export const searchUser = async (req, res) => {
   const {
     body: { result },
   } = req;
-  try {
-    const users = await User.find({
-      $or: [
-        { email: { $regex: `${result}`, $options: "i" } },
-        { ID: { $regex: `${result}`, $options: "i" } },
-        { nickname: { $regex: `${result}`, $options: "i" } },
-      ],
-    });
+  if (result.length < 1) {
+    res.status(200).send({ users: [] });
+  } else {
+    try {
+      const users = await User.find({
+        $or: [
+          { email: { $regex: `${result}`, $options: "i" } },
+          { ID: { $regex: `${result}`, $options: "i" } },
+          { nickname: { $regex: `${result}`, $options: "i" } },
+        ],
+      });
 
-    res.status(200).send({ users });
-  } catch (error) {
-    res.send({ error });
-    res.status(400);
-    console.log(error);
+      res.status(200).send({ users });
+    } catch (error) {
+      res.send({ error });
+      res.status(400);
+      console.log(error);
+    }
   }
 };
 export const profileUser = async (req, res) => {
@@ -143,7 +147,11 @@ export const profileUser = async (req, res) => {
         model: "User",
       },
     ]);
-    res.status(200).send({ user });
+    if (userId === req.user.id) {
+      res.status(200).send({ user, me: true });
+    } else {
+      res.status(200).send({ user, me: false });
+    }
   } catch (error) {
     res.status(400);
     res.send({ error });

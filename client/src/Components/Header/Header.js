@@ -64,9 +64,5 @@ Header.propTypes = {
   src: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };
-Header.defaultProps = {
-  src:
-    "https://images.unsplash.com/photo-1594599304267-88bdc2233be9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-  name: "Sara",
-};
+
 export default Header;

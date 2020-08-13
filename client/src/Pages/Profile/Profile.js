@@ -22,6 +22,9 @@ import Loading from "Components/Loading/Loading";
 import Album from "Components/Album/Album";
 import df from "images/default.jpeg";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTh } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 
 export default () => {
   const dispatch = useDispatch();
@@ -34,6 +37,7 @@ export default () => {
       markContents,
       friends,
     },
+    me,
   } = useSelector((state) => state.Profile);
   const albums = [].concat(myContents, markContents);
   const loading = useSelector((state) => state.loading);
@@ -54,9 +58,13 @@ export default () => {
             <ProfileInfo>
               <InfoUser>
                 <InfoUserName>{nickname}</InfoUserName>
-                <Link to="/me/support">
-                  <InfoCustomBtn>프로필 편집</InfoCustomBtn>
-                </Link>
+                {me ? (
+                  <Link to="/me/support">
+                    <InfoCustomBtn>프로필 편집</InfoCustomBtn>
+                  </Link>
+                ) : (
+                  <InfoCustomBtn>팔로우 하기</InfoCustomBtn>
+                )}
               </InfoUser>
               <InfoContent>
                 <InfoContentsNum>게시물 {albums.length}</InfoContentsNum>
@@ -65,8 +73,12 @@ export default () => {
               </InfoContent>
             </ProfileInfo>
             <MenuOptions>
-              <Option>1</Option>
-              <Option>2</Option>
+              <Option>
+                <FontAwesomeIcon icon={faTh} />
+              </Option>
+              <Option>
+                <FontAwesomeIcon icon={faBookmark} />
+              </Option>
             </MenuOptions>
           </ProfileMenu>
           <ProfileLoc>My Album</ProfileLoc>
