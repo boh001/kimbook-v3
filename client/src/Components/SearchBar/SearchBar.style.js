@@ -56,16 +56,16 @@ export const SearchBar = styled.input.attrs({
     height: 30px;
   }
 `;
-export const SearchReults = styled.div`
+export const SearchReults = styled.ul`
   position: absolute;
   left: 0;
-  bottom: -500px;
+  bottom: -100px;
   width: 100%;
   background-color: white;
   border: 1px solid ${colors.mainGrey};
   border-radius: 10px;
 `;
-export const SearchResult = styled.div`
+export const SearchResult = styled.li`
   width: 100%;
   height: 60px;
   @media screen and (max-width: 1024px) {

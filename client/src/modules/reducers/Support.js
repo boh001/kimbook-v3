@@ -4,8 +4,10 @@ import produce from "immer";
 
 const SUPPORT = "SUPPORT";
 const SUPPORTEMAIL = "SUPPORTEMAIL";
+const SUPPORTCODE = "SUPPORTCODE";
 export const supportRequestAction = createRequestAction(SUPPORT);
 export const supportemailAction = createRequestAction(SUPPORTEMAIL);
+export const supportcodeAction = createRequestAction(SUPPORTCODE);
 
 const initialState = {
   user: {
@@ -16,6 +18,7 @@ const initialState = {
     markContents: [],
   },
   emailCheckState: {
+    result: false,
     show: false,
     message: "",
     error: "",
@@ -57,6 +60,26 @@ export default handleActions(
       produce(state, (draft) => {
         draft.error = payload.error;
       }),
+    [supportcodeAction.REQUEST]: (state, { payload }) => {
+      return produce(state, (draft) => {
+        draft.codeCheckState.show = false;
+      });
+    },
+    [supportcodeAction.SUCCESS]: (state, { payload }) => {
+      return produce(state, (draft) => {
+        const {
+          data: { result, message },
+        } = payload;
+        draft.codeCheckState.show = true;
+        draft.codeCheckState.result = result;
+        draft.codeCheckState.message = message;
+      });
+    },
+    [supportcodeAction.FAILURE]: (state, { payload }) => {
+      return produce(state, (draft) => {
+        draft.codeCheckState.error = payload.error;
+      });
+    },
   },
   initialState
 );

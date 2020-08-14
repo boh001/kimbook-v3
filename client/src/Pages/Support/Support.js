@@ -11,20 +11,23 @@ import {
   SupportForm,
   NameInput,
   EmailInput,
-  EmailSend,
-  SupporSubmit,
+  CheckBtn,
+  SupportSubmit,
   UserWrap,
   EmailLabel,
   EmailWrap,
   NameLabel,
   InfoWrap,
   LabelText,
+  CodeLabel,
+  CodeInput,
 } from "./Support.style";
 import Header from "Components/Header/Header";
 import useComponentDidMount from "hooks/useComponentDidMount";
 import {
   supportRequestAction,
   supportemailAction,
+  supportcodeAction,
 } from "modules/reducers/Support";
 import { useDispatch, useSelector } from "react-redux";
 import MiniLoading from "Components/MiniLoading/MiniLoading";
@@ -34,11 +37,15 @@ export default () => {
   const [page, setPage] = useState(0);
   const emailRef = useRef();
   const nameRef = useRef();
+  const codeRef = useRef();
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading);
   const emailLoading = loading[supportemailAction.TYPE];
+  const codeLoading = loading[supportcodeAction.TYPE];
   const {
     user: { _id: userId, avatarUrl, nickname, email },
+    codeCheckState,
+    emailCheckState,
   } = useSelector((state) => state.Support);
   useComponentDidMount(() => dispatch(supportRequestAction.request()));
   const sendEmail = useCallback(
@@ -58,6 +65,17 @@ export default () => {
     },
     [dispatch, email]
   );
+  const verifyCode = useCallback(
+    (e) => {
+      e.preventDefault();
+      const { code: origin } = codeCheckState;
+      const {
+        current: { value: verify },
+      } = codeRef;
+      dispatch(supportcodeAction.request({ origin, verify }));
+    },
+    [dispatch, codeCheckState]
+  ); // 인증코드 확인
   return (
     <>
       <Header userId={userId} src={avatarUrl} name={nickname} />
@@ -83,14 +101,20 @@ export default () => {
               <EmailWrap>
                 <EmailLabel>
                   <LabelText>이메일</LabelText>
-                  <EmailInput pretext={email} ref={emailRef}></EmailInput>
-                  <EmailSend onClick={(e) => sendEmail(e)}>
+                  <EmailInput pretext={email} ref={emailRef} />
+                  <CheckBtn onClick={(e) => sendEmail(e)}>
                     {emailLoading ? <MiniLoading /> : "전송"}
-                  </EmailSend>
+                  </CheckBtn>
                 </EmailLabel>
               </EmailWrap>
-
-              <SupporSubmit>제출</SupporSubmit>
+              <CodeLabel>
+                <LabelText>인증코드</LabelText>
+                <CodeInput ref={codeRef} />
+                <CheckBtn onClick={(e) => verifyCode(e)}>
+                  {codeLoading ? <MiniLoading /> : "인증"}
+                </CheckBtn>
+              </CodeLabel>
+              <SupportSubmit>제출</SupportSubmit>
             </SupportForm>
           </SupportProfile>
         </SupportFrame>

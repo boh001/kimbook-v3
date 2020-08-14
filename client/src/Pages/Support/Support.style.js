@@ -73,7 +73,7 @@ export const UserImg = styled.img.attrs((props) => ({
 `;
 export const InfoWrap = styled.div`
   ${flexCenter};
-  padding-bottom: 3em;
+  padding-bottom: 2em;
 `;
 export const UserName = styled.span``;
 export const UploadImg = styled.span`
@@ -118,7 +118,7 @@ export const EmailInput = styled.input.attrs((props) => ({
   width: 100%;
   padding: 0.2em 1em;
 `;
-export const EmailSend = styled.button`
+export const CheckBtn = styled.button`
   background-color: ${colors.mainGreen};
   width: 80px;
   height: 50px;
@@ -129,8 +129,20 @@ export const EmailSend = styled.button`
   bottom: -4rem;
   right: 0;
   ${flexCenter};
+  z-index: 1;
 `;
-export const SupporSubmit = styled.button.attrs((props) => ({
+export const CodeLabel = styled.label`
+  width: 100%;
+  position: relative;
+  padding-top: 1em;
+`;
+export const CodeInput = styled.input.attrs((props) => ({
+  type: "text",
+}))`
+  width: 100%;
+  padding: 0.2em 1em;
+`;
+export const SupportSubmit = styled.button.attrs((props) => ({
   type: "submit",
 }))`
   border: none;
