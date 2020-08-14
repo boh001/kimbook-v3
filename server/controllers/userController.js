@@ -3,7 +3,11 @@ import cryptoRandomString from "crypto-random-string";
 import User from "../models/User";
 import Content from "../models/Content";
 import routes from "../routes";
-import { mailOptions, transporter } from "../nodemailer";
+import {
+  signUpMailOptions,
+  changeMailOptions,
+  transporter,
+} from "../nodemailer";
 
 // export const login = passport.authenticate("local", {
 //   failureRedirect: routes.HOME,
@@ -66,7 +70,14 @@ export const sendEmail = (req, res) => {
   const {
     body: { name, email },
   } = req;
+  console.log(name, email);
   const code = cryptoRandomString({ length: 10, type: "base64" });
+  let mailOptions;
+  if (req.user) {
+    mailOptions = changeMailOptions;
+  } else {
+    mailOptions = signUpMailOptions;
+  }
   transporter.sendMail(mailOptions(name, email, code), (error, info) => {
     if (error) {
       res.send({ result: false, message: "전송 실패" });

@@ -112,7 +112,7 @@ export const EmailLabel = styled.label`
   position: relative;
 `;
 export const EmailInput = styled.input.attrs((props) => ({
-  value: props.pretext,
+  defaultValue: props.pretext,
   type: "email",
 }))`
   width: 100%;
@@ -120,23 +120,27 @@ export const EmailInput = styled.input.attrs((props) => ({
 `;
 export const EmailSend = styled.button`
   background-color: ${colors.mainGreen};
+  width: 80px;
+  height: 50px;
   color: white;
-  border: 1px solid ${colors.mainGreen};
-  border-radius: 0px 10px 10px 0px;
+  border-radius: 10px;
   font-size: inherit;
-  padding: 0.2em 1em;
   position: absolute;
-  bottom: 0px;
+  bottom: -4rem;
   right: 0;
+  ${flexCenter};
 `;
-export const SupporSubmit = styled.input.attrs((props) => ({
+export const SupporSubmit = styled.button.attrs((props) => ({
   type: "submit",
 }))`
   border: none;
+  width: 80px;
+  height: 50px;
+  font-size: inherit;
   background-color: ${colors.mainGreen};
   color: white;
   position: absolute;
   bottom: 2em;
   right: 4em;
-  padding: 0.2em 1em;
+  ${flexCenter};
 `;
