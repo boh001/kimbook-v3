@@ -3,6 +3,7 @@ import { flexCenter } from "utils/constants/css";
 import colors from "utils/constants/colors";
 import { Link } from "react-router-dom";
 import { USERLOGIN } from "utils/api/path";
+
 export const LoginFrame = styled.div`
   margin-top: 120px;
   width: 100%;
@@ -28,46 +29,20 @@ export const LoginForm = styled.form.attrs({
     width: 90%;
   }
 `;
-export const LoginInput = styled.input.attrs((props) => {
-  return {
-    type: props.type,
-    placeholder: props.placeholder,
-    value: props.value,
-    name: props.name,
-    required: true,
-  };
-})`
-  width: 100%;
-  height: 80px;
-  font-size: inherit;
-  margin: 20px 0px;
-  @media screen and (max-width: 600px) {
-    height: 50px;
-  }
-`;
 
-export const LoginSubmit = styled.input.attrs((props) => {
-  return {
-    type: props.type,
-    value: props.value,
-  };
+export const LoginSubmit = styled.button.attrs({
+  type: "submit",
 })`
   width: 100%;
-  height: 80px;
   font-size: inherit;
   margin-top: 20px;
+  padding: 0.5em 1em;
   border: none;
   background-color: ${colors.mainGreen};
   color: white;
   cursor: pointer;
   &:hover {
     background-color: ${colors.hoverGreen};
-  }
-  &:active {
-    transform: scale(0.95);
-  }
-  @media screen and (max-width: 600px) {
-    height: 50px;
   }
 `;
 export const LoginLabel = styled.label`
@@ -80,17 +55,12 @@ export const FindPassword = styled(Link)`
   margin: 40px 0px 40px 0px;
 `;
 export const SignBtn = styled.button`
-  width: 170px;
-  height: 80px;
+  padding: 0.5em 1em;
   font-size: inherit;
   color: white;
   background-color: ${colors.mainGreen};
   &:hover {
     background-color: ${colors.hoverGreen};
-  }
-  @media screen and (max-width: 600px) {
-    width: 100px;
-    height: 50px;
   }
 `;
 export const LineFrame = styled.div`

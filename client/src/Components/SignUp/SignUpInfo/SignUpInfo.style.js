@@ -13,10 +13,10 @@ export const SignUpInput = styled.input.attrs((props) => {
   width: 75%;
   height: 100%;
   font-size: inherit;
+  padding: 0.5em 1em;
   padding-right: 250px;
   margin-left: 20px;
-  @media screen and (max-width: 600px) {
-    font-size: 15px;
+  @media screen and (max-width: 764px) {
     padding-right: 35vw;
   }
 `;
@@ -24,13 +24,10 @@ export const SignUpInputLabel = styled.label`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 70px;
   margin-bottom: 40px;
-  font-size: 25px;
   position: relative;
-  @media screen and (max-width: 600px) {
-    height: 40px;
-    font-size: 15px;
+  @media screen and (max-width: 764px) {
+    font-size: 20px;
     margin-bottom: 20px;
   }
 `;
@@ -38,16 +35,14 @@ export const LabelText = styled.span`
   display: inline-block;
   line-height: 30px;
   width: 25%;
-  @media screen and (max-width: 600px) {
-    line-height: 15px;
-  }
 `;
 export const CodeBtn = styled.button`
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 60px;
-  height: 50px;
+  top: 1px;
+  right: 0px;
+  width: 80px;
+  height: 100%;
+  ${flexCenter};
   background-color: ${colors.mainGreen};
   color: white;
   font-size: inherit;
@@ -55,14 +50,10 @@ export const CodeBtn = styled.button`
   &:hover {
     background-color: ${colors.hoverGreen};
   }
-  @media screen and (max-width: 600px) {
-    width: 40px;
-    height: 30px;
-    top: 5px;
-    right: 5px;
+  @media screen and (max-width: 764px) {
+    width: 60px;
   }
 `;
-
 export const CheckText = styled.div`
   position: absolute;
   top: 0;
@@ -72,8 +63,6 @@ export const CheckText = styled.div`
   height: 100%;
   ${flexCenter}
   color: ${(props) => (props.check ? `${colors.mainGreen}` : "red")};
-  @media screen and (max-width: 600px) {
-font-size:10px;
-  }
+
   
 `;

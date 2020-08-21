@@ -2,14 +2,22 @@ import { all, takeEvery, takeLatest, put } from "redux-saga/effects";
 import checkSaga from "./checkSaga";
 import { apiSendEmail } from "utils/api/createPostData";
 import requestSaga from "./requestSaga";
-import { apiUserSupport } from "utils/api/createPostData";
+import {
+  apiUserSupport,
+  apiUserChangeProfile,
+  apiUserChangePwd,
+} from "utils/api/createPostData";
 import {
   supportRequestAction,
   supportemailAction,
   supportcodeAction,
+  supportSubmitAction,
+  supportPwdSubmitAction,
 } from "modules/reducers/Support";
 
 const LoadUserSaga = requestSaga(supportRequestAction, apiUserSupport);
+const submitSaga = requestSaga(supportSubmitAction, apiUserChangeProfile);
+const pwdSubmitSaga = requestSaga(supportPwdSubmitAction, apiUserChangePwd);
 const emailCheckSaga = checkSaga(supportemailAction, apiSendEmail);
 function* codeCheckSaga({ payload }) {
   try {
@@ -33,6 +41,12 @@ function* codeCheckSaga({ payload }) {
 function* watchLoadUser() {
   yield takeEvery(supportRequestAction.REQUEST, LoadUserSaga);
 }
+function* watchSubmit() {
+  yield takeEvery(supportSubmitAction.REQUEST, submitSaga);
+}
+function* watchPwdSubmit() {
+  yield takeEvery(supportPwdSubmitAction.REQUEST, pwdSubmitSaga);
+}
 function* watchEmailCheck() {
   yield takeLatest(supportemailAction.REQUEST, emailCheckSaga);
 }
@@ -40,5 +54,11 @@ function* watchCodeCheck() {
   yield takeLatest(supportcodeAction.REQUEST, codeCheckSaga);
 }
 export default function* watchSupport() {
-  yield all([watchLoadUser(), watchEmailCheck(), watchCodeCheck()]);
+  yield all([
+    watchLoadUser(),
+    watchEmailCheck(),
+    watchCodeCheck(),
+    watchSubmit(),
+    watchPwdSubmit(),
+  ]);
 }

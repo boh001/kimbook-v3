@@ -30,7 +30,8 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
-    "query-string": "^6.13.1"
+    "query-string": "^6.13.1",
+    "redux-persist": "^6.0.0"
   },
   "scripts": {
     "start": "npm-run-all --parallel start:**",
@@ -39,8 +40,8 @@
     "build": "cd client && npm build",
     "test": "cd client && npm test",
     "eject": "cd client && npm eject",
-    "storybook": "cd client && npm start-storybook -p 9009 -s public",
-    "build-storybook": "cd client && npm build-storybook -s public",
+    "storybook": "cd client && npm run storybook",
+    "build-storybook": "cd client && npm run build-storybook",
     "lint": "cd client && ./node_modules/.bin/eslint ."
   },
   "eslintConfig": {

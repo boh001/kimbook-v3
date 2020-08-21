@@ -5,8 +5,14 @@ const UserSchema = new mongoose.Schema({
   nickname: String,
   ID: String,
   email: String,
-  avatarURL: String,
-  friends: [
+  avatarUrl: String,
+  follow: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  follower: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

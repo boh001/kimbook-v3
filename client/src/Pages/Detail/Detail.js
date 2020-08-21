@@ -11,7 +11,7 @@ import {
   OptionsText,
   TextValue,
 } from "./Detail.style";
-import Header from "Components/Header/Header";
+import InfoHeader from "Components/Header/InfoHeader/InfoHeader";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -62,11 +62,7 @@ export default () => {
   );
   return (
     <>
-      <Header
-        userId={loginUser._id}
-        src={loginUser.avatarUrl}
-        name={loginUser.nickname}
-      />
+      <InfoHeader />
       {isLoading ? (
         <Loading />
       ) : (

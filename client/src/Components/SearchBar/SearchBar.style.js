@@ -10,7 +10,7 @@ export const SearchFrame = styled.div`
   @media screen and (max-width: 1024px) {
     margin-right: 0.6rem;
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 764px) {
     margin-right: 0.3rem;
   }
 `;
@@ -25,7 +25,7 @@ export const SearchIcon = styled.span`
     padding-right: 0.8rem;
     padding-left: 0.3rem;
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 764px) {
     top: 5px;
     padding-right: 0.5rem;
     left: ${(props) => (props.show ? "1rem" : "5px")};
@@ -50,7 +50,7 @@ export const SearchBar = styled.input.attrs({
     padding-left: ${(props) => (props.show ? "4rem" : "0")};
     height: 45px;
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 764px) {
     width: ${(props) => (props.show ? "140px" : "0")};
     padding-left: ${(props) => (props.show ? "3rem" : "0")};
     height: 30px;
@@ -71,7 +71,7 @@ export const SearchResult = styled.li`
   @media screen and (max-width: 1024px) {
     height: 45px;
   }
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 764px) {
     height: 30px;
   }
 `;

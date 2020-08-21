@@ -5,13 +5,11 @@ const SHOWTHMBNAILACTION = "SHOWTHMBNAILACTION";
 const SHOWTAGACTION = "SHOWTAGACTION";
 const SHOWUPLOADACTION = "SHOWUPLOADACTION";
 const DELETEUPLOADACTION = "DELETEUPLOADACTION";
-const WRITE = "WRITE";
 
 export const showThumbnailAction = createAction(SHOWTHMBNAILACTION);
 export const showTagAction = createAction(SHOWTAGACTION);
 export const showUploadAction = createAction(SHOWUPLOADACTION);
 export const delteUploadAction = createAction(DELETEUPLOADACTION);
-export const writeAction = { TYPE: WRITE };
 
 const initialState = {
   slide: {

@@ -3,8 +3,9 @@ import createRequestAction from "./createRequestAction";
 import produce from "immer";
 
 const PROFILE = "PROFILE";
-
+const PROFILESTARTFOLLOW = "PROFILESTARTFOLLOW";
 export const profileRequestAction = createRequestAction(PROFILE);
+export const profileStartFollowAction = createRequestAction(PROFILESTARTFOLLOW);
 
 const initialState = {
   user: {
@@ -13,7 +14,8 @@ const initialState = {
     avatarUrl: "",
     myContents: [],
     markContents: [],
-    friends: [],
+    follow: [],
+    follower: [],
   },
   me: false,
 };
@@ -30,6 +32,13 @@ export default handleActions(
         draft.me = me;
       }),
     [profileRequestAction.FAILURE]: (state, { payload }) =>
+      produce(state, (draft) => {
+        draft.error = payload.error;
+      }),
+    [profileStartFollowAction.REQUEST]: (state, { payload }) => state,
+    [profileStartFollowAction.SUCCESS]: (state, { payload }) =>
+      produce(state, (draft) => {}),
+    [profileStartFollowAction.FAILURE]: (state, { payload }) =>
       produce(state, (draft) => {
         draft.error = payload.error;
       }),

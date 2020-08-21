@@ -3,7 +3,7 @@ import withRedux from "addon-redux/withRedux";
 import { Provider } from "react-redux";
 import configureStore from "modules/store";
 
-const store = configureStore();
+const { store, persistor } = configureStore();
 
 const withReduxSetting = {
   Provider,

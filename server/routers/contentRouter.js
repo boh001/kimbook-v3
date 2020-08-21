@@ -1,6 +1,7 @@
 import express from "express";
 import routes from "../routes";
-import { multerMiddleware } from "../multer";
+import { multerMultiMiddleware } from "../multer";
+import { onlyPrivate } from "../middleware";
 import {
   uploadContent,
   upLike,
@@ -11,11 +12,16 @@ import {
 
 const contentRouter = express.Router();
 
-contentRouter.post(routes.UPLOAD, multerMiddleware, uploadContent);
-contentRouter.post(routes.LIKE, upLike);
-contentRouter.post(routes.MARK, upMark);
-contentRouter.post(routes.MARK, upMark);
-contentRouter.post(routes.DETAIL, loadDetail);
-contentRouter.post(routes.DELETE, deleteContent);
+contentRouter.post(
+  routes.UPLOAD,
+  onlyPrivate,
+  multerMultiMiddleware,
+  uploadContent
+);
+contentRouter.post(routes.LIKE, onlyPrivate, upLike);
+contentRouter.post(routes.MARK, onlyPrivate, upMark);
+contentRouter.post(routes.MARK, onlyPrivate, upMark);
+contentRouter.post(routes.DETAIL, onlyPrivate, loadDetail);
+contentRouter.post(routes.DELETE, onlyPrivate, deleteContent);
 
 export default contentRouter;

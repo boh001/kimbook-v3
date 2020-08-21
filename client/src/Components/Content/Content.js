@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
   showDetailModalAction,
@@ -15,7 +15,7 @@ import {
   ContentSlider,
 } from "./Content.style";
 import ModalPortal from "Components/ModalPortal";
-import Modal from "Components/Modal/Modal";
+import ModalFrame from "Components/Modal/ModalFrame/ModalFrame";
 import Slider from "Components/Slider/Slider";
 import { onLikeAction, onMarkAction } from "modules/reducers/Me";
 import { modalOpenAction } from "modules/reducers/modal";
@@ -27,8 +27,6 @@ import ContentComment from "./ContentComment/ContentComment";
 import ContentInput from "./ContentInput/ContentInput";
 
 const Content = React.memo(({ idx, content, loginUser }) => {
-  const [deleteModal, setDeleteModal] = useState(false);
-  const [detailModal, setDetailModal] = useState(false);
   const dispatch = useDispatch();
   const {
     authorId: { _id: userId, avatarUrl, nickname },
@@ -39,6 +37,9 @@ const Content = React.memo(({ idx, content, loginUser }) => {
     _id: contentId,
     likeUsers,
   } = content;
+  const modal = useSelector((state) => state.modal);
+  const detailModal = modal[showDetailModalAction.TYPE + contentId];
+  const deleteModal = modal[showDeleteModalAction.TYPE + contentId];
   const onLike = useCallback(
     (e) => {
       e.preventDefault();
@@ -53,11 +54,8 @@ const Content = React.memo(({ idx, content, loginUser }) => {
     },
     [dispatch, contentId]
   );
-  const OpenDeleteMdoal = useCallback(() => {
-    setDeleteModal(true);
-  });
   const OpenDetailMdoal = useCallback(() => {
-    setDetailModal(true);
+    dispatch(modalOpenAction({ type: showDetailModalAction.TYPE + contentId }));
   });
   return (
     <>
@@ -110,19 +108,16 @@ const Content = React.memo(({ idx, content, loginUser }) => {
       </ContentFrame>
       {detailModal && (
         <ModalPortal>
-          <Modal type={showDetailModalAction.TYPE}>
-            <ContentDetail files={files} closeModal={setDetailModal} />
-          </Modal>
+          <ModalFrame type={showDetailModalAction.TYPE + contentId}>
+            <ContentDetail files={files} />
+          </ModalFrame>
         </ModalPortal>
       )}
       {deleteModal && (
         <ModalPortal>
-          <Modal type={showDeleteModalAction.TYPE}>
-            <ContentDeleteModal
-              contentId={contentId}
-              closeModal={setDeleteModal}
-            />
-          </Modal>
+          <ModalFrame type={showDeleteModalAction.TYPE + contentId}>
+            <ContentDeleteModal contentId={contentId} />
+          </ModalFrame>
         </ModalPortal>
       )}
     </>

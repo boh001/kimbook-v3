@@ -135,6 +135,7 @@ export const WriteUploads = styled.div`
   display: grid;
   width: 100%;
   grid-template-columns: repeat(3, 1fr);
+  padding: 0.5em;
   grid-auto-rows: 150px;
 `;
 export const UploadImg = styled.img.attrs((props) => ({

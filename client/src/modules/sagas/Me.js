@@ -12,7 +12,7 @@ import {
   onLikeAction,
   onMarkAction,
   addCommentAction,
-  showDeleteModalAction,
+  DeleteContentAction,
 } from "modules/reducers/Me";
 
 const loginUserSaga = requestSaga(meRequestAction, apiUserInfo);
@@ -39,7 +39,7 @@ function* deleteSaga({ payload }) {
     yield call(apiContentDelete, payload);
   } catch (e) {
     yield put(
-      showDeleteModalAction.failure({ error: `${e.name}: ${e.message}` })
+      DeleteContentAction.failure({ error: `${e.name}: ${e.message}` })
     );
   }
 }
@@ -56,7 +56,7 @@ function* watchAddComment() {
   yield takeEvery(addCommentAction.REQUEST, addCommentSaga);
 }
 function* watchDelete() {
-  yield takeEvery(showDeleteModalAction.REQUEST, deleteSaga);
+  yield takeEvery(DeleteContentAction.REQUEST, deleteSaga);
 }
 export default function* watchMe() {
   yield all([

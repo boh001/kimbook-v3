@@ -119,7 +119,9 @@ export default () => {
               <FontAwesomeIcon icon={faArrowLeft} />
             </WriteBack>
             <WriteHeader>Tag</WriteHeader>
-            <WriteScroll></WriteScroll>
+            <WriteScroll>
+              <WriteUploads></WriteUploads>
+            </WriteScroll>
           </WriteSlide>
         </WriteWrapper>
       </WriteFrame>

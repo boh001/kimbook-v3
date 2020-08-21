@@ -8,14 +8,13 @@ export const Frame = styled.div`
   width: 100%;
   padding: 1em 0px;
   margin-top: 90px;
-  font-size: 30px;
+  font-size: 20px;
   @media screen and (max-width: 1024px) {
     width: 100%;
     border-left: none;
     border-right: none;
     border-radius: 0px;
     margin-top: 70px;
-    font-size: 20px;
   }
   @media screen and (max-width: 764px) {
     margin-top: 50px;
@@ -24,7 +23,7 @@ export const Frame = styled.div`
 `;
 export const DetailFrame = styled.div`
   width: 1000px;
-  height: 700px;
+  height: 600px;
   ${flexCenter};
   border: 1px solid ${colors.mainGrey};
   @media screen and (max-width: 1024px) {

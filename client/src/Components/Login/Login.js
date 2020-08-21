@@ -2,8 +2,6 @@ import React, { useCallback } from "react";
 import {
   LoginFrame,
   LoginForm,
-  LoginInput,
-  LoginLabel,
   LoginSubmit,
   FindPassword,
   SignBtn,
@@ -12,15 +10,14 @@ import {
   LineText,
 } from "./Login.style";
 import ModalPortal from "Components/ModalPortal";
-import Modal from "Components/Modal/Modal";
+import ModalFrame from "Components/Modal/ModalFrame/ModalFrame";
 import Loading from "Components/Loading/Loading";
 import SignUp from "Components/SignUp/SignUp";
 import { useSelector, useDispatch } from "react-redux";
 import { modalOpenAction } from "modules/reducers/modal";
 import { loginAction } from "modules/reducers/Login";
-import { startLoading, finishLoading } from "modules/reducers/loading";
-import useComponentWillMount from "hooks/useComponentWillMount";
-import useComponentDidMount from "hooks/useComponentDidMount";
+import TopLabelInput from "Components/Input/TopLabelInput/TopLabelInput";
+
 export default () => {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
@@ -32,12 +29,7 @@ export default () => {
   const openModal = useCallback(() => {
     dispatch(modalOpenAction({ type: loginAction.TYPE }));
   }, [dispatch]);
-  useComponentWillMount(() =>
-    dispatch(startLoading({ type: loginAction.TYPE }))
-  );
-  useComponentDidMount(() =>
-    dispatch(finishLoading({ type: loginAction.TYPE }))
-  );
+
   return (
     <>
       {isLoading ? (
@@ -45,25 +37,21 @@ export default () => {
       ) : (
         <LoginFrame>
           <LoginForm>
-            <LoginLabel>
-              아이디
-              <LoginInput
-                type={"text"}
-                placeholder={"아이디를 입력하세요"}
-                name={"ID"}
-              />
-            </LoginLabel>
-            <LoginLabel>
-              비밀번호
-              <LoginInput
-                type={"password"}
-                placeholder={"비밀번호를 입력하세요"}
-                name={"password"}
-              />
-            </LoginLabel>
-            <LoginSubmit type={"submit"} value={"로그인"} />
+            <TopLabelInput
+              label="아이디"
+              type="text"
+              placeholder="아이디를 입력하세요"
+              name="ID"
+            />
+            <TopLabelInput
+              label="비밀번호"
+              type="password"
+              placeholder="비밀번호를 입력하세요"
+              name="password"
+            />
+            <LoginSubmit>로그인</LoginSubmit>
           </LoginForm>
-          <FindPassword to="/support">계정을 잊으셨나요?</FindPassword>
+          <FindPassword to="/find">계정을 잊으셨나요?</FindPassword>
           <LineFrame>
             <Line />
             <LineText>또는</LineText>
@@ -74,9 +62,9 @@ export default () => {
       )}
       {isOpenModal ? (
         <ModalPortal>
-          <Modal type={loginAction.TYPE}>
+          <ModalFrame type={loginAction.TYPE}>
             <SignUp />
-          </Modal>
+          </ModalFrame>
         </ModalPortal>
       ) : null}
     </>

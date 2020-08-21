@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { useParams } from "react-router";
 import {
   Frame,
@@ -14,9 +14,12 @@ import {
   InfoUser,
   InfoContent,
 } from "./Profile.style";
-import Header from "Components/Header/Header";
+import InfoHeader from "Components/Header/InfoHeader/InfoHeader";
 import useComponentDidMount from "hooks/useComponentDidMount";
-import { profileRequestAction } from "modules/reducers/Profile";
+import {
+  profileRequestAction,
+  profileStartFollowAction,
+} from "modules/reducers/Profile";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "Components/Loading/Loading";
 import Album from "Components/Album/Album";
@@ -27,6 +30,13 @@ import { faTh } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 
 export default () => {
+  const [page, setPage] = useState(0);
+  const showAlbum = useCallback(() => {
+    setPage(0);
+  });
+  const showMark = useCallback(() => {
+    setPage(1);
+  });
   const dispatch = useDispatch();
   const {
     user: {
@@ -35,20 +45,23 @@ export default () => {
       avatarUrl,
       myContents,
       markContents,
-      friends,
+      follow,
+      follower,
     },
     me,
   } = useSelector((state) => state.Profile);
-  const albums = [].concat(myContents, markContents);
   const loading = useSelector((state) => state.loading);
   const isLoading = loading[profileRequestAction.TYPE];
   let { id: userId } = useParams();
   useComponentDidMount(() =>
     dispatch(profileRequestAction.request({ userId }))
   );
+  const startFollow = useCallback(() => {
+    dispatch(profileStartFollowAction({ userId }));
+  });
   return (
     <>
-      <Header userId={loginuserId} src={avatarUrl} name={nickname} />
+      <InfoHeader />
       {isLoading ? (
         <Loading />
       ) : (
@@ -63,26 +76,39 @@ export default () => {
                     <InfoCustomBtn>프로필 편집</InfoCustomBtn>
                   </Link>
                 ) : (
-                  <InfoCustomBtn>팔로우 하기</InfoCustomBtn>
+                  <InfoCustomBtn onClick={startFollow}>
+                    팔로우 하기
+                  </InfoCustomBtn>
                 )}
               </InfoUser>
               <InfoContent>
-                <InfoContentsNum>게시물 {albums.length}</InfoContentsNum>
-                <InfoContentsNum>팔로워 {albums.length}</InfoContentsNum>
-                <InfoContentsNum>팔로우 {albums.length}</InfoContentsNum>
+                <InfoContentsNum>게시물 {myContents.length}</InfoContentsNum>
+                <InfoContentsNum>팔로워 {follower.length}</InfoContentsNum>
+                <InfoContentsNum>팔로우 {follow.length}</InfoContentsNum>
               </InfoContent>
             </ProfileInfo>
             <MenuOptions>
-              <Option>
+              <Option onClick={showAlbum}>
                 <FontAwesomeIcon icon={faTh} />
               </Option>
-              <Option>
+              <Option onClick={showMark}>
                 <FontAwesomeIcon icon={faBookmark} />
               </Option>
             </MenuOptions>
           </ProfileMenu>
-          <ProfileLoc>My Album</ProfileLoc>
-          <Album albums={albums} />
+          {page === 0 ? (
+            <>
+              <ProfileLoc>My Album</ProfileLoc>
+              <Album albums={myContents} />
+            </>
+          ) : (
+            page === 1 && (
+              <>
+                <ProfileLoc>My Mark</ProfileLoc>
+                <Album albums={markContents} />
+              </>
+            )
+          )}
         </Frame>
       )}
     </>

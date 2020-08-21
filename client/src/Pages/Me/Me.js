@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "Components/Header/Header";
+import InfoHeader from "Components/Header/InfoHeader/InfoHeader";
 import Content from "Components/Content/Content";
 import Loading from "Components/Loading/Loading";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,14 +12,13 @@ export default () => {
   const { user: loginUser, contents } = useSelector((state) => state.Me);
   const loading = useSelector((state) => state.loading);
   const isLoading = loading[meRequestAction.TYPE];
-  useComponentDidMount(() => dispatch(meRequestAction.request()));
+  useComponentDidMount(() => {
+    dispatch(meRequestAction.request());
+  });
+
   return (
     <>
-      <Header
-        userId={loginUser._id}
-        src={loginUser.avatarUrl}
-        name={loginUser.nickname}
-      />
+      <InfoHeader />
       {isLoading ? (
         <Loading />
       ) : (

@@ -15,31 +15,28 @@ export const SignUpForm = styled.form.attrs({
   border-radius: 10px;
   border: 1px solid ${colors.mainGrey};
   background-color: white;
-  padding: 20px 50px;
+  padding: 2em 2em;
   font-size: 25px;
-  @media screen and (max-width: 600px) {
-    height: 500px;
+  @media screen and (max-width: 764px) {
+    padding: 2em 4em;
+    font-size: 25px;
+    height: 110vw;
     width: 100%;
-    font-size: 15px;
-    padding: 10px 30px;
   }
 `;
 export const CloseBtn = styled.button`
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 25px;
-  height: 25px;
   color: ${colors.mainGrey};
   border: 1px solid ${colors.mainGrey};
   ${flexCenter};
   font-size: 15px;
   border-radius: 10px;
   background-color: transparent;
-  @media screen and (max-width: 600px) {
+  padding: 0.5em;
+  @media screen and (max-width: 764px) {
     font-size: 10px;
-    width: 20px;
-    height: 20px;
   }
 `;
 
@@ -47,10 +44,9 @@ export const SignUpSubmit = styled.button.attrs((props) => ({
   type: "submit",
 }))`
   position: absolute;
-  bottom: 20px;
-  right: 50px;
-  width: 100px;
-  height: 50px;
+  bottom: 2em;
+  right: 2em;
+  padding: 0.5em 1em;
   border-radius: 10px;
   border: none;
   background-color: ${colors.mainGreen};
@@ -61,10 +57,9 @@ export const SignUpSubmit = styled.button.attrs((props) => ({
   &:hover {
     background-color: ${colors.hoverGreen};
   }
-  @media screen and (max-width: 600px) {
-    width: 70px;
-    height: 40px;
-    right: 30px;
+  @media screen and (max-width: 764px) {
+    bottom: 2em;
+    right: 4em;
   }
 `;
 export const SignUpError = styled.span`

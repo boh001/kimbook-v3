@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import {
   SubOptions,
   LOptions,
@@ -8,6 +9,8 @@ import {
   OptionMark,
   TextLike,
 } from "./ContentOptions.style";
+import { showDeleteModalAction } from "modules/reducers/Me";
+import { modalOpenAction } from "modules/reducers/modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart as THeart,
@@ -22,15 +25,18 @@ import {
 
 export default ({
   userId,
-  OpenDeleteMdoal,
   likeUsers,
   contentId,
   loginUser,
   onLike,
   onMark,
 }) => {
+  const dispatch = useDispatch();
   const likeCheck = likeUsers?.includes(loginUser._id);
   const markCheck = loginUser?.markContents?.includes(contentId);
+  const OpenDeleteMdoal = useCallback(() => {
+    dispatch(modalOpenAction({ type: showDeleteModalAction.TYPE + contentId }));
+  });
   return (
     <>
       <SubOptions>

@@ -9,10 +9,6 @@ import {
   transporter,
 } from "../nodemailer";
 
-// export const login = passport.authenticate("local", {
-//   failureRedirect: routes.HOME,
-//   successRedirect: routes.ME,
-// });
 export const login = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
@@ -33,6 +29,10 @@ export const login = (req, res, next) => {
       res.redirect(routes.HOME);
     }
   })(req, res, next);
+};
+export const logout = (req, res) => {
+  req.logout();
+  res.status(302).json("success");
 };
 export const signUp = async (req, res, next) => {
   const {
@@ -70,7 +70,6 @@ export const sendEmail = (req, res) => {
   const {
     body: { name, email },
   } = req;
-  console.log(name, email);
   const code = cryptoRandomString({ length: 10, type: "base64" });
   let mailOptions;
   if (req.user) {
@@ -175,6 +174,78 @@ export const supportInfoUser = async (req, res) => {
   try {
     const user = await User.findOne({ _id });
     res.status(200).send({ user });
+  } catch (e) {
+    console.log(e);
+  }
+};
+export const changeProfile = async (req, res) => {
+  const {
+    body: { nickname, email },
+    user: { _id },
+    file,
+  } = req;
+  console.log(nickname, email, file);
+  try {
+    await User.findByIdAndUpdate(_id, {
+      avatarUrl: file ? file.location : "",
+      nickname,
+      email,
+    });
+    res.send({ result: true });
+  } catch (e) {
+    console.log(e);
+  }
+};
+export const changePwd = async (req, res) => {
+  const {
+    body: { oldPassword, newPassword1 },
+    user: { _id },
+  } = req;
+  console.log(req.body);
+  try {
+    const user = await User.findOne({ _id });
+    user.changePassword(oldPassword, newPassword1, (err, _) => {
+      if (err) {
+        if (err.name === "IncorrectPasswordError")
+          res.send({
+            result: false,
+            message: "일치하지 않는 비밀번호입니다.",
+          });
+      }
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+export const findId = async (req, res) => {
+  const {
+    body: { nickname, email },
+  } = req;
+  console.log(nickname, email);
+  try {
+    const user = await User.findOne({ nickname, email });
+    console.log(user);
+    if (user) {
+      res.send({ result: true });
+    } else {
+      res.send({ result: false });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+export const findPwd = async (req, res) => {
+  const {
+    body: { nickname, email, id },
+  } = req;
+  try {
+    const user = await User.findOne({ nickname, email, ID: id });
+    console.log(user);
+    if (user) {
+      res.send({ result: true });
+    } else {
+      res.send({ result: false });
+    }
   } catch (e) {
     console.log(e);
   }

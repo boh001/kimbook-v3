@@ -140,3 +140,36 @@ export const deleteContent = async (req, res) => {
     console.log(e);
   }
 };
+export const startFollow = async (req, res) => {
+  const {
+    body: { userId },
+  } = req;
+  const {
+    user: { _id },
+  } = req;
+  try {
+    const user = await User.findOne({ _id: userId });
+    const loginUser = await User.findOne({ _id });
+    const { follow } = user;
+    if (follow.includes(_id)) {
+      await user.updateOne({
+        $pull: { follow: _id },
+      });
+      await loginUser.updateOne({
+        $pull: { follower: userId },
+      });
+
+      res.status(200).send({ likeCheck: false });
+    } else {
+      await user.updateOne({
+        $push: { follow: _id },
+      });
+      await loginUser.updateOne({
+        $push: { follower: userId },
+      });
+      res.status(200).send({ likeCheck: true });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};

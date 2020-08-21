@@ -8,24 +8,24 @@ export const MiniLoadingFrame = styled.div`
 `;
 const loadingA = keyframes`
  0 {
-    height: 15px;
+    height: 15%;
   }
   50% {
-    height: 35px;
+    height: 70%;
   }
   100% {
-    height: 15px;
+    height: 15%;
   }
 `;
 const loadingB = keyframes`
 0 {
-   height: 5px;
+   height: 10%;
  }
  50% {
-   height: 20px;
+   height: 60%;
  }
  100% {
-   height: 5px;
+   height: 10%;
  }
 `;
 export const MiniLoading = styled.div`

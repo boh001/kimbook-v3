@@ -8,12 +8,14 @@ const ONMARKACTION = "ONMARKACTION";
 const ADDCOMMENT = "ADDCOMMENT";
 const SHOWDETAILMODAL = "SHOWDETAILMODAL";
 const SHOWDELETEMODAL = "SHOWDELETEMODAL";
+const DELTECONTENT = "DELTECONTENT";
 export const meRequestAction = createRequestAction(ME);
 export const onLikeAction = createRequestAction(ONLIKEACTION);
 export const onMarkAction = createRequestAction(ONMARKACTION);
 export const addCommentAction = createRequestAction(ADDCOMMENT);
 export const showDetailModalAction = { TYPE: SHOWDETAILMODAL };
-export const showDeleteModalAction = createRequestAction(SHOWDELETEMODAL);
+export const showDeleteModalAction = { TYPE: SHOWDELETEMODAL };
+export const DeleteContentAction = createRequestAction(DELTECONTENT);
 
 const initialState = {
   user: {
@@ -100,8 +102,8 @@ export default handleActions(
       produce(state, (draft) => {
         draft.error = payload.error;
       }),
-    [showDeleteModalAction.REQUEST]: (state, { payload }) => state,
-    [showDeleteModalAction.FAILURE]: (state, { payload }) =>
+    [DeleteContentAction.REQUEST]: (state, { payload }) => state,
+    [DeleteContentAction.FAILURE]: (state, { payload }) =>
       produce(state, (draft) => {
         draft.error = payload.error;
       }),

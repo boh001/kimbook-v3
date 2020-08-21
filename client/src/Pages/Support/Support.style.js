@@ -26,7 +26,12 @@ export const SupportFrame = styled.div`
     width: 100%;
     border-left: none;
     border-right: none;
-    height: 85vw;
+  }
+  @media screen and (max-width: 764px) {
+    height: 600px;
+  }
+  @media screen and (max-width: 500px) {
+    height: 400px;
   }
 `;
 export const SupportCategory = styled.div`
@@ -43,12 +48,14 @@ export const SupportCustom = styled.div`
   width: 100%;
   height: 10%;
   cursor: pointer;
+  border-left: ${(props) => props.page && `5px solid ${colors.mainGreen}`};
+  background-color: ${(props) => props.page && "#fafafa"};
   &:hover {
-    background-color: #fafafa;
-    border-left: 2px solid ${colors.mainGrey};
+    background-color: ${(props) => !props.page && "#fafafa"};
+    border-left: ${(props) => !props.page && `5px solid ${colors.mainGrey}`};
   }
 `;
-export const SupportProfile = styled.div`
+export const SupportMain = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -57,102 +64,16 @@ export const SupportProfile = styled.div`
   padding: 2em 4em;
   position: relative;
 `;
-export const UserWrap = styled.div`
-  padding-left: 1em;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  flex-direction: column;
-`;
-export const UserImg = styled.img.attrs((props) => ({
-  src: props.src,
-}))`
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-`;
-export const InfoWrap = styled.div`
-  ${flexCenter};
-  padding-bottom: 2em;
-`;
-export const UserName = styled.span``;
-export const UploadImg = styled.span`
-  display: block;
-  color: ${colors.mainGreen};
-  cursor: pointer;
-`;
-export const SupportForm = styled.form.attrs((props) => ({}))`
-  ${flexCenter};
-  width: 100%;
-  justify-content: center;
-  flex-direction: column;
-`;
-export const LabelText = styled.span`
-  display: block;
-  padding-bottom: 0.5em;
-`;
-export const NameLabel = styled.label`
-  width: 100%;
-`;
-export const NameInput = styled.input.attrs((props) => ({
-  defaultValue: props.pretext,
-  type: "text",
-}))`
-  width: 100%;
-  padding: 0.2em 1em;
-`;
-export const EmailWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding-top: 1em;
-`;
-export const EmailLabel = styled.label`
-  width: 100%;
-  position: relative;
-`;
-export const EmailInput = styled.input.attrs((props) => ({
-  defaultValue: props.pretext,
-  type: "email",
-}))`
-  width: 100%;
-  padding: 0.2em 1em;
-`;
-export const CheckBtn = styled.button`
-  background-color: ${colors.mainGreen};
-  width: 80px;
-  height: 50px;
-  color: white;
-  border-radius: 10px;
-  font-size: inherit;
-  position: absolute;
-  bottom: -4rem;
-  right: 0;
-  ${flexCenter};
-  z-index: 1;
-`;
-export const CodeLabel = styled.label`
-  width: 100%;
-  position: relative;
-  padding-top: 1em;
-`;
-export const CodeInput = styled.input.attrs((props) => ({
-  type: "text",
-}))`
-  width: 100%;
-  padding: 0.2em 1em;
-`;
-export const SupportSubmit = styled.button.attrs((props) => ({
+export const SupportSubmit = styled.input.attrs((props) => ({
   type: "submit",
+  value: "제출하기",
 }))`
   border: none;
-  width: 80px;
-  height: 50px;
+  width: 100%;
   font-size: inherit;
-  background-color: ${colors.mainGreen};
-  color: white;
-  position: absolute;
-  bottom: 2em;
-  right: 4em;
+  background-color: transparent;
+  color: ${colors.mainGreen};
   ${flexCenter};
+  margin-top: 2.5em;
+  cursor: pointer;
 `;
