@@ -24,26 +24,46 @@ export const Frame = styled.div`
 export const DetailFrame = styled.div`
   width: 1000px;
   height: 600px;
-  ${flexCenter};
+  display: grid;
+  grid-auto-columns: auto;
+  grid-auto-rows: auto;
+  grid-auto-flow: column;
   border: 1px solid ${colors.mainGrey};
   @media screen and (max-width: 1024px) {
     width: 100%;
   }
   @media screen and (max-width: 764px) {
-    flex-direction: column;
     height: 110vw;
   }
 `;
-
+export const DetailSilder = styled.div`
+  width: 100%;
+  height: 100%;
+  grid-column: 1/3;
+  grid-row: 1/4;
+  @media screen and (max-width: 764px) {
+    grid-column: 1/4;
+    grid-row: 2/4;
+  }
+`;
+export const DetailHeader = styled.div`
+  width: 100%;
+  height: 100%;
+  @media screen and (max-width: 764px) {
+    grid-column: 1/4;
+  }
+`;
 export const DetailSide = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
   height: 100%;
   border-left: 1px solid ${colors.mainGrey};
+  grid-row: 2/4;
   @media screen and (max-width: 764px) {
     width: 100%;
     height: 30%;
+    grid-column: 1/4;
   }
 `;
 export const DetailName = styled.span`
@@ -57,6 +77,7 @@ export const DetailName = styled.span`
 `;
 export const DetailSub = styled.div`
   width: 100%;
+  height: 100%;
   flex: 1;
   overflow: auto;
   padding: 0.5em;
@@ -70,12 +91,12 @@ export const DetailSub = styled.div`
 `;
 export const DetailOptions = styled.div`
   width: 100%;
+  height: 100%;
   padding: 0.5rem 1rem 1rem 1rem;
 `;
 export const DetailInput = styled.div`
-  @media screen and (max-width: 764px) {
-    display: none;
-  }
+  width: 100%;
+  height: 100%;
 `;
 export const DetailLine = styled.div`
   margin: 0.5em 0;

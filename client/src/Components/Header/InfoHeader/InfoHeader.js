@@ -1,11 +1,10 @@
-import React, { useCallback } from "react";
+import React from "react";
 import {
   HeaderFrame,
   HeaderSection,
   HeaderFlag,
   HeaderIcon,
 } from "./InfoHeader.style";
-import ModalPortal from "Components/ModalPortal";
 import ModalFrame from "Components/Modal/ModalFrame/ModalFrame";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,8 +12,7 @@ import {
   faPenSquare,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
-import { modalOpenAction } from "modules/reducers/modal";
+import { useSelector } from "react-redux";
 import {
   HeaderWriteModalOpenAction,
   HeaderLogoutModalOpenAction,
@@ -23,19 +21,17 @@ import UserInfo from "Components/UserInfo/UserInfo";
 import Write from "Components/Write/Write";
 import HeaderLogoutModal from "../HeaderLogoutModal/HeaderLogoutModal";
 import SearchBar from "Components/SearchBar/SearchBar";
+import { useOpenModal } from "hooks/useModal";
 
 export default () => {
-  const dispatch = useDispatch();
-  const modal = useSelector((state) => state.modal);
   const { user: loginUser } = useSelector((state) => state.Me);
-  const isOpenWriteModal = modal[HeaderWriteModalOpenAction.TYPE];
-  const isOpenLogoutModal = modal[HeaderLogoutModalOpenAction.TYPE];
-  const openWriteModal = useCallback(() => {
-    dispatch(modalOpenAction({ type: HeaderWriteModalOpenAction.TYPE }));
-  }, [dispatch]);
-  const openLogoutModal = useCallback(() => {
-    dispatch(modalOpenAction({ type: HeaderLogoutModalOpenAction.TYPE }));
-  }, [dispatch]);
+  const [isOpenWriteModal, openWriteModal] = useOpenModal(
+    HeaderWriteModalOpenAction.TYPE
+  );
+  const [isOpenLogoutModal, openLogoutModal] = useOpenModal(
+    HeaderLogoutModalOpenAction.TYPE
+  );
+
   return (
     <>
       <HeaderFrame>
@@ -63,19 +59,11 @@ export default () => {
         </HeaderSection>
       </HeaderFrame>
       {isOpenWriteModal ? (
-        <ModalPortal>
-          <ModalFrame type={HeaderWriteModalOpenAction.TYPE}>
-            <Write />
-          </ModalFrame>
-        </ModalPortal>
+        <ModalFrame type={HeaderWriteModalOpenAction.TYPE}>
+          <Write />
+        </ModalFrame>
       ) : null}
-      {isOpenLogoutModal ? (
-        <ModalPortal>
-          <ModalFrame type={HeaderLogoutModalOpenAction.TYPE}>
-            <HeaderLogoutModal />
-          </ModalFrame>
-        </ModalPortal>
-      ) : null}
+      {isOpenLogoutModal ? <HeaderLogoutModal /> : null}
     </>
   );
 };

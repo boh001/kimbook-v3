@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import colors from "utils/constants/colors";
-import { Link } from "react-router-dom";
 
 export const ContentFrame = styled.div`
   width: 760px;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import colors from "utils/constants/colors";
 import { flexCenter } from "utils/constants/css";
 
-export const ModalFrame = styled.div`
+export const Frame = styled.div`
   display: grid;
   align-items: center;
   justify-content: center;

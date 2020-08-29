@@ -59,7 +59,7 @@ export const SearchBar = styled.input.attrs({
 export const SearchReults = styled.ul`
   position: absolute;
   left: 0;
-  bottom: -100px;
+  top: 65px;
   width: 100%;
   background-color: white;
   border: 1px solid ${colors.mainGrey};

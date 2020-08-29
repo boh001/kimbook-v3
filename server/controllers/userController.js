@@ -17,7 +17,6 @@ export const login = (req, res, next) => {
 
     if (user) {
       // 로그인 성공
-      const json = JSON.parse(JSON.stringify(user));
       req.logIn(user, (error) => {
         if (error) {
           return next(error);
@@ -140,7 +139,7 @@ export const searchUser = async (req, res) => {
 };
 export const profileUser = async (req, res) => {
   const {
-    body: { userId },
+    body: { payload: userId },
   } = req;
   try {
     const user = await User.findOne({ _id: userId }).populate([
@@ -157,6 +156,7 @@ export const profileUser = async (req, res) => {
         model: "User",
       },
     ]);
+    console.log(req.body);
     if (userId === req.user.id) {
       res.status(200).send({ user, me: true });
     } else {

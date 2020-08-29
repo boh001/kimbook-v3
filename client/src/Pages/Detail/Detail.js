@@ -1,7 +1,8 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useCallback } from "react";
 import {
   Frame,
   DetailFrame,
+  DetailHeader,
   DetailSide,
   DetailSub,
   DetailOptions,
@@ -10,6 +11,7 @@ import {
   DetailName,
   OptionsText,
   TextValue,
+  DetailSilder,
 } from "./Detail.style";
 import InfoHeader from "Components/Header/InfoHeader/InfoHeader";
 import { useParams } from "react-router";
@@ -20,13 +22,13 @@ import {
   onMarkDetailAction,
   addCommenDetailtAction,
 } from "modules/reducers/Detail";
-import Loading from "Components/Loading/Loading";
 import Album from "Components/Album/Album";
 import Slider from "Components/Slider/Slider";
 import ContentHeader from "Components/Content/ContentHeader/ContentHeader";
 import ContentOptions from "Components/Content/ContentOptions/ContentOptions";
 import ContentComment from "Components/Content/ContentComment/ContentComment";
 import ContentInput from "Components/Content/ContentInput/ContentInput";
+import DataLoader from "Components/DataLoader/DataLoader";
 
 export default () => {
   const dispatch = useDispatch();
@@ -39,13 +41,7 @@ export default () => {
     comments,
     likeUsers,
   } = content;
-  const loading = useSelector((state) => state.loading);
-  const isLoading = loading[detailRequestAction.TYPE];
   let { id: contentId } = useParams();
-  useEffect(() => dispatch(detailRequestAction.request({ contentId })), [
-    dispatch,
-    contentId,
-  ]);
   const onLike = useCallback(
     (e) => {
       e.preventDefault();
@@ -63,19 +59,22 @@ export default () => {
   return (
     <>
       <InfoHeader />
-      {isLoading ? (
-        <Loading />
-      ) : (
+      <DataLoader action={detailRequestAction} payload={contentId}>
         <Frame>
           <DetailFrame>
-            <Slider files={files} />
-            <DetailSide>
+            <DetailSilder>
+              <Slider files={files} />
+            </DetailSilder>
+
+            <DetailHeader>
               <ContentHeader
                 userId={userId}
                 avatarUrl={avatarUrl}
                 nickname={nickname}
                 createAt={createAt}
               />
+            </DetailHeader>
+            <DetailSide>
               <DetailSub>
                 {comments.map((comment, key) => {
                   const {
@@ -114,7 +113,7 @@ export default () => {
           <DetailLine />
           <Album albums={loginUser.myContents} />
         </Frame>
-      )}
+      </DataLoader>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { ModalFrame, DetailSub } from "./ContentDetail.style";
+import { ModalFrame, DetailSub } from "./ContentDetailModal.style";
 import Slider from "Components/Slider/Slider";
 
 export default ({ files, closeModal }) => {

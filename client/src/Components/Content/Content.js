@@ -1,10 +1,7 @@
 import React, { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import {
-  showDetailModalAction,
-  showDeleteModalAction,
-} from "modules/reducers/Me";
+import { showDetailModalAction } from "modules/reducers/Me";
 import {
   ContentFrame,
   ContentSub,
@@ -14,19 +11,17 @@ import {
   TextInfo,
   ContentSlider,
 } from "./Content.style";
-import ModalPortal from "Components/ModalPortal";
 import ModalFrame from "Components/Modal/ModalFrame/ModalFrame";
 import Slider from "Components/Slider/Slider";
 import { onLikeAction, onMarkAction } from "modules/reducers/Me";
-import { modalOpenAction } from "modules/reducers/modal";
-import ContentDeleteModal from "./ContentDeleteModal.js/ContentDeleteModal";
-import ContentDetail from "./ContentDetail/ContentDetail";
+import ContentDetail from "./ContentDetailModal/ContentDetailModal";
 import ContentHeader from "./ContentHeader/ContentHeader";
 import ContentOptions from "./ContentOptions/ContentOptions";
 import ContentComment from "./ContentComment/ContentComment";
 import ContentInput from "./ContentInput/ContentInput";
+import { useOpenModal } from "hooks/useModal";
 
-const Content = React.memo(({ idx, content, loginUser }) => {
+const Content = React.memo(({ idx, content }) => {
   const dispatch = useDispatch();
   const {
     authorId: { _id: userId, avatarUrl, nickname },
@@ -37,9 +32,9 @@ const Content = React.memo(({ idx, content, loginUser }) => {
     _id: contentId,
     likeUsers,
   } = content;
-  const modal = useSelector((state) => state.modal);
-  const detailModal = modal[showDetailModalAction.TYPE + contentId];
-  const deleteModal = modal[showDeleteModalAction.TYPE + contentId];
+  const [isOpenDetailModal, OpenDetailMdoal] = useOpenModal(
+    showDetailModalAction.TYPE + contentId
+  );
   const onLike = useCallback(
     (e) => {
       e.preventDefault();
@@ -54,9 +49,6 @@ const Content = React.memo(({ idx, content, loginUser }) => {
     },
     [dispatch, contentId]
   );
-  const OpenDetailMdoal = useCallback(() => {
-    dispatch(modalOpenAction({ type: showDetailModalAction.TYPE + contentId }));
-  });
   return (
     <>
       <ContentFrame>
@@ -74,7 +66,6 @@ const Content = React.memo(({ idx, content, loginUser }) => {
             userId={userId}
             likeUsers={likeUsers}
             contentId={contentId}
-            loginUser={loginUser}
             onLike={onLike}
             onMark={onMark}
           />
@@ -106,19 +97,10 @@ const Content = React.memo(({ idx, content, loginUser }) => {
         </ContentSub>
         <ContentInput contentId={contentId} idx={idx} />
       </ContentFrame>
-      {detailModal && (
-        <ModalPortal>
-          <ModalFrame type={showDetailModalAction.TYPE + contentId}>
-            <ContentDetail files={files} />
-          </ModalFrame>
-        </ModalPortal>
-      )}
-      {deleteModal && (
-        <ModalPortal>
-          <ModalFrame type={showDeleteModalAction.TYPE + contentId}>
-            <ContentDeleteModal contentId={contentId} />
-          </ModalFrame>
-        </ModalPortal>
+      {isOpenDetailModal && (
+        <ModalFrame type={showDetailModalAction.TYPE + contentId}>
+          <ContentDetail files={files} />
+        </ModalFrame>
       )}
     </>
   );

@@ -15,19 +15,18 @@ import {
   InfoContent,
 } from "./Profile.style";
 import InfoHeader from "Components/Header/InfoHeader/InfoHeader";
-import useComponentDidMount from "hooks/useComponentDidMount";
 import {
   profileRequestAction,
   profileStartFollowAction,
 } from "modules/reducers/Profile";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "Components/Loading/Loading";
 import Album from "Components/Album/Album";
 import df from "images/default.jpeg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTh } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
+import DataLoader from "Components/DataLoader/DataLoader";
 
 export default () => {
   const [page, setPage] = useState(0);
@@ -39,32 +38,17 @@ export default () => {
   });
   const dispatch = useDispatch();
   const {
-    user: {
-      _id: loginuserId,
-      nickname,
-      avatarUrl,
-      myContents,
-      markContents,
-      follow,
-      follower,
-    },
+    user: { nickname, avatarUrl, myContents, markContents, follow, follower },
     me,
   } = useSelector((state) => state.Profile);
-  const loading = useSelector((state) => state.loading);
-  const isLoading = loading[profileRequestAction.TYPE];
   let { id: userId } = useParams();
-  useComponentDidMount(() =>
-    dispatch(profileRequestAction.request({ userId }))
-  );
   const startFollow = useCallback(() => {
     dispatch(profileStartFollowAction({ userId }));
-  });
+  }, [dispatch, userId]);
   return (
     <>
       <InfoHeader />
-      {isLoading ? (
-        <Loading />
-      ) : (
+      <DataLoader action={profileRequestAction} payload={userId}>
         <Frame>
           <ProfileMenu>
             <ProfileImg src={avatarUrl ? avatarUrl : df} />
@@ -110,7 +94,7 @@ export default () => {
             )
           )}
         </Frame>
-      )}
+      </DataLoader>
     </>
   );
 };

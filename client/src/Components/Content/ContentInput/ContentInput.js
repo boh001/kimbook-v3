@@ -1,5 +1,5 @@
-import React, { useCallback, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { ContentForm, ContentInput, ContentSubmit } from "./ContentInput.style";
 import { addCommentAction } from "modules/reducers/Me";
 

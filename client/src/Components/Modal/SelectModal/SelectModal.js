@@ -1,17 +1,15 @@
-import React, { useCallback } from "react";
-import { ModalFrame, CancelBtn } from "./SelectModal.style";
-import { useDispatch } from "react-redux";
-import { modalCloseAction } from "modules/reducers/modal";
-
+import React from "react";
+import { Frame, CancelBtn } from "./SelectModal.style";
+import { useCloseModal } from "hooks/useModal";
+import ModalFrame from "../ModalFrame/ModalFrame";
 export default ({ type, children }) => {
-  const dispatch = useDispatch();
-  const modalClose = useCallback(() => {
-    dispatch(modalCloseAction({ type }));
-  });
+  const closeSelectModal = useCloseModal(type);
   return (
-    <ModalFrame>
-      {children}
-      <CancelBtn onClick={modalClose}>취소하기</CancelBtn>
+    <ModalFrame type={type}>
+      <Frame>
+        {children}
+        <CancelBtn onClick={closeSelectModal}>취소하기</CancelBtn>
+      </Frame>
     </ModalFrame>
   );
 };

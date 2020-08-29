@@ -9,10 +9,13 @@ import SelectModal from "Components/Modal/SelectModal/SelectModal";
 
 export default ({ contentId }) => {
   const dispatch = useDispatch();
-  const contentDelete = useCallback((e) => {
-    dispatch(DeleteContentAction.request({ contentId }));
-    window.location.reload(false);
-  });
+  const contentDelete = useCallback(
+    (e) => {
+      dispatch(DeleteContentAction.request({ contentId }));
+      window.location.reload(false);
+    },
+    [dispatch, contentId]
+  );
   return (
     <SelectModal type={showDeleteModalAction.TYPE + contentId}>
       <BtnWrap>

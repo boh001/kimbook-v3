@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { flexCenter } from "utils/constants/css";
 
-export const ModalFrame = styled.div`
+export const Frame = styled.div`
   background: rgba(0, 0, 0, 0.25);
   position: fixed;
   left: 0;

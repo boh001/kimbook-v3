@@ -10,9 +10,7 @@ export const CommentFrame = styled.div`
 `;
 export const CommentUser = styled(Link)`
   display: inline-block;
-  position: absolute;
-  top: 0.5em;
-  left: 0;
+  margin-right: 0.5em;
   color: ${colors.mainGreen};
 `;
 export const CommentText = styled.p`

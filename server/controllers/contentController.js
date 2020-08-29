@@ -83,7 +83,7 @@ export const upMark = async (req, res) => {
 };
 export const loadDetail = async (req, res) => {
   const {
-    body: { contentId },
+    body: { payload: contentId },
   } = req;
 
   try {

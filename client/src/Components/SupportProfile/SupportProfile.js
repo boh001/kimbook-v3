@@ -35,8 +35,6 @@ import {
 import { modalOpenAction, modalCloseAction } from "modules/reducers/modal";
 import MiniLoading from "Components/MiniLoading/MiniLoading";
 import df from "images/default.jpeg";
-import ModalPortal from "Components/ModalPortal";
-import ModalFrame from "Components/Modal/ModalFrame/ModalFrame";
 import SelectModal from "../Modal/SelectModal/SelectModal";
 
 export default ({ children }) => {
@@ -182,19 +180,15 @@ export default ({ children }) => {
         {children}
       </SupportForm>
       {isOpenModal ? (
-        <ModalPortal>
-          <ModalFrame type={supportRequestAction.TYPE}>
-            <SelectModal type={supportRequestAction.TYPE}>
-              <BtnWrap>
-                <UploadBtn>프로필 업로드</UploadBtn>
-                <WriteFile onChange={(e) => uploadAvatar(e)} />
-              </BtnWrap>
-              <BtnWrap>
-                <DeleteBtn onClick={deleteAvatar}>현재 사진 삭제</DeleteBtn>
-              </BtnWrap>
-            </SelectModal>
-          </ModalFrame>
-        </ModalPortal>
+        <SelectModal type={supportRequestAction.TYPE}>
+          <BtnWrap>
+            <UploadBtn>프로필 업로드</UploadBtn>
+            <WriteFile onChange={(e) => uploadAvatar(e)} />
+          </BtnWrap>
+          <BtnWrap>
+            <DeleteBtn onClick={deleteAvatar}>현재 사진 삭제</DeleteBtn>
+          </BtnWrap>
+        </SelectModal>
       ) : null}
     </>
   );

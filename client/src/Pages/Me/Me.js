@@ -1,40 +1,24 @@
 import React from "react";
 import InfoHeader from "Components/Header/InfoHeader/InfoHeader";
 import Content from "Components/Content/Content";
-import Loading from "Components/Loading/Loading";
-import { useDispatch, useSelector } from "react-redux";
-import useComponentDidMount from "hooks/useComponentDidMount";
+import { useSelector } from "react-redux";
 import { meRequestAction } from "modules/reducers/Me";
 import { Frame } from "./Me.style";
-
+import DataLoader from "Components/DataLoader/DataLoader";
+import ChatRoomBtn from "Components/ChatRoomBtn/ChatRoomBtn";
 export default () => {
-  const dispatch = useDispatch();
-  const { user: loginUser, contents } = useSelector((state) => state.Me);
-  const loading = useSelector((state) => state.loading);
-  const isLoading = loading[meRequestAction.TYPE];
-  useComponentDidMount(() => {
-    dispatch(meRequestAction.request());
-  });
-
+  const { contents } = useSelector((state) => state.Me);
   return (
     <>
       <InfoHeader />
-      {isLoading ? (
-        <Loading />
-      ) : (
+      <DataLoader action={meRequestAction}>
         <Frame>
           {contents.map((content, key) => {
-            return (
-              <Content
-                key={key}
-                idx={key}
-                content={content}
-                loginUser={loginUser}
-              />
-            );
+            return <Content key={key} idx={key} content={content} />;
           })}
         </Frame>
-      )}
+      </DataLoader>
+      <ChatRoomBtn />
     </>
   );
 };

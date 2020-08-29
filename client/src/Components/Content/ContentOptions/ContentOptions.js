@@ -1,5 +1,4 @@
-import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import {
   SubOptions,
   LOptions,
@@ -10,7 +9,9 @@ import {
   TextLike,
 } from "./ContentOptions.style";
 import { showDeleteModalAction } from "modules/reducers/Me";
-import { modalOpenAction } from "modules/reducers/modal";
+import ContentDeleteModal from "../ContentDeleteModal/ContentDeleteModal";
+import ModalPortal from "Components/ModalPortal";
+import ModalFrame from "Components/Modal/ModalFrame/ModalFrame";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart as THeart,
@@ -22,21 +23,17 @@ import {
   faBookmark as FMark,
   faComment,
 } from "@fortawesome/free-regular-svg-icons";
+import { useOpenModal } from "hooks/useModal";
+import { useSelector } from "react-redux";
 
-export default ({
-  userId,
-  likeUsers,
-  contentId,
-  loginUser,
-  onLike,
-  onMark,
-}) => {
-  const dispatch = useDispatch();
+export default ({ userId, likeUsers, contentId, onLike, onMark }) => {
+  const { user: loginUser } = useSelector((state) => state.Me);
   const likeCheck = likeUsers?.includes(loginUser._id);
   const markCheck = loginUser?.markContents?.includes(contentId);
-  const OpenDeleteMdoal = useCallback(() => {
-    dispatch(modalOpenAction({ type: showDeleteModalAction.TYPE + contentId }));
-  });
+  const [isOpenDeleteModal, OpenDeleteMdoal] = useOpenModal(
+    showDeleteModalAction.TYPE + contentId
+  );
+
   return (
     <>
       <SubOptions>
@@ -68,6 +65,7 @@ export default ({
         )}
       </SubOptions>
       <TextLike>좋아요 {likeUsers?.length}개</TextLike>
+      {isOpenDeleteModal && <ContentDeleteModal contentId={contentId} />}
     </>
   );
 };
