@@ -2,22 +2,21 @@ import React from "react";
 import InfoHeader from "Components/Header/InfoHeader/InfoHeader";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import withReduxDecorator from "utils/story/withReduxDecorator";
-import configureStore from "modules/store";
-import { PersistGate } from "redux-persist/integration/react";
-const { store, persistor } = configureStore();
+import Layout from "utils/story/Layout";
 
 export default {
   title: "Components|Header",
-  decorator: [(storyFn) => withReduxDecorator({})(storyFn)],
   component: InfoHeader,
 };
+const cannedActions = [];
 export const infoHeader = () => (
-  <PersistGate loading={null} persistor={persistor}>
+  <Layout>
     <InfoHeader />
-  </PersistGate>
+  </Layout>
 );
 infoHeader.story = {
   name: "Header with User Info",
+  decorators: [(storyFn) => withReduxDecorator({}, cannedActions)(storyFn)],
   parameters: {
     viewport: {
       viewports: INITIAL_VIEWPORTS,
