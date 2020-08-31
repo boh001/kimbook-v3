@@ -18,7 +18,7 @@ import {
 const LoadUserSaga = requestSaga(supportRequestAction, apiUserSupport);
 const submitSaga = requestSaga(supportSubmitAction, apiUserChangeProfile);
 const pwdSubmitSaga = requestSaga(supportPwdSubmitAction, apiUserChangePwd);
-const emailCheckSaga = checkSaga(supportemailAction, apiSendEmail);
+const emailCheckSaga = requestSaga(supportemailAction, apiSendEmail);
 function* codeCheckSaga({ payload }) {
   try {
     const { origin, verify } = payload;

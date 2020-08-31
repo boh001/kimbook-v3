@@ -17,7 +17,7 @@ import {
 import InfoHeader from "Components/Header/InfoHeader/InfoHeader";
 import {
   profileRequestAction,
-  profileStartFollowAction,
+  profileUserFollowAction,
 } from "modules/reducers/Profile";
 import { useDispatch, useSelector } from "react-redux";
 import Album from "Components/Album/Album";
@@ -27,6 +27,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTh } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import DataLoader from "Components/DataLoader/DataLoader";
+import useClick from "hooks/useClick";
 
 export default () => {
   const [page, setPage] = useState(0);
@@ -36,15 +37,13 @@ export default () => {
   const showMark = useCallback(() => {
     setPage(1);
   });
-  const dispatch = useDispatch();
   const {
     user: { nickname, avatarUrl, myContents, markContents, follow, follower },
-    me,
   } = useSelector((state) => state.Profile);
+  const { user: loginUser } = useSelector((state) => state.Me);
   let { id: userId } = useParams();
-  const startFollow = useCallback(() => {
-    dispatch(profileStartFollowAction({ userId }));
-  }, [dispatch, userId]);
+  const startFollow = useClick(profileUserFollowAction, userId);
+
   return (
     <>
       <InfoHeader />
@@ -55,13 +54,15 @@ export default () => {
             <ProfileInfo>
               <InfoUser>
                 <InfoUserName>{nickname}</InfoUserName>
-                {me ? (
+                {userId === loginUser._id ? (
                   <Link to="/me/support">
                     <InfoCustomBtn>프로필 편집</InfoCustomBtn>
                   </Link>
                 ) : (
-                  <InfoCustomBtn onClick={startFollow}>
-                    팔로우 하기
+                  <InfoCustomBtn onClick={(e) => startFollow(e)}>
+                    {follower.includes(loginUser._id)
+                      ? "팔로우"
+                      : "팔로우 하기"}
                   </InfoCustomBtn>
                 )}
               </InfoUser>

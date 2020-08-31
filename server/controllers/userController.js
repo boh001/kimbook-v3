@@ -69,6 +69,7 @@ export const sendEmail = (req, res) => {
   const {
     body: { name, email },
   } = req;
+  console.log(name, email);
   const code = cryptoRandomString({ length: 10, type: "base64" });
   let mailOptions;
   if (req.user) {
@@ -156,12 +157,7 @@ export const profileUser = async (req, res) => {
         model: "User",
       },
     ]);
-    console.log(req.body);
-    if (userId === req.user.id) {
-      res.status(200).send({ user, me: true });
-    } else {
-      res.status(200).send({ user, me: false });
-    }
+    res.status(200).send({ user });
   } catch (error) {
     res.status(400);
     res.send({ error });
@@ -204,6 +200,7 @@ export const changePwd = async (req, res) => {
   console.log(req.body);
   try {
     const user = await User.findOne({ _id });
+    console.log(user);
     user.changePassword(oldPassword, newPassword1, (err, _) => {
       if (err) {
         if (err.name === "IncorrectPasswordError")
@@ -248,5 +245,30 @@ export const findPwd = async (req, res) => {
     }
   } catch (e) {
     console.log(e);
+  }
+};
+export const userFollow = async (req, res) => {
+  const {
+    user: { _id },
+  } = req;
+  const {
+    body: { payload: userId },
+  } = req;
+  console.log(req.body);
+  try {
+    const me = await User.findOne({ _id });
+    const user = await User.findOne({ _id: userId });
+    console.log(user);
+    if (!me.follow.includes(userId)) {
+      await me.updateOne({ $push: { follow: userId } });
+      await user.updateOne({ $push: { follower: _id } });
+      res.send({ result: true, userId: _id });
+    } else {
+      await me.updateOne({ $pull: { follow: userId } });
+      await user.updateOne({ $pull: { follower: _id } });
+      res.send({ result: false });
+    }
+  } catch (error) {
+    console.log(error);
   }
 };

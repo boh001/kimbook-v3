@@ -31,12 +31,12 @@ export const SearchIcon = styled.span`
     left: ${(props) => (props.show ? "1rem" : "5px")};
   }
 `;
-export const SearchBar = styled.input.attrs({
+export const SearchBar = styled.input.attrs((props) => ({
   type: "text",
   placeholder: "검색",
   name: "result",
   autoComplete: "off",
-})`
+}))`
   position: relative;
   width: ${(props) => (props.show ? "400px" : "0")};
   height: 60px;
@@ -64,14 +64,18 @@ export const SearchReults = styled.ul`
   background-color: white;
   border: 1px solid ${colors.mainGrey};
   border-radius: 10px;
+  @media screen and (max-width: 1024px) {
+    top: 50px;
+  }
+  @media screen and (max-width: 764px) {
+    top: 35px;
+  }
 `;
 export const SearchResult = styled.li`
   width: 100%;
-  height: 60px;
-  @media screen and (max-width: 1024px) {
-    height: 45px;
-  }
-  @media screen and (max-width: 764px) {
-    height: 30px;
+  padding: 0.25em;
+  border-radius: 10px;
+  &:hover {
+    background-color: #dcdde1;
   }
 `;

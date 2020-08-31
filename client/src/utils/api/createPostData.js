@@ -16,6 +16,7 @@ import {
   CONTENTDELETE,
   USERCHANGEPWD,
   USERCHANGEPROFILE,
+  USERFOLLOW,
 } from "./path";
 
 const api = axios.create({
@@ -30,6 +31,7 @@ export const apiSignUp = apiPostData(USERSIGNUP);
 export const apiUserInfo = apiPostData(USERINFO);
 export const apiUserLogout = apiGetData(USERLOGOUT);
 export const apiUserProfile = apiPostData(USERPROFILE);
+export const apiUserFollow = apiPostData(USERFOLLOW);
 export const apiUserSearch = apiPostData(USERSEARCH);
 export const apiUserSupport = apiPostData(USERSUPPORT);
 export const apiUserChangePwd = apiPostData(USERCHANGEPWD);

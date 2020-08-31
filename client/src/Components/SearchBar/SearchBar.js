@@ -34,7 +34,7 @@ export default () => {
       <SearchIcon onClick={showSearch} show={show}>
         <FontAwesomeIcon icon={faSearch} />
       </SearchIcon>
-      {resultShow && (
+      {show && resultShow && (
         <SearchReults>
           {results.map((result, key) => {
             const { avatarUrl, nickname } = result;

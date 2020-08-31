@@ -5,6 +5,7 @@ export default (actions, api) =>
   function*({ payload }) {
     try {
       yield put(startLoading({ type: actions.TYPE }));
+      console.log(payload);
       const { data } = yield call(api, payload);
       yield put(actions.success({ data }));
     } catch (e) {

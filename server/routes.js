@@ -22,6 +22,7 @@ const CHANGEPROFILE = "/changeProfile";
 const CHANGEPWD = "/changePwd";
 const FINDID = "/findId";
 const FINDPWD = "/findPwd";
+const FOLLOW = "/follow";
 const ERROR = "/error";
 
 const routes = {
@@ -37,6 +38,7 @@ const routes = {
   SIGNUP,
   IDCHECK,
   SENDEMAIL,
+  FOLLOW,
   INFO,
   SEARCH,
   PROFILE,

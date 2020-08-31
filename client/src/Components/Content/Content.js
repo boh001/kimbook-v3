@@ -107,22 +107,11 @@ const Content = React.memo(({ idx, content }) => {
 });
 Content.propTypes = {
   idx: PropTypes.number.isRequired,
-  avatarUrl: PropTypes.string.isRequired,
-  nickname: PropTypes.string,
-  content: PropTypes.objectOf(PropTypes.array).isRequired,
-  like: PropTypes.number.isRequired,
-  likeUsers: PropTypes.arrayOf(PropTypes.string),
-  createAt: PropTypes.instanceOf(Date).isRequired,
-  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
-  contentId: PropTypes.string.isRequired,
-  myContents: PropTypes.arrayOf(PropTypes.string),
-  markContents: PropTypes.arrayOf(PropTypes.string),
+  content: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 Content.defaultProps = {
-  nickname: "",
-  myContents: [],
-  markContents: [],
-  likeUsers: [],
+  idx: "",
+  content: {},
 };
 
 export default Content;

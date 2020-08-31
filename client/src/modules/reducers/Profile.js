@@ -3,9 +3,9 @@ import createRequestAction from "./createRequestAction";
 import produce from "immer";
 
 const PROFILE = "PROFILE";
-const PROFILESTARTFOLLOW = "PROFILESTARTFOLLOW";
+const PROFILEUSERFOLLOW = "PROFILEUSERFOLLOW";
 export const profileRequestAction = createRequestAction(PROFILE);
-export const profileStartFollowAction = createRequestAction(PROFILESTARTFOLLOW);
+export const profileUserFollowAction = createRequestAction(PROFILEUSERFOLLOW);
 
 const initialState = {
   user: {
@@ -17,7 +17,7 @@ const initialState = {
     follow: [],
     follower: [],
   },
-  me: false,
+  error: "",
 };
 
 export default handleActions(
@@ -26,19 +26,27 @@ export default handleActions(
     [profileRequestAction.SUCCESS]: (state, { payload }) =>
       produce(state, (draft) => {
         const {
-          data: { user, me },
+          data: { user },
         } = payload;
         draft.user = user;
-        draft.me = me;
       }),
     [profileRequestAction.FAILURE]: (state, { payload }) =>
       produce(state, (draft) => {
         draft.error = payload.error;
       }),
-    [profileStartFollowAction.REQUEST]: (state, { payload }) => state,
-    [profileStartFollowAction.SUCCESS]: (state, { payload }) =>
-      produce(state, (draft) => {}),
-    [profileStartFollowAction.FAILURE]: (state, { payload }) =>
+    [profileUserFollowAction.REQUEST]: (state, { payload }) => state,
+    [profileUserFollowAction.SUCCESS]: (state, { payload }) =>
+      produce(state, (draft) => {
+        const {
+          data: { userId, result },
+        } = payload;
+        if (result) {
+          draft.user.follower.push(userId);
+        } else {
+          draft.user.follower.pop();
+        }
+      }),
+    [profileUserFollowAction.FAILURE]: (state, { payload }) =>
       produce(state, (draft) => {
         draft.error = payload.error;
       }),

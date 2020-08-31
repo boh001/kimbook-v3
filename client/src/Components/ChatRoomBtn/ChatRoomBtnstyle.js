@@ -15,7 +15,8 @@ export const Frame = styled.div`
   right: 2em;
   transition: 0.2s linear;
   z-index: 2;
-  cursor: pointer;
+  cursor: ${(props) => !props.active && "pointer"};
+  border: 1px solid ${colors.mainGreen};
 `;
 export const ChatFrame = styled.div`
   position: relative;
@@ -31,6 +32,7 @@ export const CloseBtn = styled.div`
   font-size: 20px;
   border-radius: 10px;
   padding: 0.5em 0.75em;
+  cursor: pointer;
   @media screen and (max-width: 764px) {
     font-size: 10px;
   }
@@ -38,7 +40,8 @@ export const CloseBtn = styled.div`
 export const ChatHeader = styled.div`
   width: 100%;
   height: 10%;
-  background-color: red;
+  ${flexCenter};
+  border-bottom: 1px solid ${colors.mainGreen};
 `;
 export const ChatMain = styled.div`
   display: flex;
@@ -48,7 +51,13 @@ export const ChatMain = styled.div`
 export const ChatRoomLists = styled.div`
   width: 30%;
   height: 100%;
-  background-color: blue;
+  border-right: 1px solid ${colors.mainGreen};
+`;
+export const ListsHeader = styled.div`
+  height: 10%;
+  width: 100%;
+  ${flexCenter};
+  border-bottom: 1px solid ${colors.mainGreen};
 `;
 export const ChatRoomMain = styled.div`
   width: 70%;
@@ -57,5 +66,30 @@ export const ChatRoomMain = styled.div`
 export const MsgFrame = styled.div`
   width: 100%;
   height: 90%;
-  padding: 1em;
+  padding: 20px;
+  ${flexCenter};
+`;
+export const MsgShow = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: white;
+`;
+export const MsgForm = styled.form`
+  width: 100%;
+  height: 10%;
+  padding: 10px 20px;
+  ${flexCenter};
+`;
+export const MsgInput = styled.input.attrs({})`
+  width: 90%;
+  height: 100%;
+`;
+export const MsgSubmit = styled.input.attrs({
+  type: "submit",
+})`
+  width: 10%;
+  ${flexCenter};
+  font-size: 25px;
+  height: 100%;
 `;

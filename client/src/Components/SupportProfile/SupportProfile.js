@@ -32,32 +32,35 @@ import {
   nicknameOkayAction,
   supportSubmitAction,
 } from "modules/reducers/Support";
-import { modalOpenAction, modalCloseAction } from "modules/reducers/modal";
+import { useOpenModal, useCloseModal } from "hooks/useModal";
 import MiniLoading from "Components/MiniLoading/MiniLoading";
 import df from "images/default.jpeg";
 import SelectModal from "../Modal/SelectModal/SelectModal";
 
 export default ({ children }) => {
   const [imgfile, setImgfile] = useState("");
+
   const emailRef = useRef();
   const nameRef = useRef();
   const codeRef = useRef();
   const formRef = useRef();
+
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading);
-  const modal = useSelector((state) => state.modal);
-  const isOpenModal = modal[supportRequestAction.TYPE];
   const emailLoading = loading[supportemailAction.TYPE];
   const codeLoading = loading[supportcodeAction.TYPE];
+
   const {
     user: { avatarUrl, nickname, email },
     codeCheckState,
     emailCheckState,
     nicknameCheckState,
   } = useSelector((state) => state.Support);
-  const openModal = useCallback(() => {
-    dispatch(modalOpenAction({ type: supportRequestAction.TYPE }));
-  }, [dispatch]);
+
+  const [isOpenProfileModal, openProfileModal] = useOpenModal(
+    supportRequestAction.TYPE
+  );
+  const closeProfileModal = useCloseModal(supportRequestAction.TYPE);
   const sendEmail = useCallback(
     (e) => {
       e.preventDefault();
@@ -71,6 +74,7 @@ export default ({ children }) => {
     },
     [dispatch]
   );
+
   const verifyCode = useCallback(
     (e) => {
       e.preventDefault();
@@ -92,12 +96,9 @@ export default ({ children }) => {
       reader.readAsDataURL(inputFile);
     });
   };
-  const closeModal = useCallback(() => {
-    dispatch(modalCloseAction({ type: supportRequestAction.TYPE }));
-  });
   const deleteAvatar = useCallback(() => {
     dispatch(deleteAvatarAction());
-    dispatch(modalCloseAction({ type: supportRequestAction.TYPE }));
+    closeProfileModal(supportRequestAction.TYPE);
   });
   const uploadAvatar = useCallback(async (e) => {
     const {
@@ -106,7 +107,7 @@ export default ({ children }) => {
     setImgfile(files[0]);
     const uploadfile = await readUpload(files[0]);
     dispatch(uploadAvatarAction({ uploadfile }));
-    dispatch(modalCloseAction({ type: supportRequestAction.TYPE }));
+    closeProfileModal(supportRequestAction.TYPE);
   });
   const nicknameBlock = useCallback((e) => {
     if (e.target.value.length === 0) {
@@ -140,7 +141,7 @@ export default ({ children }) => {
         <UserImg src={avatarUrl ? avatarUrl : df} />
         <UserWrap>
           <UserName>{nickname}</UserName>
-          <UploadImg onClick={openModal}>프로필 사진 바꾸기</UploadImg>
+          <UploadImg onClick={openProfileModal}>프로필 사진 바꾸기</UploadImg>
         </UserWrap>
       </InfoWrap>
       <SupportForm ref={formRef} onSubmit={(e) => submitControl(e)}>
@@ -179,7 +180,7 @@ export default ({ children }) => {
         </CodeLabel>
         {children}
       </SupportForm>
-      {isOpenModal ? (
+      {isOpenProfileModal ? (
         <SelectModal type={supportRequestAction.TYPE}>
           <BtnWrap>
             <UploadBtn>프로필 업로드</UploadBtn>

@@ -6,8 +6,13 @@ import {
   ChatHeader,
   ChatMain,
   ChatRoomLists,
+  ListsHeader,
   ChatRoomMain,
   MsgFrame,
+  MsgForm,
+  MsgShow,
+  MsgInput,
+  MsgSubmit,
 } from "./ChatRoomBtnstyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDots, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -29,11 +34,19 @@ export default () => {
           <CloseBtn onClick={closeChat}>
             <FontAwesomeIcon icon={faTimes} />
           </CloseBtn>
-          <ChatHeader></ChatHeader>
+          <ChatHeader>채팅방</ChatHeader>
           <ChatMain>
-            <ChatRoomLists></ChatRoomLists>
+            <ChatRoomLists>
+              <ListsHeader>목록</ListsHeader>
+            </ChatRoomLists>
             <ChatRoomMain>
-              <MsgFrame></MsgFrame>
+              <MsgFrame>
+                <MsgShow></MsgShow>
+              </MsgFrame>
+              <MsgForm>
+                <MsgInput />
+                <MsgSubmit />
+              </MsgForm>
             </ChatRoomMain>
           </ChatMain>
         </ChatFrame>
